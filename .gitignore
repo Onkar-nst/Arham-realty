@@ -3,3 +3,8 @@ dist
 .DS_Store
 *.local
 *.tsbuildinfo
+
+# Client source material (213MB of brochures, renders and the project
+# schedule). Kept out of the repo; processed output lives in public/.
+# See README "Where the data comes from".
+data from client/

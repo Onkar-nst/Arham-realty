@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { CLUSTERS, FOOTPRINT, FOOTPRINT_STATS } from '../data/content'
 import { ArrowRight, Chevron } from '../components/Icons'
 import { Counter, EASE, MaskedLines, Reveal } from '../components/Motion'
+import { Link } from '../router'
 
 const LEGEND = ['Completed', 'Ongoing', 'Upcoming'] as const
 
@@ -50,12 +51,12 @@ export default function Footprint() {
                 <br />
                 <span>{FOOTPRINT.caption[1]}</span>
               </h3>
-              <a className="btn btn--ghost" href="#about">
+              <Link className="btn btn--ghost" to="/about">
                 Our Story
                 <span className="btn__arrow">
                   <ArrowRight />
                 </span>
-              </a>
+              </Link>
 
               <div className="legend">
                 {LEGEND.map((l) => (

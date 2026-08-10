@@ -1,37 +1,43 @@
 /* ------------------------------------------------------------------
-   Design tokens — lifted from the Ironwood/Framer construction theme
-   and retuned for Arham Realty.
+   Design tokens.
+
+   Colour follows "Arham Realty Brand Guidelines v1.0" (Evolved Monkeys,
+   26 May 2026): white #FFFFFF and the three brand greens — #017C60
+   primary, #12A87A light, #0C5C37 deep. The neutrals below are tints of
+   those greens rather than the warm greys the theme shipped with, so the
+   whole page sits under the logo instead of beside it.
    ------------------------------------------------------------------ */
 
 :root {
-  /* Surfaces — warm cream over near-black ink */
-  --bg: #f5f3ee;
-  --bg-alt: #efece5;
+  /* Surfaces — white per the guidelines, with the faintest green cast */
+  --bg: #f7f9f8;
+  --bg-alt: #eef3f1;
   --surface: #ffffff;
-  --surface-2: #faf8f4;
+  --surface-2: #f9fbfa;
 
   /* Ink */
-  --ink: #171614;
-  --ink-strong: #0f0e0d;
-  --muted: #5c564f;
-  --muted-2: #7d766d;
+  --ink: #14201c;
+  --ink-strong: #0b1310;
+  --muted: #556862;
+  --muted-2: #7d8f89;
 
   /* Lines */
-  --line: #e0d6c7;
-  --line-soft: #eae4da;
+  --line: #d8e3df;
+  --line-soft: #e7eeeb;
 
-  /* Accent — brass/gold */
-  --accent: #a87020;
-  --accent-bright: #f7b74a;
-  --accent-soft: #f0ce96;
-  --accent-wash: #f7ecd8;
+  /* Accent — the brand greens */
+  --accent: #017c60;
+  --accent-bright: #12a87a;
+  --accent-deep: #0c5c37;
+  --accent-soft: #9fd3c1;
+  --accent-wash: #e6f2ee;
 
-  /* Inverted block (dark bands) */
-  --inv-bg: #171614;
-  --inv-bg-2: #1c1a17;
-  --inv-ink: #f5f3ee;
-  --inv-muted: #a8a298;
-  --inv-line: #2c2924;
+  /* Inverted block (dark bands) — deep green rather than neutral black */
+  --inv-bg: #0b1a15;
+  --inv-bg-2: #0f231c;
+  --inv-ink: #f3f8f6;
+  --inv-muted: #93a9a2;
+  --inv-line: #1d372e;
 
   /* Type */
   --font-display: 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -55,9 +61,9 @@
   --section-y: 128px;
 
   /* Elevation */
-  --shadow-sm: 0 1px 2px rgba(23, 22, 20, 0.05);
-  --shadow-md: 0 4px 24px rgba(23, 22, 20, 0.06);
-  --shadow-lg: 0 24px 64px rgba(23, 22, 20, 0.1);
+  --shadow-sm: 0 1px 2px rgba(20, 32, 28, 0.05);
+  --shadow-md: 0 4px 24px rgba(20, 32, 28, 0.06);
+  --shadow-lg: 0 24px 64px rgba(20, 32, 28, 0.1);
 }
 
 @media (max-width: 900px) {

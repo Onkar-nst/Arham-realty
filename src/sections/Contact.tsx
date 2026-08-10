@@ -73,7 +73,7 @@ export default function Contact() {
                     </div>
                     <h3 className="form__title">Enquiry received</h3>
                     <p className="form__sub" style={{ marginBottom: 0 }}>
-                      Thank you — our team will be in touch within one business day.
+                      Thank you. Our team will be in touch within one business day.
                     </p>
                     <button className="btn btn--ghost" onClick={() => setSent(false)}>
                       Send another

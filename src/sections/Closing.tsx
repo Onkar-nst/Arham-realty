@@ -1,6 +1,8 @@
 import { BRAND, CTA, FOOTER, NAV, CONTACT } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
+import { Link } from '../router'
+import Logo from '../components/Logo'
 
 /** Infinite band of region names — the theme's repeated-services marquee. */
 export function Marquee() {
@@ -49,12 +51,12 @@ export function Cta() {
           <MaskedLines lines={CTA.title} accentIndex={1} />
         </h2>
         <Reveal delay={0.2}>
-          <a className="btn btn--onDark" href="#contact">
+          <Link className="btn btn--onDark" to="/#contact">
             {CTA.action}
             <span className="btn__arrow">
               <ArrowRight />
             </span>
-          </a>
+          </Link>
         </Reveal>
       </div>
     </section>
@@ -67,10 +69,9 @@ export function Footer() {
       <div className="wrap">
         <div className="footer__grid">
           <div className="footer__brand">
-            <div className="logo">
-              <span>{BRAND.markTop}</span>
-              <span>{BRAND.markBottom}</span>
-            </div>
+            <Link to="/" className="logo" aria-label="Arham Realty, home">
+              <Logo />
+            </Link>
             <p className="footer__blurb">{BRAND.blurb}</p>
           </div>
 
@@ -79,7 +80,7 @@ export function Footer() {
             <ul className="footer__list">
               {NAV.map((n) => (
                 <li key={n.href}>
-                  <a href={n.href}>{n.label}</a>
+                  <Link to={n.href}>{n.label}</Link>
                 </li>
               ))}
             </ul>
@@ -89,8 +90,8 @@ export function Footer() {
             <p className="footer__h">Projects</p>
             <ul className="footer__list">
               {FOOTER.projects.map((p) => (
-                <li key={p}>
-                  <a href="#projects">{p}</a>
+                <li key={p.href}>
+                  <Link to={p.href}>{p.label}</Link>
                 </li>
               ))}
             </ul>
@@ -111,6 +112,8 @@ export function Footer() {
             </ul>
           </div>
         </div>
+
+        <p className="footer__disclaimer">{FOOTER.disclaimer}</p>
 
         <div className="footer__bottom">
           <span>{FOOTER.copyright}</span>

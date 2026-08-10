@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { HERO, HERO_STATS } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { Counter, EASE, MaskedLines, useParallax } from '../components/Motion'
+import { Link } from '../router'
 
 export default function Hero() {
   const { ref, y } = useParallax(56)
@@ -52,30 +53,21 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: EASE, delay: 0.74 }}
             >
-              <a className="btn btn--onDark" href={HERO.primary.href}>
+              <Link className="btn btn--onDark" to={HERO.primary.href}>
                 {HERO.primary.label}
                 <span className="btn__arrow">
                   <ArrowRight />
                 </span>
-              </a>
-              <a className="btn btn--ghostDark" href={HERO.secondary.href}>
+              </Link>
+              <Link className="btn btn--ghostDark" to={HERO.secondary.href}>
                 {HERO.secondary.label}
                 <span className="btn__arrow">
                   <ArrowRight />
                 </span>
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>
-
-        <motion.div
-          className="hero__scroll"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-        >
-          Scroll
-        </motion.div>
       </section>
 
       <section className="stats" aria-label="Company at a glance">
@@ -91,7 +83,7 @@ export default function Hero() {
                 transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
               >
                 <div className="stats__value">
-                  <Counter value={s.value} />
+                  <Counter value={s.value} decimals={s.decimals ?? 0} />
                   <span className="stats__suffix">{s.suffix}</span>
                 </div>
                 <div className="stats__label">{s.label}</div>

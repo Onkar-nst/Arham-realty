@@ -6,7 +6,7 @@ import { EASE, MaskedLines, Reveal } from '../components/Motion'
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
-function Timeline() {
+export function Timeline() {
   const [i, setI] = useState(0)
   const [dir, setDir] = useState(1)
   const entry = TIMELINE[i]

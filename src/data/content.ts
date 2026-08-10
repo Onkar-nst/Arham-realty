@@ -1,9 +1,14 @@
 /* ------------------------------------------------------------------
-   All copy is carried over verbatim from the previous Arham Realty
-   site. The only authored additions are the timeline entries for
-   2000s–2026, which the old site loaded client-side and never
-   rendered; they are reconstructed from the project record below.
+   Site copy.
+
+   The project catalogue lives in ./projects.ts, rebuilt from the
+   client's own schedule. Figures quoted here (areas, counts) are
+   derived from that file rather than typed by hand, so the two can
+   never drift apart.
    ------------------------------------------------------------------ */
+
+import { AREA_TOTALS, PROJECT_COUNTS, PROJECTS } from './projects'
+import type { ProjectStatus } from './projects'
 
 export const BRAND = {
   name: 'Arham Realty',
@@ -14,191 +19,32 @@ export const BRAND = {
 }
 
 export const NAV = [
-  { label: 'Home', href: '#home' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Our Values', href: '#values' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Our Values', href: '/#values' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export const HERO = {
-  eyebrow: 'Worli Sea Face Landmark',
+  eyebrow: 'Building across Mumbai & Thane since 1994',
   titleLines: ['Redefining', "Mumbai's Skyline", 'for 30+ Years'],
   body:
-    'Three decades of trust. A legacy of excellence — building iconic spaces that stand the test of time and elevate urban living.',
-  primary: { label: 'Our Story', href: '#about' },
-  secondary: { label: 'View Projects', href: '#projects' },
-  image:
-    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&auto=format&fit=crop',
+    'Three decades of trust, and a legacy of excellence. We build spaces that hold their value, and their character, long after the handover.',
+  primary: { label: 'Our Story', href: '/about' },
+  secondary: { label: 'View Projects', href: '/projects' },
+  image: '/projects/premia-bc-2.jpg',
 }
+
+/* Every figure below is computed from the project schedule. */
+const lakhs = (sqft: number) => Math.round((sqft / 100000) * 10) / 10
 
 export const HERO_STATS = [
-  { value: 30, suffix: '+', label: 'Years of Trust' },
-  { value: 14, suffix: '+', label: 'Landmark Projects' },
-  { value: 12, suffix: 'L+', label: 'Sq. Ft. Underway' },
-  { value: 900, suffix: '+', label: 'Happy Residents' },
+  { value: 30, suffix: '+', label: 'Years Since 1994' },
+  { value: PROJECT_COUNTS.Completed, suffix: '', label: 'Projects Completed' },
+  { value: lakhs(AREA_TOTALS.Completed), suffix: 'L', label: 'Sq. Ft. Delivered', decimals: 1 },
+  { value: lakhs(AREA_TOTALS.Upcoming), suffix: 'L', label: 'Sq. Ft. In Pipeline', decimals: 1 },
 ]
-
-/* ---------------------------------- Projects --------------------- */
-
-export type ProjectStatus = 'Completed' | 'Ongoing' | 'Upcoming'
-
-export interface Project {
-  name: string
-  developer: string
-  location: string
-  timeline: string
-  category: string
-  status: ProjectStatus
-  description?: string
-  images: string[]
-}
-
-const IMG = (id: string) =>
-  `https://images.unsplash.com/${id}?w=1400&auto=format&fit=crop`
-
-export const PROJECTS: Project[] = [
-  {
-    name: 'Premia "A"',
-    developer: 'Kenarc Spaces LLP',
-    location: 'Tilak Nagar, Chembur West',
-    timeline: '2019–2023',
-    category: 'Residential',
-    status: 'Completed',
-    description:
-      'An landmark residential tower designed to offer luxury living in prime location. It features beautifully planned apartments with high-end finishes and excellent connectivity.',
-    images: [
-      IMG('photo-1545324418-cc1a3fa10c00'),
-      IMG('photo-1600585154340-be6161a56a0c'),
-      IMG('photo-1486325212027-8081e485255e'),
-    ],
-  },
-  {
-    name: 'Pramod CHSL',
-    developer: 'Global Oricon Developers',
-    location: 'Ghatkopar East, Mumbai',
-    timeline: '2012–2018',
-    category: 'Residential',
-    status: 'Completed',
-    images: [
-      IMG('photo-1600585154340-be6161a56a0c'),
-      IMG('photo-1486325212027-8081e485255e'),
-      IMG('photo-1545324418-cc1a3fa10c00'),
-    ],
-  },
-  {
-    name: 'Dakshata CHSL',
-    developer: 'Oricon Developers',
-    location: 'Chembur West, Mumbai',
-    timeline: '2010–2015',
-    category: 'Residential',
-    status: 'Completed',
-    images: [
-      IMG('photo-1486325212027-8081e485255e'),
-      IMG('photo-1545324418-cc1a3fa10c00'),
-      IMG('photo-1600585154340-be6161a56a0c'),
-    ],
-  },
-  {
-    name: 'Blossom CHSL',
-    developer: 'Divine Construction Co.',
-    location: 'Santacruz West, Mumbai',
-    timeline: '2005–2008',
-    category: 'Residential / Commercial',
-    status: 'Completed',
-    images: [
-      IMG('photo-1600607687939-ce8a6c25118c'),
-      IMG('photo-1545324418-cc1a3fa10c00'),
-      IMG('photo-1486325212027-8081e485255e'),
-    ],
-  },
-  {
-    name: 'Shubhda Tower',
-    developer: 'Divine Construction Co.',
-    location: 'Worli, Mumbai',
-    timeline: '2000–2005',
-    category: 'Residential',
-    status: 'Completed',
-    images: [
-      IMG('photo-1512917774080-9991f1c4c750'),
-      IMG('photo-1600585154340-be6161a56a0c'),
-      IMG('photo-1545324418-cc1a3fa10c00'),
-    ],
-  },
-  {
-    name: 'Premia "B" & "C"',
-    developer: 'Kenarc Spaces LLP',
-    location: 'Tilak Nagar, Chembur West',
-    timeline: '2024–',
-    category: 'Residential',
-    status: 'Ongoing',
-    description:
-      'The next two towers of the Premia estate, extending the masterplan with larger configurations and a raised podium deck.',
-    images: [
-      IMG('photo-1600585154340-be6161a56a0c'),
-      IMG('photo-1545324418-cc1a3fa10c00'),
-      IMG('photo-1486325212027-8081e485255e'),
-    ],
-  },
-  {
-    name: 'Anvaya — Medinee Niketan CHSL',
-    developer: 'Arham Realty',
-    location: 'Andheri, Mumbai',
-    timeline: '2024–',
-    category: 'Residential',
-    status: 'Ongoing',
-    description:
-      'A redevelopment in the Andheri corridor pairing progressive architecture with structural reliability.',
-    images: [
-      IMG('photo-1486325212027-8081e485255e'),
-      IMG('photo-1600607687939-ce8a6c25118c'),
-      IMG('photo-1545324418-cc1a3fa10c00'),
-    ],
-  },
-  {
-    name: 'Pali Hill',
-    developer: 'Arham Realty',
-    location: 'Bandra West, Mumbai',
-    timeline: 'Upcoming',
-    category: 'Ultra Luxury Residential',
-    status: 'Upcoming',
-    images: [
-      IMG('photo-1512917774080-9991f1c4c750'),
-      IMG('photo-1486325212027-8081e485255e'),
-    ],
-  },
-  {
-    name: 'Mahalaxmi Heights',
-    developer: 'Arham Realty',
-    location: 'Mahalaxmi, Mumbai',
-    timeline: 'Upcoming',
-    category: 'Residential',
-    status: 'Upcoming',
-    images: [
-      IMG('photo-1545324418-cc1a3fa10c00'),
-      IMG('photo-1600585154340-be6161a56a0c'),
-    ],
-  },
-  {
-    name: 'Arham Square',
-    developer: 'Arham Realty',
-    location: 'Malad East, Mumbai',
-    timeline: 'Upcoming',
-    category: 'Commercial',
-    status: 'Upcoming',
-    images: [
-      IMG('photo-1600607687939-ce8a6c25118c'),
-      IMG('photo-1512917774080-9991f1c4c750'),
-    ],
-  },
-]
-
-/** Counts shown on the portfolio filter tabs — from the old site. */
-export const PROJECT_COUNTS: Record<ProjectStatus, number> = {
-  Completed: 14,
-  Ongoing: 2,
-  Upcoming: 6,
-}
 
 /* ---------------------------------- About ------------------------ */
 
@@ -209,8 +55,34 @@ export const ABOUT = {
     before: 'Born from a vision to redefine urban living, Arham Realty stands as a symbol of ',
     emphasis: 'progressive infrastructure, architectural precision, and timeless value',
     after:
-      ' — developing premium spaces that blend modern design, functionality, and sustainable growth.',
+      ', developing premium spaces that blend modern design, functionality, and sustainable growth.',
   },
+}
+
+/**
+ * Copy for the About page. The four introduction paragraphs are taken
+ * verbatim from the client's own brand guidelines (Evolved Monkeys,
+ * v1.0, 26 May 2026, p.1) — this is approved brand language and should
+ * not be reworded without going back to that document.
+ */
+export const ABOUT_PAGE = {
+  eyebrow: 'About Arham Realty',
+  title: ['Thirty years of', 'building Mumbai'],
+  intro: [
+    'Born from a vision to redefine urban living, Arham Realty stands as a symbol of progressive infrastructure, architectural precision, and timeless value.',
+    'With a commitment to shaping the evolving skyline of Mumbai, Arham Realty develops premium residential and commercial spaces that blend modern design, functionality, and sustainable growth.',
+    'Driven by excellence and rooted in integrity, the brand continuously pushes boundaries in construction quality, design intelligence, and customer experience.',
+    'Every project reflects the spirit of Mumbai itself: ambitious, dynamic, and constantly evolving.',
+  ],
+  storyTitle: 'From Nalasopara to the island city',
+  story: [
+    'The first entry on the Arham Group schedule is Vardaman Park at Nalasopara East. 46,000 sq ft, started in 1994 and handed over two years later. The decade that followed was spent out in the Thane belt and the far western suburbs, at Mira Road, Bhayander and Kandivali, building the kind of community housing the city’s outward growth was asking for.',
+    'Worli changed the scale of things. Shubhda Tower, finished in 2005, was 4.1 lakh sq ft and is still the largest completed project on the schedule. It was the practice’s arrival in the island city, and Bandra, Khar and Santacruz followed quickly after.',
+    'The 2010s went to redevelopment. Dakshata CHSL in Chembur West and Pramod CHSL in Ghatkopar East were both rebuilt for the societies already living on them, work that asks for patience with the approvals and with the families waiting to move back home. Premia at Tilak Nagar and Anvaya at Andheri East are built on that record.',
+  ],
+  groupsTitle: 'Arham Group of Companies',
+  groupsBody:
+    'Projects are delivered through the group’s development companies and joint ventures. Every project on this site is listed against the entity that built it.',
 }
 
 export const TIMELINE = [
@@ -219,16 +91,16 @@ export const TIMELINE = [
     kicker: 'Beginnings',
     title: 'Founded in 1994',
     body:
-      "Established in Mulund & Nalasopara with a vision to build quality, dependable homes for Mumbai's growing families.",
-    image: IMG('photo-1486325212027-8081e485255e'),
+      'Established in Mulund and Nalasopara, with a plan to build quality, dependable homes for Mumbai’s growing families.',
+    image: '/projects/anvaya-5.jpg',
   },
   {
     era: '2000s',
     kicker: 'Into the island city',
     title: 'Shubhda Tower & Blossom CHSL',
     body:
-      'The practice moved into South Mumbai and the western suburbs, delivering Shubhda Tower at Worli and the mixed-use Blossom CHSL at Santacruz West.',
-    image: IMG('photo-1512917774080-9991f1c4c750'),
+      'The practice moved into South Mumbai and the western suburbs, delivering Shubhda Tower at Worli and Blossom CHSL, part shops and part homes, at Santacruz West.',
+    image: '/projects/shubhda-tower.jpg',
   },
   {
     era: '2010s',
@@ -236,23 +108,23 @@ export const TIMELINE = [
     title: 'Chembur & Ghatkopar',
     body:
       'Dakshata CHSL and Pramod CHSL established Arham as a dependable redevelopment partner for housing societies across the central suburbs.',
-    image: IMG('photo-1600585154340-be6161a56a0c'),
+    image: '/projects/dakshata-chsl.jpg',
   },
   {
     era: '2020s',
     kicker: 'A landmark address',
     title: 'Premia, Tilak Nagar',
     body:
-      'Premia "A" completed in 2023 — a luxury residential tower with high-end finishes and excellent connectivity, with towers B and C now underway.',
-    image: IMG('photo-1545324418-cc1a3fa10c00'),
+      'Premia Tower A was finished in 2023, a residential tower with premium finishes and excellent connectivity. Towers B and C are now underway on the same estate.',
+    image: '/projects/premia-a-1.jpg',
   },
   {
     era: '2026',
     kicker: 'What comes next',
     title: 'Six upcoming addresses',
     body:
-      'A pipeline spanning Pali Hill, Mahalaxmi, Bandra West, Borivali and Malad — carrying three decades of practice into the next skyline.',
-    image: IMG('photo-1600607687939-ce8a6c25118c'),
+      'A pipeline spanning Bandra West, Mahalaxmi, Borivali East and West, Malad East and Bhandup East, carrying three decades of practice into the next skyline.',
+    image: '/projects/premia-bc-1.jpg',
   },
 ]
 
@@ -269,7 +141,7 @@ export const VISION = {
   headline:
     "To be Mumbai's most trusted real estate brand, shaping iconic skyline landmarks.",
   body:
-    'Known for creating sustainable, future-ready spaces and enriching communities for generations to come. We aim to revolutionize urban living through visionary, community-centric designs.',
+    'Known for creating sustainable, future ready spaces and enriching communities for generations to come. We aim to revolutionise urban living through visionary, community centric designs.',
 }
 
 /* ---------------------------------- Footprint -------------------- */
@@ -278,15 +150,15 @@ export const FOOTPRINT = {
   index: '03 / Geographical network',
   title: ['Our Footprint Across', 'Mumbai & Thane'],
   body:
-    'Since 1994, Arham Realty has established landmark spaces that unite progressive architecture and structural reliability. Dive into our geographical distribution.',
+    'Since 1994 we have built across Mumbai and Thane, uniting progressive architecture with structural reliability. Here is where you will find us.',
   caption: ['Landmarks Built on', 'Precision & Spatial Impact'],
 }
 
 export const FOOTPRINT_STATS = [
-  { value: 2.4, suffix: 'M+', label: 'Sq Ft Delivered', decimals: 1 },
-  { value: 900, suffix: '+', label: 'Happy Families' },
-  { value: 22, suffix: '+', label: 'Prime Locations' },
-  { value: 1.2, suffix: 'M+', label: 'Sq Ft Upcoming', decimals: 1 },
+  { value: lakhs(AREA_TOTALS.Completed), suffix: 'L', label: 'Sq Ft Delivered', decimals: 1 },
+  { value: lakhs(AREA_TOTALS.Ongoing), suffix: 'L', label: 'Sq Ft Under Construction', decimals: 1 },
+  { value: lakhs(AREA_TOTALS.Upcoming), suffix: 'L', label: 'Sq Ft Upcoming', decimals: 1 },
+  { value: PROJECTS.length, suffix: '', label: 'Projects Since 1994' },
 ]
 
 export interface Cluster {
@@ -295,60 +167,43 @@ export interface Cluster {
   entries: { name: string; status: ProjectStatus }[]
 }
 
-export const CLUSTERS: Cluster[] = [
-  {
-    region: 'Chembur & Ghatkopar',
-    count: 4,
-    entries: [
-      { name: 'Premia "A"', status: 'Completed' },
-      { name: 'Premia "B" & "C"', status: 'Ongoing' },
-      { name: 'Pramod CHSL', status: 'Completed' },
-      { name: 'Dakshata CHSL', status: 'Completed' },
-    ],
-  },
-  {
-    region: 'Bandra & Santacruz',
-    count: 4,
-    entries: [
-      { name: 'Blossom CHSL', status: 'Completed' },
-      { name: 'Shailesh Apartment', status: 'Completed' },
-      { name: 'Akhand Aabhar CHSL', status: 'Completed' },
-      { name: 'Bandra West, Mumbai', status: 'Upcoming' },
-    ],
-  },
-  {
-    region: 'Worli & South Mumbai',
-    count: 2,
-    entries: [
-      { name: 'Shubhda Tower', status: 'Completed' },
-      { name: 'Mahalaxmi, Mumbai', status: 'Upcoming' },
-    ],
-  },
-  {
-    region: 'Thane & Central Suburbs',
-    count: 6,
-    entries: [
-      { name: 'Pooja Park', status: 'Completed' },
-      { name: 'Toral Apartment', status: 'Completed' },
-      { name: 'Jesal Apartment', status: 'Completed' },
-      { name: 'Sai Dhara', status: 'Completed' },
-      { name: 'Vardaman Park', status: 'Completed' },
-      { name: 'Bhandup East, Mumbai', status: 'Upcoming' },
-    ],
-  },
-  {
-    region: 'Andheri & Borivali',
-    count: 6,
-    entries: [
-      { name: 'Anvaya — Medinee Niketan CHSL', status: 'Ongoing' },
-      { name: 'Navtarun CHSL', status: 'Completed' },
-      { name: 'Shri Ganesh CHSL', status: 'Completed' },
-      { name: 'Borivali East, Mumbai', status: 'Upcoming' },
-      { name: 'Borivali West, Mumbai', status: 'Upcoming' },
-      { name: 'Malad East, Mumbai', status: 'Upcoming' },
-    ],
-  },
+/* Localities grouped into the five corridors the practice actually works
+   in. Derived from the project schedule so a new project appears on the
+   map the moment it is added — there is no second list to maintain. */
+const REGION_OF: Record<string, string> = {
+  'Chembur West, Mumbai': 'Chembur, Ghatkopar & Bhandup',
+  'Ghatkopar East, Mumbai': 'Chembur, Ghatkopar & Bhandup',
+  'Bhandup East, Mumbai': 'Chembur, Ghatkopar & Bhandup',
+  'Bandra West, Mumbai': 'Bandra, Khar & Santacruz',
+  'Khar West, Mumbai': 'Bandra, Khar & Santacruz',
+  'Santacruz West, Mumbai': 'Bandra, Khar & Santacruz',
+  'Worli, Mumbai': 'Worli & Mahalaxmi',
+  'Mahalaxmi, Mumbai': 'Worli & Mahalaxmi',
+  'Andheri East, Mumbai': 'Andheri, Kandivali, Borivali & Malad',
+  'Kandivali West, Mumbai': 'Andheri, Kandivali, Borivali & Malad',
+  'Borivali East, Mumbai': 'Andheri, Kandivali, Borivali & Malad',
+  'Borivali West, Mumbai': 'Andheri, Kandivali, Borivali & Malad',
+  'Malad East, Mumbai': 'Andheri, Kandivali, Borivali & Malad',
+  'Mira Road East, Thane': 'Mira Road, Bhayander & Nalasopara',
+  'Bhayander East, Thane': 'Mira Road, Bhayander & Nalasopara',
+  'Nalasopara East, Thane': 'Mira Road, Bhayander & Nalasopara',
+}
+
+const REGION_ORDER = [
+  'Chembur, Ghatkopar & Bhandup',
+  'Andheri, Kandivali, Borivali & Malad',
+  'Bandra, Khar & Santacruz',
+  'Mira Road, Bhayander & Nalasopara',
+  'Worli & Mahalaxmi',
 ]
+
+export const CLUSTERS: Cluster[] = REGION_ORDER.map((region) => {
+  const entries = PROJECTS.filter((p) => REGION_OF[p.location] === region).map((p) => ({
+    name: p.name,
+    status: p.status,
+  }))
+  return { region, count: entries.length, entries }
+})
 
 /* ---------------------------------- Values ----------------------- */
 
@@ -356,7 +211,7 @@ export const VALUES_HEADER = {
   eyebrow: 'Why Arham',
   title: ['The values we', 'build on'],
   body:
-    'Four principles have shaped every project since 1994 — guiding how we design, how we build, and how we stand behind every home we deliver.',
+    'Four principles have shaped every project since 1994. They guide how we design, how we build, and how we stand behind every home we hand over.',
 }
 
 export const VALUES = [
@@ -376,7 +231,7 @@ export const VALUES = [
   },
   {
     n: '03',
-    kicker: 'Future-Ready Design',
+    kicker: 'Future Ready Design',
     title: 'Innovation',
     body:
       'Implementing progressive architectural ideas and technology to engineer functional, elegant living experiences.',
@@ -386,7 +241,7 @@ export const VALUES = [
     kicker: 'Green Compass',
     title: 'Sustainability',
     body:
-      'Building responsibly for a greener tomorrow, integrating eco-friendly designs and efficient resources for future generations.',
+      'Building responsibly for a greener tomorrow, integrating eco friendly designs and efficient resources for future generations.',
   },
 ]
 
@@ -403,7 +258,7 @@ export const CONTACT = {
       label: 'Office',
       lines: [
         'Office No. 7, 1st Floor, Shantinath Shopping Centre,',
-        'S.V. Road, Malad West, Mumbai — 400064',
+        'S.V. Road, Malad West, Mumbai 400064',
       ],
     },
     { label: 'Phone', lines: ['+91 98190 91599'], href: 'tel:+919819091599' },
@@ -412,17 +267,17 @@ export const CONTACT = {
       lines: ['arhamlanddevelopers@gmail.com'],
       href: 'mailto:arhamlanddevelopers@gmail.com',
     },
-    { label: 'Hours', lines: ['Mon – Sat · 10:00 AM – 7:00 PM'] },
+    { label: 'Hours', lines: ['Mon to Sat · 10:00 AM to 7:00 PM'] },
   ],
   form: {
     title: 'Send us an enquiry',
     body: "Tell us what you're looking for and we'll match you to the right project.",
     interests: [
-      'Premia "B" & "C" — Chembur',
-      'Anvaya — Andheri',
-      'Arham Square — Commercial',
-      'Pali Hill — Ultra Luxury',
-      'Mahalaxmi Heights',
+      'Premia Towers B & C, Chembur',
+      'Anvaya, Andheri East',
+      'Upcoming at Bandra West',
+      'Upcoming at Mahalaxmi',
+      'Upcoming at Borivali, Malad or Bhandup',
       'Redevelopment / Land',
       'General Enquiry',
     ],
@@ -440,11 +295,15 @@ export const CTA = {
 
 export const FOOTER = {
   projects: [
-    'Premia B & C — Chembur',
-    'Anvaya — Andheri',
-    'Pali Hill — Upcoming',
-    'All Projects',
+    { label: 'Premia Towers B & C', href: '/projects/premia-towers-b-c' },
+    { label: 'Anvaya, Andheri East', href: '/projects/anvaya-medinee-niketan' },
+    { label: 'Premia Tower A', href: '/projects/premia-tower-a' },
+    { label: 'All Projects', href: '/projects' },
   ],
   legal: ['Privacy Policy', 'Terms & Conditions'],
   copyright: '© 2026 Arham Realty. All rights reserved.',
+  /* Standard Indian real-estate marketing disclaimer. Renders and plans
+     shown on this site come from project brochures and are indicative. */
+  disclaimer:
+    'Images, plans and amenity layouts shown are artists’ impressions taken from project brochures and are indicative only. They do not form part of any offer or contract. Areas quoted are construction areas as recorded in the Arham Group project schedule. Details of upcoming projects are subject to statutory approvals and are shown by locality. Building names are withheld pending those approvals.',
 }

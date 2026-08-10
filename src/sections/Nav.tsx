@@ -1,13 +1,18 @@
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { BRAND, NAV } from '../data/content'
+import { NAV } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { EASE } from '../components/Motion'
+import { Link, useRouter } from '../router'
+import Logo from '../components/Logo'
 
 export default function Nav() {
   const [stuck, setStuck] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('#home')
+  const { path, navigate } = useRouter()
+
+  const onHome = path === '/'
 
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 220, damping: 40, mass: 0.3 })
@@ -19,15 +24,16 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  /* Highlight the nav item whose section owns the upper third of the viewport. */
+  /* Section highlighting only applies to the home page's anchors. */
   useEffect(() => {
-    const ids = NAV.map((n) => n.href.slice(1))
+    if (!onHome) return
+    const ids = NAV.filter((n) => n.href.startsWith('/#')).map((n) => n.href.slice(2))
     const obs = new IntersectionObserver(
       (entries) => {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible) setActive('#' + visible.target.id)
+        if (visible) setActive('/#' + visible.target.id)
       },
       { rootMargin: '-20% 0px -55% 0px', threshold: [0.05, 0.3, 0.6] },
     )
@@ -36,38 +42,37 @@ export default function Nav() {
       if (el) obs.observe(el)
     })
     return () => obs.disconnect()
-  }, [])
+  }, [onHome, path])
+
+  const isActive = (href: string) =>
+    href.startsWith('/#') ? onHome && active === href : path.startsWith(href) && href !== '/'
 
   const go = (href: string) => {
     setOpen(false)
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    navigate(href)
   }
+
+  /* Off the home page there is no dark hero behind the bar, so it must
+     always wear its light treatment. */
+  const solid = stuck || !onHome
 
   return (
     <>
       <motion.div className="progress" style={{ scaleX: progress }} />
 
-      <header className={`nav${stuck ? ' nav--stuck' : ''}`}>
+      <header className={`nav${solid ? ' nav--stuck' : ''}`}>
         <div className="wrap">
           <div className="nav__inner">
-            <a
-              className="logo"
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault()
-                go('#home')
-              }}
-            >
-              <span>{BRAND.markTop}</span>
-              <span>{BRAND.markBottom}</span>
-            </a>
+            <Link to="/" className="logo" aria-label="Arham Realty, home">
+              <Logo />
+            </Link>
 
             <nav aria-label="Primary">
               <ul className="nav__links">
                 {NAV.map((item) => (
                   <li key={item.href}>
                     <a
-                      className={`nav__link${active === item.href ? ' nav__link--active' : ''}`}
+                      className={`nav__link${isActive(item.href) ? ' nav__link--active' : ''}`}
                       href={item.href}
                       onClick={(e) => {
                         e.preventDefault()
@@ -83,10 +88,10 @@ export default function Nav() {
 
             <a
               className="btn btn--solid nav__cta"
-              href="#contact"
+              href="/#contact"
               onClick={(e) => {
                 e.preventDefault()
-                go('#contact')
+                go('/#contact')
               }}
             >
               Enquire Now
@@ -132,10 +137,10 @@ export default function Nav() {
                   ))}
                   <li>
                     <a
-                      href="#contact"
+                      href="/#contact"
                       onClick={(e) => {
                         e.preventDefault()
-                        go('#contact')
+                        go('/#contact')
                       }}
                       style={{ color: 'var(--accent)' }}
                     >
