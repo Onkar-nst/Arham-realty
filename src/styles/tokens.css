@@ -1,0 +1,157 @@
+/* ------------------------------------------------------------------
+   Design tokens — lifted from the Ironwood/Framer construction theme
+   and retuned for Arham Realty.
+   ------------------------------------------------------------------ */
+
+:root {
+  /* Surfaces — warm cream over near-black ink */
+  --bg: #f5f3ee;
+  --bg-alt: #efece5;
+  --surface: #ffffff;
+  --surface-2: #faf8f4;
+
+  /* Ink */
+  --ink: #171614;
+  --ink-strong: #0f0e0d;
+  --muted: #5c564f;
+  --muted-2: #7d766d;
+
+  /* Lines */
+  --line: #e0d6c7;
+  --line-soft: #eae4da;
+
+  /* Accent — brass/gold */
+  --accent: #a87020;
+  --accent-bright: #f7b74a;
+  --accent-soft: #f0ce96;
+  --accent-wash: #f7ecd8;
+
+  /* Inverted block (dark bands) */
+  --inv-bg: #171614;
+  --inv-bg-2: #1c1a17;
+  --inv-ink: #f5f3ee;
+  --inv-muted: #a8a298;
+  --inv-line: #2c2924;
+
+  /* Type */
+  --font-display: 'Geist', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'Fragment Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Radii — Framer used 4 / 8 / 16 / 999 */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-pill: 999px;
+
+  /* Motion — the theme's single easing curve */
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur: 0.4s;
+  --dur-fast: 0.3s;
+
+  /* Layout */
+  --maxw: 1240px;
+  --gutter: 24px;
+  --section-y: 128px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(23, 22, 20, 0.05);
+  --shadow-md: 0 4px 24px rgba(23, 22, 20, 0.06);
+  --shadow-lg: 0 24px 64px rgba(23, 22, 20, 0.1);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --section-y: 84px;
+    --gutter: 20px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reset
+   ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
