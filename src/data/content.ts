@@ -50,7 +50,7 @@ export const HERO_STATS = [
 
 export const ABOUT = {
   eyebrow: 'About Arham Realty',
-  title: ['Building Dreams', 'Since', '1994'],
+  title: ['Building Dreams', { text: 'Since', accent: '1994' }],
   lead: {
     before: 'Born from a vision to redefine urban living, Arham Realty stands as a symbol of ',
     emphasis: 'progressive infrastructure, architectural precision, and timeless value',
@@ -164,7 +164,7 @@ export const FOOTPRINT_STATS = [
 export interface Cluster {
   region: string
   count: number
-  entries: { name: string; status: ProjectStatus }[]
+  entries: { slug: string; name: string; status: ProjectStatus }[]
 }
 
 /* Localities grouped into the five corridors the practice actually works
@@ -199,11 +199,35 @@ const REGION_ORDER = [
 
 export const CLUSTERS: Cluster[] = REGION_ORDER.map((region) => {
   const entries = PROJECTS.filter((p) => REGION_OF[p.location] === region).map((p) => ({
+    slug: p.slug,
     name: p.name,
     status: p.status,
   }))
   return { region, count: entries.length, entries }
 })
+
+/* Flat pin list for the map. Same source as CLUSTERS, so a project can
+   never appear in the list but be missing from the plot. */
+export interface Pin {
+  slug: string
+  name: string
+  location: string
+  status: ProjectStatus
+  region: string
+  coords: [number, number]
+  /** Where a pin click goes. Projects without client material have no page. */
+  href: string
+}
+
+export const FOOTPRINT_PINS: Pin[] = PROJECTS.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  location: p.location,
+  status: p.status,
+  region: REGION_OF[p.location] ?? 'Mumbai & Thane',
+  coords: p.coords,
+  href: `/projects/${p.slug}`,
+}))
 
 /* ---------------------------------- Values ----------------------- */
 
@@ -249,7 +273,7 @@ export const VALUES = [
 
 export const CONTACT = {
   eyebrow: 'Get in Touch',
-  title: ["Let's", 'talk'],
+  title: [{ text: "Let's", accent: 'talk' }],
   sub: ['Reach the', 'Arham team.'],
   body:
     "Our team responds to every enquiry personally. Visit us, call, or send a note and we'll be in touch within one business day.",

@@ -106,7 +106,7 @@ export default function About() {
                 </p>
               </Reveal>
               <h2 className="h-section">
-                <MaskedLines lines={ABOUT.title} accentIndex={2} />
+                <MaskedLines lines={ABOUT.title} />
               </h2>
             </div>
             <Reveal delay={0.12}>

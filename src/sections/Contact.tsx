@@ -27,7 +27,7 @@ export default function Contact() {
             </Reveal>
 
             <h2 className="contact__title">
-              <MaskedLines lines={CONTACT.title} accentIndex={1} />
+              <MaskedLines lines={CONTACT.title} />
             </h2>
 
             <Reveal delay={0.1}>

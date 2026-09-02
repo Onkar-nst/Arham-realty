@@ -72,13 +72,19 @@ export const revealItem = {
  * Per-line masked rise, used on display headings. Each line sits in an
  * overflow-hidden track and slides up from below the mask.
  */
+/** A line is either plain text, or plain text followed by an accented tail
+    that must stay on the same line (e.g. "Since 1994"). */
+export type MaskedLine = string | { text: string; accent: string }
+
+const lineKey = (line: MaskedLine) => (typeof line === 'string' ? line : line.text + line.accent)
+
 export function MaskedLines({
   lines,
   className,
   delay = 0,
   accentIndex,
 }: {
-  lines: string[]
+  lines: MaskedLine[]
   className?: string
   delay?: number
   /** Render this line in the accent serif-italic treatment. */
@@ -93,7 +99,7 @@ export function MaskedLines({
   return (
     <span className={['mask-lines', className].filter(Boolean).join(' ')} ref={ref}>
       {lines.map((line, i) => (
-        <span className="mask-line" key={line + i}>
+        <span className="mask-line" key={lineKey(line) + i}>
           <motion.span
             className={i === accentIndex ? 'accent-line' : undefined}
             initial={{ y: '110%' }}
@@ -104,7 +110,13 @@ export function MaskedLines({
               delay: delay + i * 0.085,
             }}
           >
-            {line}
+            {typeof line === 'string' ? (
+              line
+            ) : (
+              <>
+                {line.text} <span className="accent-line">{line.accent}</span>
+              </>
+            )}
           </motion.span>
         </span>
       ))}

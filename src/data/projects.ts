@@ -705,20 +705,15 @@ export const lakh = (sqft: number) => {
 export const sqftLabel = (sqft: number) => sqft.toLocaleString('en-IN')
 
 /**
- * Projects with a dedicated page. Only the three the client supplied full
- * brochure material for — renders, amenity schedules and approved copy.
- * The rest are listed on the index and route to an enquiry until their
- * material arrives; add a slug here once it does.
+ * Every project has a page. The three with full brochure material read as
+ * full case studies; the rest render from the schedule record — status,
+ * timeline, area, location, map — plus whatever copy exists, and say
+ * plainly where no photography was supplied.
  */
-export const DETAIL_SLUGS = new Set([
-  'premia-towers-b-c',
-  'anvaya-medinee-niketan',
-  'premia-tower-a',
-])
+export const hasFullMaterial = (p: Project) =>
+  Boolean(p.images.length && (p.highlights || p.amenities))
 
-export const hasDetailPage = (p: Project) => DETAIL_SLUGS.has(p.slug)
-
-/** Featured on the home page — the same three, in presentation order. */
+/** Featured on the home page, in presentation order. */
 export const FEATURED = ['premia-towers-b-c', 'anvaya-medinee-niketan', 'premia-tower-a']
   .map(findProject)
   .filter((p): p is Project => Boolean(p))

@@ -45,6 +45,9 @@ export function RouterProvider({ children }: { children: ReactNode }) {
       setPath(next)
       /* New page: start at the top unless the link asked for a section. */
       if (!hash) window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+    } else if (!hash) {
+      /* Already here: treat the click as "take me back to the top". */
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
     if (hash) {

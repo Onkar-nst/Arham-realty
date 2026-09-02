@@ -109,7 +109,7 @@ export default function ProjectsPage() {
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}
-              className="projects__list"
+              className="projects__list projects__list--grid"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}

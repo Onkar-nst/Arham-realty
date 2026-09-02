@@ -27,6 +27,22 @@
   background: var(--bg-alt);
 }
 
+/* Where a dark band butts against the next light section, the two full
+   paddings stack into an oversized gap — halve both sides of the seam. */
+.section--dark + .section {
+  padding-top: calc(var(--section-y) * 0.45);
+}
+
+.section--dark:has(+ .section) {
+  padding-bottom: calc(var(--section-y) * 0.45);
+}
+
+/* The stats band carries its own padding, so the section under it does
+   not need a full one on top. */
+.stats + .section {
+  padding-top: calc(var(--section-y) * 0.45);
+}
+
 /* Eyebrow — mono, uppercase, wide-tracked, with a leading rule */
 .eyebrow {
   display: inline-flex;
@@ -54,19 +70,19 @@
 /* Display heading scale — 42 → 72px, tight tracking */
 .h-display {
   font-size: clamp(38px, 6.2vw, 72px);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
   line-height: 1.02;
 }
 
 .h-section {
   font-size: clamp(32px, 4.6vw, 56px);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1.05;
 }
 
 .h-card {
   font-size: clamp(20px, 2vw, 28px);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
 }
 
 .lead {
@@ -242,7 +258,7 @@
   }
 
   .nav:not(.nav--stuck) .nav__link {
-    color: rgba(243, 248, 246, 0.72);
+    color: #fff;
   }
 
   .nav:not(.nav--stuck) .nav__link:hover,
@@ -275,10 +291,43 @@
   width: auto;
   height: auto;
   display: block;
+  /* Inside the flex lockup the images must keep their intrinsic aspect
+     ratio — letting them shrink squashes the mark and clips the "A". */
+  flex: none;
 }
 
+.brandmark-lockup {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 4px;
+  flex: none;
+}
+
+/* The mark keeps the old lockup height so the nav bar does not grow;
+   only the wordmark is scaled up. */
 .brandmark--full {
-  height: 46px;
+  height: 45px;
+}
+
+.brandmark-type {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  margin-bottom: 3px;
+}
+
+.brandmark--name {
+  height: 21px;
+}
+
+/* REALTY is not centred on the ARHAM block in the source art — it sits
+   at 47% of its width — so anchor it there and let it scale about that
+   point. */
+.brandmark--sub {
+  height: 9px;
+  margin-top: 5px;
+  margin-left: 47.1%;
+  transform: translateX(-50%);
 }
 
 .brandmark--mark {
@@ -294,8 +343,25 @@
 }
 
 @media (max-width: 900px) {
+  .brandmark-lockup {
+    gap: 3px;
+  }
+
   .brandmark--full {
-    height: 28px;
+    height: 27px;
+  }
+
+  .brandmark-type {
+    margin-bottom: 2px;
+  }
+
+  .brandmark--name {
+    height: 13px;
+  }
+
+  .brandmark--sub {
+    height: 6px;
+    margin-top: 3px;
   }
 }
 
@@ -467,7 +533,7 @@
 }
 
 .hero__eyebrow {
-  color: rgba(243, 248, 246, 0.72);
+  color: #fff;
   margin-bottom: 26px;
 }
 
@@ -605,6 +671,13 @@
   gap: 28px;
 }
 
+/* Projects page only: two cards per row, each stacked photo-over-copy.
+   The home page keeps the full-width alternating rows below. */
+.projects__list--grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
 .pcard {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
@@ -627,9 +700,31 @@
 
 .pcard__media {
   position: relative;
-  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--bg-alt);
+  /* No aspect-ratio on the two-column layout: a definite height would
+     stop the cell stretching, leaving a gap under the photo whenever the
+     copy column runs taller. The floor keeps short cards from squashing. */
+  min-height: 440px;
+}
+
+/* Stacked variant — the card becomes a column, and the grid row stretches
+   every card in it to the tallest, so the CTAs line up. */
+.projects__list--grid .pcard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.projects__list--grid .pcard__media {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  flex: none;
+}
+
+.projects__list--grid .pcard__body {
+  flex: 1;
+  justify-content: flex-start;
 }
 
 .pcard__media img {
@@ -710,15 +805,15 @@
 }
 
 .dot--Completed {
-  background: var(--accent-bright);
+  background: var(--st-completed);
 }
 
 .dot--Ongoing {
-  background: var(--accent-bright);
+  background: var(--st-ongoing);
 }
 
 .dot--Upcoming {
-  background: #6f8f9e;
+  background: var(--st-upcoming);
 }
 
 .pcard__body {
@@ -726,6 +821,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* Pushes the CTA to the foot of the card so it sits on one line across
+   the row regardless of how much copy each project carries. */
+.projects__list--grid .pcard__body .link-arrow {
+  margin-top: auto;
 }
 
 .pcard__dev {
@@ -770,6 +871,26 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+/* On a card the amenities stay on one line and scroll sideways when they
+   run long, so the row never pushes the copy column taller than the
+   photograph beside it. The detail page keeps the wrapping list. */
+.pcard__amen .pcard__chips {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Fade the trailing edge to signal there is more to scroll to. */
+  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+
+.pcard__amen .pcard__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.pcard__amen .chip {
+  flex: none;
 }
 
 .chip {
@@ -884,8 +1005,16 @@
 }
 
 @media (max-width: 900px) {
+  .projects__list--grid {
+    grid-template-columns: 1fr;
+  }
   .pcard {
     grid-template-columns: 1fr;
+  }
+  /* Stacked, so there is no sibling to match — go back to a fixed crop. */
+  .pcard__media {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
   }
   .pcard:nth-child(even) .pcard__media {
     order: 0;
@@ -906,18 +1035,18 @@
    ================================================================== */
 
 .about__lead {
-  font-size: clamp(19px, 2.1vw, 27px);
-  line-height: 1.45;
-  letter-spacing: -0.025em;
-  font-family: var(--font-display);
-  font-weight: 300;
+  /* Matches the standard .lead treatment used across the sections. */
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.65;
   color: var(--muted);
-  max-width: 34ch;
+  max-width: 58ch;
 }
 
+/* The emphasis clause reads at the same ink as the rest — the <em> is
+   kept for semantics only. */
 .about__lead em {
   font-style: normal;
-  color: var(--ink);
+  color: inherit;
 }
 
 .tl {
@@ -1178,27 +1307,179 @@
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+  gap: 8px;
 }
 
-.legend__item {
+/* Legend doubles as the status filter — pressed means "shown". */
+.legend__chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted-2);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+
+.legend__chip[aria-pressed='true'] {
+  color: var(--ink);
+  border-color: var(--accent-soft);
+  background: var(--accent-wash);
+}
+
+.legend__chip[aria-pressed='false'] {
+  opacity: 0.45;
+}
+
+.legend__chip[aria-pressed='false'] .dot {
+  background: var(--muted-2);
+}
+
+/* ---- The plot ---- */
+
+.fp__plot {
+  display: grid;
+  gap: 16px;
+}
+
+.fp__plot-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.fp__map {
+  height: 560px;
+  border: 1px solid var(--inv-line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--inv-bg);
+  z-index: 0;
+}
+
+/* The basemap is neutral grey, so hue-rotate alone has nothing to turn.
+   sepia() gives the greys a hue first; the rotation then carries it to
+   the deep brand green used by the site's dark bands. */
+.fp__map .leaflet-tile-pane {
+  filter: sepia(0.7) hue-rotate(105deg) saturate(1.5) brightness(0.72) contrast(1.15);
+}
+
+/* Place names ride above the tint, neutral, so they stay legible. */
+.fp__map .leaflet-shadow-pane {
+  filter: saturate(0) brightness(1.15) opacity(0.7);
+}
+
+.fp__map .leaflet-container {
+  background: var(--inv-bg);
+  font-family: var(--font-body);
+}
+
+.fp__map .leaflet-control-zoom a {
+  background: rgba(11, 26, 21, 0.86);
+  color: var(--inv-ink);
+  border-color: var(--inv-line);
+  border-radius: var(--r-xs);
+  font-weight: 400;
+}
+
+.fp__map .leaflet-control-zoom a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.fp__map .leaflet-control-attribution {
+  background: rgba(11, 26, 21, 0.7);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--inv-muted);
+}
+
+.fp__map .leaflet-control-attribution a {
+  color: var(--inv-muted);
+}
+
+/* Pins are the same three status colours as the rest of the site. */
+.fp-pin {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(243, 248, 246, 0.9);
+  box-shadow: 0 0 0 4px rgba(1, 124, 96, 0.18);
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.fp-pin-wrap:hover .fp-pin {
+  transform: scale(1.45);
+}
+
+.fp-pin--Completed {
+  background: var(--st-completed-pin);
+}
+
+.fp-pin--Ongoing {
+  background: var(--st-ongoing-pin);
+}
+
+.fp-pin--Upcoming {
+  background: var(--st-upcoming-pin);
+}
+
+.leaflet-tooltip.fp-tip {
+  background: var(--ink-strong);
+  border: none;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-md);
+  color: var(--inv-ink);
+  padding: 9px 13px;
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.leaflet-tooltip.fp-tip strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.leaflet-tooltip.fp-tip span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--inv-muted);
+}
+
+.leaflet-tooltip.fp-tip::before {
+  border-top-color: var(--ink-strong);
 }
 
 .clusters {
   display: grid;
   gap: 0;
   border-top: 1px solid var(--line);
+}
+
+/* "Show all locations" resets the map to the full footprint. */
+.fp__story {
+  /* Centred within the left column rather than flush to its edge. The
+     .btn base is inline-flex, on which auto margins do nothing — the
+     button has to be block-level for them to bite. */
+  display: flex;
+  width: fit-content;
+  margin: 32px auto 0;
 }
 
 .cluster {
@@ -1222,9 +1503,13 @@
 
 .cluster__name {
   font-family: var(--font-display);
-  font-size: clamp(18px, 1.7vw, 23px);
-  letter-spacing: -0.03em;
-  font-weight: 500;
+  font-size: clamp(15px, 1.25vw, 18px);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  /* Region names stay on a single line — the count column keeps its width. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cluster__right {
@@ -1298,6 +1583,18 @@
   .fp__grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  /* Lead with the map on a phone; the corridor list reads as its key. */
+  .fp__grid > *:last-child {
+    order: -1;
+  }
+  .fp__map {
+    height: 380px;
+  }
+  .fp__plot-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
@@ -1681,6 +1978,17 @@
 }
 
 /* Marquee — the theme repeats service names in an infinite band */
+/* The band sits between two full-padded sections, which stacks 128px of
+   air on each side of it. Halve the padding the two neighbours put next
+   to the band so it reads as part of the flow rather than a gap. */
+.section:has(+ .marquee) {
+  padding-bottom: calc(var(--section-y) * 0.45);
+}
+
+.marquee + .section {
+  padding-top: calc(var(--section-y) * 0.45);
+}
+
 .marquee {
   overflow: hidden;
   border-block: 1px solid var(--line);
@@ -2413,4 +2721,26 @@
 .section--dark .accent-line,
 .cta .accent-line {
   color: var(--accent-bright);
+}
+
+/* Detail-page gallery with no supplied photography: the branded plate
+   fills the stage, at a size that suits the larger frame. */
+.pgal__stage--empty .plate__mark {
+  width: 140px;
+}
+
+.nextcard__plate {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.pdetail__note {
+  margin-top: 22px;
+  padding: 16px 20px;
+  border-left: 2px solid var(--accent-soft);
+  background: var(--bg-alt);
+  border-radius: var(--r-sm);
+  font-size: 14.5px;
+  color: var(--muted);
 }

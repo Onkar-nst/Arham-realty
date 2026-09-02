@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import type { Project } from '../data/projects'
-import { hasDetailPage, lakh } from '../data/projects'
+import { lakh } from '../data/projects'
 import { ArrowRight, Caret } from '../components/Icons'
 import { EASE, Reveal } from '../components/Motion'
 import { Link } from '../router'
@@ -11,7 +11,7 @@ import { Link } from '../router'
  * plainly beats dressing an unphotographed 1999 society in stock imagery
  * of a building that is not theirs.
  */
-function Plate({ project }: { project: Project }) {
+export function Plate({ project }: { project: Project }) {
   return (
     <div className="plate" aria-hidden="true">
       <img className="plate__mark" src="/brand/arham-mark.png" alt="" />
@@ -75,8 +75,6 @@ export default function ProjectCard({
   project: Project
   index?: number
 }) {
-  const detail = hasDetailPage(project)
-
   return (
     <Reveal delay={Math.min(index, 3) * 0.06} distance={30}>
       <article className="pcard">
@@ -131,22 +129,11 @@ export default function ProjectCard({
             </div>
           </dl>
 
-          {detail ? (
-            <Link className="link-arrow" to={`/projects/${project.slug}`}>
-              Explore Details
-              <ArrowRight />
-            </Link>
-          ) : (
-            <a
-              className="link-arrow"
-              href={project.mapUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View on Map
-              <ArrowRight />
-            </a>
-          )}
+          <Link className="link-arrow" to={`/projects/${project.slug}`}>
+            Explore Details
+            <ArrowRight />
+          </Link>
+
         </div>
       </article>
     </Reveal>

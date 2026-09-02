@@ -11,7 +11,7 @@ import ProjectPage from './pages/ProjectPage'
 import AboutPage from './pages/AboutPage'
 import NotFoundPage from './pages/NotFoundPage'
 import PageHead from './components/PageHead'
-import { findProject, hasDetailPage } from './data/projects'
+import { findProject } from './data/projects'
 import { RouterProvider, useRouter } from './router'
 
 function Home() {
@@ -42,9 +42,7 @@ function Routes() {
 
   if (path.startsWith('/projects/')) {
     const project = findProject(path.slice('/projects/'.length))
-    /* Only the projects with full client material have a page of their
-       own; the rest are listed on the index. */
-    if (project && hasDetailPage(project)) return <ProjectPage project={project} />
+    if (project) return <ProjectPage project={project} />
   }
 
   return <NotFoundPage />

@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import type { Project } from '../data/projects'
-import { PROJECTS, hasDetailPage, lakh, sqftLabel } from '../data/projects'
+import { PROJECTS, lakh, sqftLabel } from '../data/projects'
 import { ArrowRight, Caret } from '../components/Icons'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
 import PageHead from '../components/PageHead'
+import { Plate } from '../components/ProjectCard'
 import { Link } from '../router'
 
 /* ------------------------------- Gallery ------------------------- */
@@ -13,6 +14,21 @@ function Gallery({ project }: { project: Project }) {
   const [i, setI] = useState(0)
   const total = project.images.length
   const current = project.images[i]
+
+  /* No client photography for this one — the plate says so rather than
+     standing in a render of somebody else's building. */
+  if (!total) {
+    return (
+      <div className="pgal">
+        <div className="pgal__stage pgal__stage--empty">
+          <Plate project={project} />
+        </div>
+        <p className="pgal__caption">
+          Photography for this project is not yet released.
+        </p>
+      </div>
+    )
+  }
 
   const step = (d: number) => setI((n) => (n + d + total) % total)
 
@@ -75,7 +91,13 @@ function Gallery({ project }: { project: Project }) {
 /* ------------------------------- Page ---------------------------- */
 
 export default function ProjectPage({ project }: { project: Project }) {
-  const others = PROJECTS.filter((p) => p.slug !== project.slug && hasDetailPage(p))
+  /* Three siblings, preferring the same status so a completed building
+     leads to other completed work rather than the pipeline. */
+  const rest = PROJECTS.filter((p) => p.slug !== project.slug)
+  const others = [
+    ...rest.filter((p) => p.status === project.status),
+    ...rest.filter((p) => p.status !== project.status),
+  ].slice(0, 3)
 
   const facts = [
     { label: 'Status', value: project.status },
@@ -134,11 +156,20 @@ export default function ProjectPage({ project }: { project: Project }) {
           <div className="wrap">
             <div className="pdetail__grid">
               <div className="pdetail__main">
-                {project.body?.map((para) => (
+                {(project.body ?? [project.summary]).map((para) => (
                   <Reveal key={para.slice(0, 40)}>
                     <p className="pdetail__para">{para}</p>
                   </Reveal>
                 ))}
+
+                {project.nameWithheld && (
+                  <Reveal>
+                    <p className="pdetail__note">
+                      The building name for this development is not being disclosed yet.
+                      It is listed here by locality until the launch.
+                    </p>
+                  </Reveal>
+                )}
 
                 {project.highlights && (
                   <Reveal>
@@ -233,7 +264,13 @@ export default function ProjectPage({ project }: { project: Project }) {
                 {others.map((p, i) => (
                   <Reveal key={p.slug} delay={i * 0.08}>
                     <Link className="nextcard" to={`/projects/${p.slug}`}>
-                      {p.images[0] && <img src={p.images[0].src} alt="" loading="lazy" />}
+                      {p.images[0] ? (
+                        <img src={p.images[0].src} alt="" loading="lazy" />
+                      ) : (
+                        <span className="nextcard__plate">
+                          <Plate project={p} />
+                        </span>
+                      )}
                       <div className="nextcard__body">
                         <p className="nextcard__status">
                           <i className={`dot dot--${p.status}`} />
