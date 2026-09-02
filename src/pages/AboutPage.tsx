@@ -112,7 +112,7 @@ export default function AboutPage() {
 
       <section className="section section--tight section--alt">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head sec-head--tight">
             <Reveal>
               <p className="eyebrow" style={{ marginBottom: 22 }}>
                 Milestones

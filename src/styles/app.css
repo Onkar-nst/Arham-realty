@@ -23,8 +23,37 @@
   color: var(--inv-ink);
 }
 
+/* Leading edge of a dark band — the mirror of the trailing-edge rules
+   below, so both seams around a dark section are tightened equally. */
+.section:has(+ .section--dark) {
+  padding-bottom: calc(var(--section-y) * 0.45);
+}
+
+.section + .section--dark {
+  padding-top: calc(var(--section-y) * 0.45);
+}
+
 .section--alt {
   background: var(--bg-alt);
+}
+
+/* Same treatment for the tinted bands as for the dark ones: where the
+   background changes, the two sections' paddings meet at one seam and
+   only need half each. */
+.section:has(+ .section--alt) {
+  padding-bottom: calc(var(--section-y) * 0.45);
+}
+
+.section + .section--alt {
+  padding-top: calc(var(--section-y) * 0.45);
+}
+
+.section--alt + .section {
+  padding-top: calc(var(--section-y) * 0.45);
+}
+
+.section--alt:has(+ .section) {
+  padding-bottom: calc(var(--section-y) * 0.45);
 }
 
 /* Where a dark band butts against the next light section, the two full
@@ -133,9 +162,18 @@
   align-items: end;
 }
 
+/* Headings that sit directly above the timeline rule — the rule already
+   provides the separation. */
+.sec-head--tight {
+  margin-bottom: 16px;
+}
+
 @media (max-width: 900px) {
   .sec-head {
     margin-bottom: 40px;
+  }
+  .sec-head--tight {
+    margin-bottom: 16px;
   }
   .sec-head__split {
     grid-template-columns: 1fr;
@@ -317,15 +355,15 @@
 }
 
 .brandmark--name {
-  height: 21px;
+  height: 18px;
 }
 
 /* REALTY is not centred on the ARHAM block in the source art — it sits
    at 47% of its width — so anchor it there and let it scale about that
    point. */
 .brandmark--sub {
-  height: 9px;
-  margin-top: 5px;
+  height: 7.7px;
+  margin-top: 4px;
   margin-left: 47.1%;
   transform: translateX(-50%);
 }
@@ -356,11 +394,11 @@
   }
 
   .brandmark--name {
-    height: 13px;
+    height: 11.5px;
   }
 
   .brandmark--sub {
-    height: 6px;
+    height: 5px;
     margin-top: 3px;
   }
 }
@@ -1050,9 +1088,9 @@
 }
 
 .tl {
-  margin-top: 84px;
+  margin-top: 28px;
   border-top: 1px solid var(--line);
-  padding-top: 32px;
+  padding-top: 18px;
 }
 
 .tl__head {
@@ -1697,6 +1735,13 @@
   align-items: start;
 }
 
+/* The form card runs taller than the details beside it — drop the left
+   column so the two finish on the same line instead of leaving a well of
+   space beneath the contact rows. */
+.contact__grid > *:first-child {
+  align-self: end;
+}
+
 .contact__title {
   font-size: clamp(44px, 7vw, 88px);
   line-height: 0.96;
@@ -2052,9 +2097,15 @@
 /* Shared page header. Sits under the fixed nav, so it carries its own
    top padding rather than relying on the hero's full-bleed media. */
 .phead {
-  padding-block: 168px var(--section-y);
+  padding-block: 168px calc(var(--section-y) * 0.55);
   background: var(--bg-alt);
   border-bottom: 1px solid var(--line);
+}
+
+/* The page header already closes with its own padding and a rule — the
+   first section under it does not need a full one on top as well. */
+.phead + .section {
+  padding-top: calc(var(--section-y) * 0.5);
 }
 
 .phead--tall {
@@ -2081,7 +2132,7 @@
 
 @media (max-width: 900px) {
   .phead {
-    padding-block: 122px var(--section-y);
+    padding-block: 122px calc(var(--section-y) * 0.55);
   }
 }
 
@@ -2551,9 +2602,11 @@
 /* ------------------------------ About page ---------------------- */
 
 .introcols {
+  /* Three paragraphs, three columns — a two-column grid left the third
+     stranded on its own row with a hole beside it. */
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px 64px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
 }
 
 .introcols p {
@@ -2574,7 +2627,15 @@
   color: var(--muted);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .introcols,
+  .storycols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+
+@media (max-width: 760px) {
   .introcols,
   .storycols {
     grid-template-columns: 1fr;
