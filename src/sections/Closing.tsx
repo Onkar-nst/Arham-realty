@@ -3,23 +3,10 @@ import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
 import { Link } from '../router'
 import Logo from '../components/Logo'
+import { openCookiePreferences } from '../components/CookieBanner'
 
-/** Infinite band of region names — the theme's repeated-services marquee. */
-export function Marquee() {
-  const items = [
-    'Chembur',
-    'Ghatkopar',
-    'Bandra',
-    'Santacruz',
-    'Worli',
-    'Mahalaxmi',
-    'Andheri',
-    'Borivali',
-    'Malad',
-    'Thane',
-    'Bhandup',
-    'Mulund',
-  ]
+/** Infinite band of locality names — doc p.2, "… · Mulund · Chembur · …". */
+export function Marquee({ items }: { items: string[] }) {
   return (
     <div className="marquee" aria-hidden="true">
       <div className="marquee__track">
@@ -100,29 +87,34 @@ export function Footer() {
           <div>
             <p className="footer__h">Get in Touch</p>
             <ul className="footer__list">
+              {CONTACT.details
+                .flatMap((d) => d.links ?? [])
+                .map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href}>{l.label}</a>
+                  </li>
+                ))}
               <li>
-                <a href="tel:+919819091599">+91 98190 91599</a>
-              </li>
-              <li>
-                <a href="mailto:arhamlanddevelopers@gmail.com">arhamlanddevelopers@gmail.com</a>
-              </li>
-              <li>
-                <span>{CONTACT.details[0].lines[1]}</span>
+                <span>{FOOTER.address}</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <p className="footer__disclaimer">{FOOTER.disclaimer}</p>
-
         <div className="footer__bottom">
           <span>{FOOTER.copyright}</span>
           <div className="footer__legal">
-            {FOOTER.legal.map((l) => (
-              <a href="#" key={l}>
-                {l}
-              </a>
-            ))}
+            {FOOTER.legal.map((l) =>
+              l.href === '#cookies' ? (
+                <button type="button" key={l.href} onClick={openCookiePreferences}>
+                  {l.label}
+                </button>
+              ) : (
+                <Link to={l.href} key={l.href}>
+                  {l.label}
+                </Link>
+              ),
+            )}
           </div>
         </div>
       </div>

@@ -1,25 +1,27 @@
 /* ------------------------------------------------------------------
    Project catalogue.
 
-   Source of truth is the client's own material:
+   Every word of copy in this file — blurbs, connectivity, amenities,
+   neighbourhood notes, categories, configurations, areas and MahaRERA
+   numbers — is taken verbatim from "ARHAM REALTY - WEB CONTENT -
+   10.09.2026.docx", which the client has had verified by their lawyers.
+   Do not reword it without going back to that document.
 
-   · "Arham Group of Companies Past, On-Going & Up-Coming Projects.xlsx"
-     — group company, project name, type, start/end year, location,
-       construction area and Google Maps pin for all 22 projects.
-   · Kenarc e-brochures (Premia Tower A, Premia Towers B & C) — amenity
-     lists, project highlights and renders.
-   · AR Visualzation renders + June 2022 site photography (Anvaya).
+   What is NOT in that document and comes from the earlier project
+   schedule ("Arham Group of Companies Past, On-Going & Up-Coming
+   Projects.xlsx"): the map pins, Google Maps links, group company
+   names (`developer`, held for reference and not rendered), the sq-ft
+   figures used for sorting, and the photography.
 
-   Two rules carried over from those documents:
+   Two rules carried over from the client:
 
-   1. The spreadsheet marks the up-coming block "DON'T DISCLOSE BUILDING
-      NAMES". Those six projects are therefore listed by locality only;
-      their society/plot names are held in `internalRef`, which is never
+   1. The six up-coming projects are listed by locality only — building
+      names are withheld until statutory approvals come through. Their
+      society/plot names are held in `internalRef`, which is never
       rendered. Do not surface it in the UI.
    2. Nothing here is invented. Where the client supplied no photograph,
       `images` is empty and the UI falls back to a branded plate rather
-      than a stock stand-in. Where no amenity list was supplied, none is
-      claimed.
+      than a stock stand-in.
    ------------------------------------------------------------------ */
 
 export type ProjectStatus = 'Completed' | 'Ongoing' | 'Upcoming'
@@ -30,648 +32,983 @@ export interface ProjectImage {
   caption?: string
 }
 
-export interface AmenityGroup {
-  group: string
-  items: string[]
-}
-
 export interface Project {
   slug: string
-  /** Public-facing title. For up-coming projects this is the locality. */
+  /** Title on the project page and listing card. */
   name: string
-  /** Society/plot name held back under the client's disclosure rule. */
-  internalRef?: string
+  /** Name as it appears in the geographical-network list (e.g. with "CHSL"). */
+  listName: string
+  /** Name on the home-page feature card, where the client uses a slightly different form. */
+  cardName?: string
+  /** Locality line under the title. Up-coming projects carry the withheld-name note instead. */
+  locality?: string
   /** True when the building name is deliberately withheld. */
   nameWithheld?: boolean
+  /** Society/plot name held back under the client's disclosure rule. Never rendered. */
+  internalRef?: string
+  /** Group company from the schedule. Held for reference; not rendered. */
   developer: string
+  status: ProjectStatus
+  /** The bold introductory paragraph on the project page. */
+  blurb: string
+  /** Short line for feature cards and meta descriptions. */
+  summary: string
+  /** Amenity teaser on the home-page card, as the client wrote it. */
+  cardAmenities?: string
+  /** The "+ N More" tail on that teaser, also as the client wrote it. */
+  cardMore?: string
   location: string
+  category: string
+  configuration?: string
+  /** "2024 - 2027". Absent for up-coming projects, which carry no dates. */
+  timeline?: string
   start: number
   end: number
-  timeline: string
-  category: string
-  status: ProjectStatus
-  /** Construction area in sq ft, from the client's schedule. */
+  /** "1.5 L+ Sq. Ft." — the tentative construction area as the client states it. */
+  areaLabel: string
+  /** Sort key only. Not displayed. */
   areaSqFt: number
+  rera?: string
+  /** MahaRERA QR image, where the client has supplied one. */
+  reraQr?: string
+  connectivity: string[]
+  /** A closing line under the connectivity list, where the client added one. */
+  connectivityFootnote?: string
+  amenities: string[]
+  neighbourhood?: { title: string; paras: string[] }
   coords: [number, number]
   mapUrl: string
-  /** One line for cards and listings. */
-  summary: string
-  /** Long-form paragraphs for the detail page. */
-  body?: string[]
-  /** Verbatim from the project brochure. */
-  highlights?: string[]
-  amenities?: AmenityGroup[]
   images: ProjectImage[]
 }
 
 const IMG = (file: string) => `/projects/${file}`
 
-export const PROJECTS: Project[] = [
-  /* ------------------------------- Ongoing ----------------------- */
-  {
-    slug: 'premia-towers-b-c',
-    name: 'Premia Towers "B" & "C"',
-    internalRef: 'Tilak Nagar Shayadri CHSL',
-    developer: 'Kenarc Spaces LLP',
-    location: 'Chembur West, Mumbai',
-    start: 2023,
-    end: 2027,
-    timeline: '2023 to 2027',
-    category: 'Residential',
-    status: 'Ongoing',
-    areaSqFt: 151875,
-    coords: [19.0689842, 72.8987858],
-    mapUrl: 'https://maps.app.goo.gl/zvKca4fcMjFB1B9z8',
-    summary:
-      'Two new towers rising beside Tower A at Tilak Nagar, with a full amenity podium below and a sports terrace on the roof.',
-    body: [
-      'When Tower A was handed over in 2023, the estate at Tilak Nagar was only part built. Towers B and C finish the picture, adding another 1.52 lakh sq ft across two buildings that share the same address and the same idea of what a home here should feel like.',
-      'Everything residents share sits on two levels. The podium is the indoor half of it: a gym and a yoga room, a jacuzzi, sauna and spa, a mini theatre, a games room, a banquet hall and a party lawn, plus a quiet workspace for the days you would rather not commute.',
-    ],
-    amenities: [
-      { group: 'Fitness', items: ['Gymnasium', 'Yoga / Zumba room'] },
-      {
-        group: 'Rejuvenation',
-        items: [
-          'Kids splash pool',
-          'Open to sky deck podium',
-          'Indoor jacuzzi',
-          'Sauna',
-          'Spa',
-          'Changing rooms',
-        ],
-      },
-      {
-        group: 'Entertainment & games',
-        items: [
-          'Mini theatre',
-          'Games room with table tennis, foosball, carrom, chess and board games',
-        ],
-      },
-      { group: 'Celebrations', items: ['Banquet hall', 'Party lawn', 'Pantry / store'] },
-      { group: 'Work', items: ['Workspace'] },
-      {
-        group: 'Rooftop terrace',
-        items: [
-          'Kids play area',
-          'Toddlers area',
-          'Multipurpose sports turf for basketball, cricket and football',
-          'Multipurpose sports court for pickleball',
-          'Viewing deck',
-          'Walking track',
-          'Gazebo',
-          'Senior citizen sitting area',
-          'Mini golf',
-          'Reflexology path',
-          'Open air yoga & meditation corner',
-        ],
-      },
-    ],
-    images: [
-      {
-        src: IMG('premia-bc-1.jpg'),
-        alt: 'Premia Towers B & C seen at dusk through flowering trees',
-        caption: 'The street elevation at Tilak Nagar',
-      },
-      {
-        src: IMG('premia-bc-2.jpg'),
-        alt: 'Premia Towers B & C illuminated at night',
-        caption: 'The building after dark',
-      },
-      {
-        src: IMG('premia-bc-3.jpg'),
-        alt: 'Aerial view of the rooftop sports terrace at Premia B & C',
-        caption: 'The rooftop terrace, with its sports turf, pickleball court and mini golf',
-      },
-      {
-        src: IMG('premia-bc-4.jpg'),
-        alt: 'Podium level plan showing the amenity layout',
-        caption: 'The podium plan, showing the fitness, rejuvenation, games and celebration decks',
-      },
-    ],
-  },
-  {
-    slug: 'anvaya-medinee-niketan',
-    name: 'Anvaya Medinee Niketan CHSL',
-    developer: 'SS Enterprises',
-    location: 'Andheri East, Mumbai',
-    start: 2018,
-    end: 2024,
-    timeline: '2018 to 2024',
-    category: 'Residential',
-    status: 'Ongoing',
-    areaSqFt: 92000,
-    coords: [19.103516, 72.8565071],
-    mapUrl: 'https://maps.app.goo.gl/tyy6S7PFNV9BRwWB8',
-    summary:
-      'A 92,000 sq ft redevelopment in Andheri East, built for the families who already lived there, and opened up to the city on every side.',
-    body: [
-      'Anvaya rebuilds Medinee Niketan CHSL for the society that has lived on the plot for years. Redevelopment asks for patience on both sides, from the approvals to the families waiting to move back in, and it is work Arham has been doing since the Chembur and Ghatkopar rebuilds of the 2010s.',
-      'The building steps back near the top to make room for a planted terrace, shaded by pergolas, with a play area for children and an open fitness deck alongside. Look north from up there and you get the airport, the tree cover of Andheri East, and the mid town skyline behind it.',
-    ],
-    images: [
-      {
-        src: IMG('anvaya-1.jpg'),
-        alt: 'Daytime render of Anvaya at Medinee Niketan, Andheri East',
-        caption: 'The street elevation',
-      },
-      {
-        src: IMG('anvaya-2.jpg'),
-        alt: 'Evening render of Anvaya at Medinee Niketan',
-        caption: 'The building in the evening',
-      },
-      {
-        src: IMG('anvaya-3.jpg'),
-        alt: 'Aerial render of the landscaped terrace deck at Anvaya',
-        caption: 'The terrace deck, with its pergolas, play zone and planted courts',
-      },
-      {
-        src: IMG('anvaya-4.jpg'),
-        alt: 'View from the site toward Mumbai airport and the mid-town skyline',
-        caption: 'The view from site, June 2022',
-      },
-      {
-        src: IMG('anvaya-5.jpg'),
-        alt: 'View from the site over the tree cover of Andheri East',
-        caption: 'The view from site, June 2022',
-      },
-    ],
-  },
+/** Printed beneath every connectivity list. */
+export const CONNECTIVITY_NOTE =
+  '* Distances and travel times are approximate and subject to traffic and route conditions. Upcoming infrastructure is subject to statutory approvals, construction and commissioning timelines.'
 
-  /* ------------------------------ Completed ---------------------- */
+/** Printed on every up-coming project. */
+export const PRELAUNCH_NOTE =
+  '*This project is at a pre-launch stage and is not yet registered with MahaRERA. No booking, sale or allotment can be made until registration.'
+
+/** Heads the up-coming tab on the projects page. */
+export const UPCOMING_NOTE = [
+  'Exact details, projects names, building names or any other kind of information is withheld until Statutory approvals come through.',
+  'These projects are at the pre-launch stage and are not yet registered with MahaRERA. No booking, sale or allotment can be made until registration.',
+  'Location, Category, Connectivity & Scale is shown in full.',
+]
+
+export const PROJECTS: Project[] = [
+  /* ------------------------------ Ongoing ----------------------- */
   {
-    slug: 'premia-tower-a',
-    name: 'Premia Tower "A"',
-    internalRef: 'Tilak Nagar Shayadri CHSL',
-    developer: 'Kenarc Spaces LLP',
-    location: 'Chembur West, Mumbai',
-    start: 2019,
-    end: 2023,
-    timeline: '2019 to 2023',
-    category: 'Residential',
-    status: 'Completed',
-    areaSqFt: 69375,
-    coords: [19.0699916, 72.8993181],
-    mapUrl: 'https://maps.app.goo.gl/RbLstG7W9p18THdj7',
-    summary:
-      'The first of the Premia towers at Tilak Nagar. One and two bedroom homes above a row of shops, finished in 2023 with full CC received.',
-    body: [
-      'Chembur, with unmatched location advantages, is one of the green lungs of the city and has the lowest population density in a planned residential suburb.',
-      'Embrace tranquility while living in the middle of unmatched comforts with ample open space and well designed rooftop amenities for all age groups to enjoy and rejuvenate.',
-      'Being right inside your home, you can soak yourself in the goodness of nature and all modern comforts, at the same time stay right at the center of the city, yet, stay far away from the commotion of urban life.',
+    slug: "premia-towers-b-c",
+    name: "Premia ‘B’ & ‘C’",
+    listName: "Premia Towers ‘B’ & ‘C’",
+    cardName: "Premia Tower “B” & “C”",
+    locality: "Chembur",
+    internalRef: "Tilak Nagar Shayadri CHSL",
+    developer: "Kenarc Spaces LLP",
+    status: "Ongoing",
+    blurb: "At over 1.5 Lakh sq. ft., Towers ‘B’ & ‘C’ continue the Premia story in Tilak Nagar, Chembur, extending a residential development that brings together well-connected homes and the established character of one of Mumbai’s evolving eastern suburbs.",
+    summary: "A refined address in Tilak Nagar, Premia brings contemporary homes to the heart of Chembur. With the Eastern Express Highway connecting you seamlessly to BKC, Thane and Navi Mumbai, and a thoughtfully designed amenity podium complemented by a dedicated sports rooftop, Premia brings together connectivity, recreation and refined urban living.",
+    cardAmenities: "Gymnasium, Yoga/Zumba Room, Co-Working Space, Mini Theatre, Banquet Hall, Kids Splash Pool, Spa, Cricket & Football Turf, Pickleball & Basketball Court",
+    cardMore: "+ 15 More",
+    location: "Tilak Nagar, Chembur",
+    category: "Residential",
+    configuration: "2 & 3 BHK",
+    timeline: "2024 - 2027",
+    start: 2024,
+    end: 2027,
+    areaLabel: "1.5 L+ Sq. Ft.",
+    areaSqFt: 151875,
+    rera: "P51800080303",
+    reraQr: "/rera/P51800080303.png",
+    connectivity: [
+      "Tilak Nagar Railway Station — approx. 5-10 mins*",
+      "Chembur Railway Station — approx. 5-10 mins*",
+      "Chembur Metro Station — Line 2B — approx. 5-10 mins*",
+      "Eastern Express Highway — approx. 10-15 mins*",
+      "Sion – Panvel Highway — approx. 10-15 mins*",
+      "Bandra–Kurla Complex — approx. 15-20 mins*",
+      "Santacruz – Chembur Link Road — convenient access",
     ],
-    highlights: [
-      'Well designed 1 BHK and 2 BHK apartments with premium amenities',
-      'Well ventilated apartments with ample natural air and light',
-      'Breathtaking modern elevation',
-      'High quality RCC framed structure with earthquake resistant design',
-      'Vastu compliant apartments',
-      'Ample car parking space with valet service',
-      'High speed elevators from a reputed brand',
-      'Rooftop amenities with open gymnasium',
-      'Rain water harvesting and 24 hours sustainable water supply',
-    ],
-    amenities: [
-      {
-        group: 'Rooftop',
-        items: [
-          'Kids play area with modern equipment',
-          'Jumbo outdoor ludo game',
-          'Open air gymnasium',
-          'Senior citizens relaxation area',
-          'Landscaped terrace garden',
-          'Yoga and meditation corner',
-          'Relaxing gazebos',
-        ],
-      },
-    ],
+    amenities: ["Gymnasium", "Yoga / Zumba Room", "Kids Splash Pool", "Sky Deck Podium", "Indoor Jacuzzi", "Sauna & Spa", "Mini Theatre", "Games Room", "Banquet Hall & Party Lawn", "Co-Working Space", "Study Room", "Rooftop Kids’ Play Area", "Rooftop Cricket / Football Turf", "Rooftop Pickleball / Basketball Court", "Mini Putting Golf", "Walking & Reflexology Track", "Senior Citizen Relaxing Area", "Open-Air Meditation & Yoga Corner", "Viewing Deck", "24×7 Security", "Intercom Facility", "Automated Fire Fighting System", "Cat Lift", "Parking Tower", "Mechanical Parking System", "High-Speed Elevators", "Rainwater Harvesting", "Earthquake Resistant Design", "CCTV At All Common Spaces", "Aesthetic Double Heighted Entrance Lobbies", "Vastu Compliant Planning"],
+    neighbourhood: {
+      title: "A WELL-CONNECTED ADDRESS, WITH THE CITY MOVING CLOSER",
+      paras: [
+        "Tilak Nagar sits at an important intersection of Mumbai’s eastern suburban network, with suburban rail, road and metro connectivity bringing Chembur, Kurla, BKC and the wider city within convenient reach. The area benefits from access to both Tilak Nagar and Chembur railway stations, while the Eastern Express Highway and Sion – Panvel Highway provide strong road connections across Mumbai and the MMR.",
+        "The neighbourhood’s connectivity has gained another significant layer with Metro Line 2B. The line now extends to Chembur, creating an increasingly integrated network connecting Chembur with BKC, Kurla, Bandra and the western suburbs, while also linking with the suburban railway and monorail systems.",
+        "With major road and transit infrastructure continuing to strengthen the eastern suburbs, Premia ‘B’ & ‘C’ are positioned within a locality where everyday connectivity is already established and the wider network continues to evolve.",
+      ],
+    },
+    coords: [19.0689842, 72.8987858],
+    mapUrl: "https://maps.app.goo.gl/zvKca4fcMjFB1B9z8",
     images: [
-      {
-        src: IMG('premia-a-1.jpg'),
-        alt: 'Premia Tower A seen from the street in Tilak Nagar, Chembur',
-        caption: 'The street elevation, with shops at the base',
-      },
-      {
-        src: IMG('premia-a-2.jpg'),
-        alt: 'Premia Tower A illuminated at night',
-        caption: 'The building after dark',
-      },
-      {
-        src: IMG('premia-a-3.jpg'),
-        alt: 'Aerial view of the rooftop amenity deck at Premia Tower A',
-        caption: 'The rooftop deck, with its play area, open gym and terrace garden',
-      },
+      { src: IMG("premia-bc-1.jpg"), alt: "Premia Towers B & C seen at dusk through flowering trees", caption: "Street view elevation" },
+      { src: IMG("premia-bc-2.jpg"), alt: "Premia Towers B & C illuminated at night", caption: "Night view elevation" },
+      { src: IMG("premia-bc-3.jpg"), alt: "Aerial view of the rooftop sports terrace at Premia B & C", caption: "Rooftop layout" },
+      { src: IMG("premia-bc-4.jpg"), alt: "Podium level plan showing the amenity layout", caption: "Podium layout" },
     ],
   },
   {
-    slug: 'pramod-chsl',
-    name: 'Pramod CHSL',
-    developer: 'Global Oricon Developers',
-    location: 'Ghatkopar East, Mumbai',
+    slug: "anvaya",
+    name: "Anvaya",
+    listName: "Anvaya",
+    cardName: "Anvaya",
+    locality: "Andheri East",
+    internalRef: "Medinee Niketan CHSL",
+    developer: "SS Enterprises",
+    status: "Ongoing",
+    blurb: "At over 0.6 Lakh sq. ft., Anvaya continues the redevelopment journey in Andheri East, bringing thoughtfully planned 1 & 2 BHK homes to a well-connected part of the city. With proximity to the Western Express Highway, Andheri’s business districts, Mumbai International Airport and the city’s expanding Metro network, the development brings together everyday convenience, connectivity and a distinctive urban outlook.",
+    summary: "A well-connected address in Andheri, Anvaya places the city within easy reach. With proximity to the Western Express Highway, Marol and Saki Naka’s business districts, and Mumbai International Airport, it offers thoughtfully designed homes, distinctive runway views and everyday convenience.",
+    cardAmenities: "Open Air Gymnasium, Kids Play Area, Senior Citizen Area, Landscape Garden, Yoga & Meditation Corner, Viewing Deck",
+    cardMore: "+ 5 More",
+    location: "Sahar Village, Andheri East",
+    category: "Residential",
+    configuration: "1 & 2 BHK",
+    timeline: "2018 - 2027",
+    start: 2018,
+    end: 2027,
+    areaLabel: "0.6 L+ Sq. Ft.",
+    areaSqFt: 60000,
+    /* Client note against this field: "Add QR Code once the project is
+       out of Abeyance". A QR is to follow; nothing is shown until then. */
+    rera: "P51800017639",
+    connectivity: [
+      "Andheri Railway Station — approx. 10-15 mins*",
+      "Western Express Highway — approx. 5-10 mins*",
+      "Western Express Highway Metro Station — Line 1 — approx. 5-10 mins*",
+      "Chakala (J.B. Nagar) Metro Station — Line 1 — approx. 5-10 mins*",
+      "Marol Naka Metro Station — Lines 1 & 3 interchange — approx. 10-15 mins*",
+      "Mumbai International Airport — approx. 10-15 mins*",
+      "Marol / MIDC business district — approx. 10 mins*",
+      "Saki Naka — approx. 10-15 mins*",
+    ],
+    connectivityFootnote: "Andheri’s Metro Line 1 provides direct connectivity between the Western and Central suburbs, with interchanges at Andheri with Western Railway and at Marol Naka with Metro Line 3.",
+    amenities: ["Open to Sky Gymnasium", "Open Air Meditation & Yoga Corner", "Reflexology Path", "Viewing Deck", "Senior Citizen Relaxing Area", "Rooftop Kids’ Play Area", "Toddler Area", "Parking Tower", "24×7 Security", "Intercom Facility", "Automated Fire Fighting System", "High-Speed Elevators", "Rainwater Harvesting", "Earthquake Resistant Design", "CCTV At All Common Spaces", "Aesthetic Entrance Lobby", "Vastu Compliant Planning"],
+    neighbourhood: {
+      title: "A CONNECTED ADDRESS IN ANDHERI EAST",
+      paras: [
+        "Anvaya is positioned within one of Mumbai’s established residential and employment corridors, with the Western Express Highway providing a key north–south road connection and Metro Line 1 linking the neighbourhood to Andheri, Ghatkopar and the wider western and eastern suburban network. The proximity to Marol, Saki Naka, MIDC and SEEPZ further places the development close to major employment centres, while Mumbai International Airport adds to its convenience for frequent travellers.",
+        "The location also benefits from Mumbai’s expanding multimodal transit network. Metro Line 3’s interchange with Line 1 at Marol Naka strengthens access towards the airport and South Mumbai, while Metro Line 7 further integrates Andheri East with the northern suburbs and other major corridors.",
+      ],
+    },
+    coords: [19.103516, 72.8565071],
+    mapUrl: "https://maps.app.goo.gl/tyy6S7PFNV9BRwWB8",
+    images: [
+      { src: IMG("anvaya-1.jpg"), alt: "Daytime render of Anvaya, Andheri East", caption: "Street view elevation" },
+      { src: IMG("anvaya-2.jpg"), alt: "Evening render of Anvaya", caption: "Night view elevation" },
+      { src: IMG("anvaya-3.jpg"), alt: "Aerial render of the landscaped terrace deck at Anvaya", caption: "Rooftop layout" },
+      { src: IMG("anvaya-4.jpg"), alt: "View from the site toward Mumbai airport and the mid-town skyline", caption: "View from project" },
+      { src: IMG("anvaya-5.jpg"), alt: "View from the site over the tree cover of Andheri East", caption: "View from project" },
+    ],
+  },
+  /* ------------------------------ Completed --------------------- */
+  {
+    slug: "premia-tower-a",
+    name: "Premia ‘A’",
+    listName: "Premia Towers ‘A’",
+    cardName: "Premia Tower ‘A’",
+    locality: "Chembur",
+    internalRef: "Tilak Nagar Shayadri CHSL",
+    developer: "Kenarc Spaces LLP",
+    status: "Completed",
+    blurb: "At over 0.7 Lakh sq. ft., Towers ‘A’ continue the Premia story in Tilak Nagar, Chembur, extending a residential development that brings together well-connected homes and the established character of one of Mumbai’s evolving eastern suburbs.",
+    summary: "A refined residential address in Tilak Nagar, Chembur, Premia is now OC received, offering thoughtfully designed homes complemented by curated retail spaces. With the Eastern Express Highway connecting Chembur seamlessly to BKC, Thane and Navi Mumbai.",
+    cardAmenities: "Open Air Gymnasium, Kids Play Area, Landscape Garden, Yoga/Meditation Corner, Relaxing Gazebo",
+    cardMore: "+ 5 More",
+    location: "Tilak Nagar, Chembur",
+    category: "Residential + Retail",
+    configuration: "1 & 2 BHK",
+    timeline: "2020 - 2023",
+    start: 2020,
+    end: 2023,
+    areaLabel: "0.7 L+ Sq. Ft.",
+    areaSqFt: 69375,
+    rera: "P51800029578",
+    connectivity: [
+      "Tilak Nagar Railway Station — approx. 5-10 mins*",
+      "Chembur Railway Station — approx. 5-10 mins*",
+      "Chembur Metro Station — Line 2B — approx. 5-10 mins*",
+      "Eastern Express Highway — approx. 10-15 mins*",
+      "Sion – Panvel Highway — approx. 10-15 mins*",
+      "Bandra–Kurla Complex — approx. 15-20 mins*",
+      "Santacruz – Chembur Link Road — convenient access",
+    ],
+    amenities: ["Open Air Gymnasium", "Open-Air Meditation & Yoga Corner", "Relaxing Gazebo", "Walking & Kids Play Area", "Senior Citizen Relaxing Area", "Open to Sky Deck", "24×7 Security", "Automated Fire Fighting System", "Cat Lift", "Parking Tower", "Basement Stack Parking", "High-Speed Elevators", "Rainwater Harvesting", "Earthquake Resistant Design", "CCTV at All Common Spaces", "Aesthetic Entrance Lobbies", "Intercom Facility", "Vastu Compliant Planning"],
+    neighbourhood: {
+      title: "A WELL-CONNECTED ADDRESS, WITH THE CITY MOVING CLOSER",
+      paras: [
+        "Tilak Nagar sits at an important intersection of Mumbai’s eastern suburban network, with suburban rail, road and metro connectivity bringing Chembur, Kurla, BKC and the wider city within convenient reach. The area benefits from access to both Tilak Nagar and Chembur railway stations, while the Eastern Express Highway and Sion – Panvel Highway provide strong road connections across Mumbai and the MMR.",
+        "The neighbourhood’s connectivity has gained another significant layer with Metro Line 2B. The line now extends to Chembur, creating an increasingly integrated network connecting Chembur with BKC, Kurla, Bandra and the western suburbs, while also linking with the suburban railway and monorail systems.",
+        "With major road and transit infrastructure continuing to strengthen the eastern suburbs, Premia ‘A’ is positioned within a locality where everyday connectivity is already established and the wider network continues to evolve.",
+      ],
+    },
+    coords: [19.0699916, 72.8993181],
+    mapUrl: "https://maps.app.goo.gl/RbLstG7W9p18THdj7",
+    images: [
+      { src: IMG("premia-a-1.jpg"), alt: "Premia Tower A seen from the street in Tilak Nagar, Chembur", caption: "Street view elevation" },
+      { src: IMG("premia-a-2.jpg"), alt: "Premia Tower A illuminated at night", caption: "Night view elevation" },
+      { src: IMG("premia-a-3.jpg"), alt: "Aerial view of the rooftop amenity deck at Premia Tower A", caption: "Rooftop layout" },
+    ],
+  },
+  {
+    slug: "pramod-chsl",
+    name: "Pramod",
+    listName: "Pramod CHSL",
+    locality: "Ghatkopar East",
+    developer: "Global Oricon Developers",
+    status: "Completed",
+    blurb: "At over 1.5 Lakh sq. ft., Pramod Society represents a redevelopment of an established residential community in Rajawadi, Ghatkopar East. With the first phase completed and existing members re-accommodated, the project sits within a well-connected neighbourhood offering convenient access to rail, Metro, major arterial roads and the wider eastern suburbs.",
+    summary: "At over 1.5 Lakh sq. ft., Pramod Society represents a redevelopment of an established residential community in Rajawadi, Ghatkopar East. With the first phase completed and existing members re-accommodated, the project sits within a well-connected neighbourhood offering convenient access to rail, Metro, major arterial roads and the wider eastern suburbs.",
+    location: "Rajawadi, Ghatkopar East",
+    category: "Residential",
+    configuration: "1 & 2 BHK",
+    timeline: "2012 - 2018",
     start: 2012,
     end: 2018,
-    timeline: '2012 to 2018',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "1.5 L+ Sq. Ft.",
     areaSqFt: 155000,
-    coords: [19.0808679, 72.9000875],
-    mapUrl: 'https://maps.app.goo.gl/XwmnxRgfoZ8qsiV28',
-    summary:
-      'A six year society rebuild in Ghatkopar East, and at 1.55 lakh sq ft the largest redevelopment the group has finished.',
-    body: [
-      'Pramod CHSL took six years to hand back to its housing society in Ghatkopar East. At 1,55,000 sq ft it is the largest completed project on the record after Shubhda Tower.',
-      'Together with Dakshata CHSL in Chembur West, it is what convinced housing societies across the central suburbs that this was a group worth handing a building to. Premia and Anvaya both rest on that reputation.',
+    connectivity: [
+      "Ghatkopar Railway Station — approx. 5-10 mins*",
+      "Ghatkopar Metro Station — Line 1 — approx. 5-10 mins*",
+      "Eastern Express Highway — approx. 5-10 mins*",
+      "LBS Road — approx. 5-10 mins*",
+      "Santacruz–Chembur Link Road — approx. 10-15 mins*",
+      "Chhatrapati Shivaji Maharaj International Airport — approx. 20-30 mins*",
     ],
+    amenities: ["Gymnasium", "Meditation & Yoga Space", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design", "Aesthetic Entrance Lobbies"],
+    neighbourhood: {
+      title: "AN ESTABLISHED ADDRESS, WELL CONNECTED TO THE CITY",
+      paras: [
+        "Rajawadi is among Ghatkopar East’s established residential neighbourhoods, offering the advantage of a mature community setting alongside strong city connectivity. Ghatkopar Railway Station provides access to the Central Line, while the adjoining Metro Line 1 connects the eastern and western suburbs, with Ghatkopar serving as an important interchange between suburban rail and Metro networks.",
+        "With the Eastern Express Highway, LBS Road and the Santacruz–Chembur Link Road within convenient reach, the location offers practical access towards Thane, South Mumbai, BKC, Navi Mumbai and the airport. The neighbourhood's established social infrastructure and proximity to major transport corridors add to its appeal as a well-connected residential address in the eastern suburbs.",
+      ],
+    },
+    coords: [19.0808679, 72.9000875],
+    mapUrl: "https://maps.app.goo.gl/XwmnxRgfoZ8qsiV28",
     images: [],
   },
   {
-    slug: 'dakshata-chsl',
-    name: 'Dakshata CHSL',
-    developer: 'Oricon Developers',
-    location: 'Chembur West, Mumbai',
+    slug: "dakshata-chsl",
+    name: "Dakshata",
+    listName: "Dakshata CHSL",
+    locality: "Chembur",
+    developer: "Oricon Developers",
+    status: "Completed",
+    blurb: "At 0.9 Lakh+ sq. ft., Dakshata CHSL brings together residential homes and ground-floor retail in the established neighbourhood of Tilak Nagar, Chembur — a well-connected eastern suburb with convenient access to Central and Harbour Line rail networks, major arterial roads and Mumbai’s growing Metro infrastructure.",
+    summary: "At 0.9 Lakh+ sq. ft., Dakshata CHSL brings together residential homes and ground-floor retail in the established neighbourhood of Tilak Nagar, Chembur — a well-connected eastern suburb with convenient access to Central and Harbour Line rail networks, major arterial roads and Mumbai’s growing Metro infrastructure.",
+    location: "Tilak Nagar, Chembur",
+    category: "Residential + Retail",
+    configuration: "2 & 3 BHK",
+    timeline: "2010 - 2015",
     start: 2010,
     end: 2015,
-    timeline: '2010 to 2015',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "0.9 L+ Sq. Ft.",
     areaSqFt: 90000,
-    coords: [19.0680226, 72.8987901],
-    mapUrl: 'https://maps.app.goo.gl/WcmR6bPmuWBXyBNu7',
-    summary:
-      'A 90,000 sq ft redevelopment in Chembur West, and the group’s first building in the neighbourhood it would come back to for Premia.',
-    body: [
-      'Dakshata CHSL brought the practice into Chembur West, a few hundred metres from the Tilak Nagar estate where Premia Tower A would go up a decade later.',
-      'Stone clad homes above, a tall glazed shopfront at street level. It is a composition the group came back to and refined at Premia.',
+    connectivity: [
+      "Tilak Nagar Railway Station — approx. 5 mins*",
+      "Chembur Railway Station — approx. 5-10 mins*",
+      "Chembur Monorail Station — approx. 5-10 mins*",
+      "Chembur Metro Station — Line 2B — approx. 5-10 mins*",
+      "Eastern Express Highway — approx. 10 mins*",
+      "Sion–Panvel Highway — approx. 10-15 mins*",
+      "Eastern Freeway — approx. 10-15 mins*",
     ],
+    amenities: ["Gymnasium", "Meditation & Yoga Space", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design", "Aesthetic Entrance Lobbies"],
+    neighbourhood: {
+      title: "A WELL-CONNECTED ADDRESS IN CHEMBUR",
+      paras: [
+        "Tilak Nagar has long been valued for its central position within Mumbai’s eastern suburbs, with multiple modes of public transport within easy reach. The proximity of Tilak Nagar and Chembur railway stations, together with the Monorail and the growing Metro Line 2B network, gives residents convenient access across the city. Major road corridors including the Eastern Express Highway, Eastern Freeway and Sion–Panvel Highway further strengthen the neighbourhood’s road connectivity.",
+        "As Chembur continues to evolve as a multi-modal transit hub, the opening of the Chembur Metro station has added another layer of connectivity, creating a close interchange between Metro, suburban rail and Monorail services. For a residential neighbourhood with an established community and everyday retail at the doorstep, this combination of existing infrastructure and expanding connectivity adds to the enduring appeal of the address.",
+      ],
+    },
+    coords: [19.0680226, 72.8987901],
+    mapUrl: "https://maps.app.goo.gl/WcmR6bPmuWBXyBNu7",
     images: [
-      {
-        src: IMG('dakshata-chsl.jpg'),
-        alt: 'Architectural render of Dakshata CHSL, Chembur West',
-        caption: 'The original scheme render',
-      },
+      { src: IMG("dakshata-chsl.jpg"), alt: "Architectural render of Dakshata CHSL, Chembur", caption: "Street view elevation" },
     ],
   },
   {
-    slug: 'blossom-chsl',
-    name: 'Blossom CHSL',
-    developer: 'Divine Construction Co.',
-    location: 'Santacruz West, Mumbai',
+    slug: "blossom-chsl",
+    name: "Blossom",
+    listName: "Blossom CHSL",
+    locality: "Santacruz West",
+    developer: "Divine Construction Co.",
+    status: "Completed",
+    blurb: "A 0.55 Lakh sq. ft. residential development with retail at ground level, Blossom brings homes and everyday convenience together on S.V. Road, Santacruz West, placing residents within easy reach of the city’s key neighbourhoods, transport networks and airport.",
+    summary: "A 0.55 Lakh sq. ft. residential development with retail at ground level, Blossom brings homes and everyday convenience together on S.V. Road, Santacruz West, placing residents within easy reach of the city’s key neighbourhoods, transport networks and airport.",
+    location: "S.V. Road, Santacruz West",
+    category: "Residential + Retail",
+    configuration: "2 & 3 BHK",
+    timeline: "2005 - 2008",
     start: 2005,
     end: 2008,
-    timeline: '2005 to 2008',
-    category: 'Residential / Commercial',
-    status: 'Completed',
+    areaLabel: "0.5 L+ Sq. Ft.",
     areaSqFt: 55000,
-    coords: [19.0835767, 72.8381361],
-    mapUrl: 'https://maps.app.goo.gl/hDNQVDZDGKLgs4ZW6',
-    summary:
-      'Shops on the lower floors, apartments above, across 55,000 sq ft in Santacruz West.',
-    body: [
-      'Blossom CHSL is the only building on the completed record that does two jobs at once. A plinth of glazed shopfronts carries six residential floors of curved balconies above it.',
-      'It sits in prime Santacruz West, within easy reach of both S.V. Road and the Western Express Highway.',
+    connectivity: [
+      "Santacruz Railway Station — approx. 5–10 mins*",
+      "Santacruz Metro Station — Line 3 — approx. 8–12 mins*",
+      "Western Express Highway — approx. 8–10 mins*",
+      "Mumbai International Airport — approx. 10–15 mins*",
+      "Bandra-Kurla Complex — approx. 15–25 mins*",
+      "Linking Road / Bandra West — approx. 5–10 mins*",
     ],
+    amenities: ["Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A LOCATION WOVEN INTO THE CITY’S EVERYDAY RHYTHM",
+      paras: [
+        "Set along S.V. Road in Santacruz West, Blossom sits within a neighbourhood where residential life, local commerce and city connectivity naturally come together. Santacruz Railway Station provides access to the Western suburban rail network, while Metro Line 3 adds a direct connection towards BKC, South Mumbai and the airport corridor. The Western Express Highway further opens up access across the western and central parts of the city.",
+        "The location also places the airport within convenient reach, making Blossom particularly well positioned for a city where work, travel and everyday life often intersect. With ground-floor retail complementing the residential spaces above, the development reflects the practical character of Santacruz West, a neighbourhood that continues to connect people, businesses and communities across Mumbai.",
+      ],
+    },
+    coords: [19.0835767, 72.8381361],
+    mapUrl: "https://maps.app.goo.gl/hDNQVDZDGKLgs4ZW6",
     images: [
-      {
-        src: IMG('blossom-chsl.jpg'),
-        alt: 'Architectural render of Blossom CHSL, Santacruz West',
-        caption: 'The original scheme render',
-      },
+      { src: IMG("blossom-chsl.jpg"), alt: "Architectural render of Blossom CHSL, Santacruz West", caption: "Street view elevation" },
     ],
   },
   {
-    slug: 'shubhda-tower',
-    name: 'Shubhda Tower',
-    developer: 'Divine Construction Co.',
-    location: 'Worli, Mumbai',
+    slug: "shailesh-apartment",
+    name: "Shailesh Apartments",
+    listName: "Shailesh Apartment",
+    locality: "Khar West",
+    developer: "Divine Construction Co.",
+    status: "Completed",
+    blurb: "A compact residential development of 0.20 Lakh sq. ft. in Khar West, Shailesh Apartment sits within a mature neighbourhood known for its quiet residential pockets, strong social infrastructure and effortless access to the city’s western corridor.",
+    summary: "A compact residential development of 0.20 Lakh sq. ft. in Khar West, Shailesh Apartment sits within a mature neighbourhood known for its quiet residential pockets, strong social infrastructure and effortless access to the city’s western corridor.",
+    location: "Guru Gangeshwar Marg, Khar West",
+    category: "Residential",
+    configuration: "2 & 3 BHK",
+    timeline: "2003 - 2005",
+    start: 2003,
+    end: 2005,
+    areaLabel: "0.2 L+ Sq. Ft.",
+    areaSqFt: 20000,
+    connectivity: [
+      "Khar Road Railway Station — approx. 5-10 mins*",
+      "Bandra Railway Station — approx. 10 mins*",
+      "Western Express Highway — approx. 10 mins*",
+      "S.V. Road — approx. 5-10 mins*",
+      "Bandra-Worli Sea Link — approx. 15 mins*",
+      "Mumbai Domestic Airport — approx. 20-25 mins*",
+      "Mumbai International Airport — approx. 20-25 mins*",
+    ],
+    amenities: ["Gymnasium", "Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A QUIET POCKET, CLOSE TO EVERYTHING",
+      paras: [
+        "Shailesh Apartment is located in the quieter residential fabric of Khar West, while remaining within easy reach of the neighbourhood’s key roads and transport networks. Khar Road and Bandra railway stations provide suburban rail connectivity, while S.V. Road and the Western Express Highway offer convenient movement across Mumbai’s western suburbs. The Bandra–Worli Sea Link further opens access towards South Mumbai.",
+        "The location also offers practical connectivity beyond the immediate neighbourhood, with Mumbai’s domestic and international airports within convenient driving distance. Together, the surrounding road, rail and airport network makes Shailesh Apartment a well-positioned residential address within the established fabric of Khar West.",
+      ],
+    },
+    coords: [19.0692816, 72.834966],
+    mapUrl: "https://maps.app.goo.gl/mt4SEhCJ2da8R1DRA",
+    images: [],
+  },
+  {
+    slug: "akhand-aabhar-chsl",
+    name: "Akhand Aabhar",
+    listName: "Akhand Aabhar CHSL",
+    locality: "Bandra West",
+    developer: "Divine Construction Co.",
+    status: "Completed",
+    blurb: "At 0.18 Lakh sq. ft., Akhand Aabhar sits along Dr. Ambedkar Road in Bandra West, within a neighbourhood shaped by the distinctive character, community and everyday rhythm of Bandra. The project reflects an earlier chapter of residential development in one of Mumbai’s most recognisable western suburban precincts.",
+    summary: "At 0.18 Lakh sq. ft., Akhand Aabhar sits along Dr. Ambedkar Road in Bandra West, within a neighbourhood shaped by the distinctive character, community and everyday rhythm of Bandra. The project reflects an earlier chapter of residential development in one of Mumbai’s most recognisable western suburban precincts.",
+    location: "Dr. Ambedkar Road, Bandra West",
+    category: "Residential",
+    configuration: "2 & 3 BHK",
+    timeline: "2003 - 2005",
+    start: 2003,
+    end: 2005,
+    areaLabel: "0.1 L+ Sq. Ft.",
+    areaSqFt: 17000,
+    connectivity: [
+      "Bandra Railway Station — approx. 5-10 mins*",
+      "Khar Road Railway Station — approx. 10 mins*",
+      "S.V. Road — approx. 5-10 mins*",
+      "Western Express Highway — approx. 10-15 mins*",
+      "Bandra-Worli Sea Link — approx. 10-15 mins*",
+      "Bandra-Kurla Complex — approx. 15-20 mins*",
+    ],
+    amenities: ["Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "WITHIN THE RHYTHM OF BANDRA",
+      paras: [
+        "Dr. Ambedkar Road places Akhand Aabhar within a well-connected part of Bandra West, with rail, road and neighbourhood connections close at hand. Bandra Railway Station is within convenient reach, while the surrounding road network provides access towards S.V. Road, the Western Express Highway, Bandra-Kurla Complex and the Bandra-Worli Sea Link.",
+        "Developed between 2003 and 2004, Akhand Aabhar represents an earlier chapter in the journey, a residential development rooted in the character of its neighbourhood and the everyday convenience of a well-connected part of Bandra.",
+      ],
+    },
+    coords: [19.0669772, 72.830246],
+    mapUrl: "https://maps.app.goo.gl/qEpq9YF9eBsvSKeQ6",
+    images: [
+      { src: IMG("akhand-aabhar.jpg"), alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Street view elevation" },
+    ],
+  },
+  {
+    slug: "shubhda-tower",
+    name: "Shubhda Tower",
+    listName: "Shubhda Tower",
+    locality: "Worli",
+    developer: "Divine Construction Co.",
+    status: "Completed",
+    blurb: "At 4.1 Lakh+ sq. ft., Shubhda Tower brings together residences and ground-floor retail on Pochkhanawala Road, Worli, a location positioned between the city’s established residential districts, the Racecourse and the rapidly evolving coastal corridor. Its setting offers the advantage of being close to both South Mumbai and the western suburbs, with the city’s major road and transit networks continuing to move closer.",
+    summary: "At 4.1 Lakh+ sq. ft., Shubhda Tower brings together residences and ground-floor retail on Pochkhanawala Road, Worli, a location positioned between the city’s established residential districts, the Racecourse and the rapidly evolving coastal corridor. Its setting offers the advantage of being close to both South Mumbai and the western suburbs, with the city’s major road and transit networks continuing to move closer.",
+    location: "Dr. Ambedkar Road, Worli",
+    category: "Residential + Retail",
+    configuration: "2 & 3 BHK",
+    timeline: "2000 - 2005",
     start: 2000,
     end: 2005,
-    timeline: '2000 to 2005',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "4.1 L+ Sq. Ft.",
     areaSqFt: 410000,
+    connectivity: [
+      "Mahalaxmi Railway Station — approx. 5-10 mins*",
+      "Mumbai Central Railway Station — approx. 10 mins*",
+      "Mahalaxmi Metro Station — Line 3 — approx. 5-10 mins*",
+      "Coastal Road — Haji Ali / Worli access — approx. 5-10 mins*",
+      "Bandra–Worli Sea Link — approx. 10-15 mins*",
+      "Lower Parel — approx. 10 mins*",
+    ],
+    amenities: ["Gymnasium", "Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "WHERE SOUTH MUMBAI MEETS THE CITY’S NEXT CONNECTIVITY STORY",
+      paras: [
+        "Sir Pochkhanawala Road places Shubhda Tower within a part of Worli where established neighbourhoods meet some of Mumbai’s most significant recent infrastructure. The Coastal Road has already strengthened movement between Worli, Haji Ali and South Mumbai, while Metro Line 3 and nearby railway stations add further public-transport connectivity. The Haji Ali interchange also provides access towards Mahalaxmi and the wider city network.",
+        "The transformation continues beyond the existing network. Ongoing and planned improvements around Worli, Haji Ali and Mahalaxmi are steadily strengthening east-west and north-south movement, bringing key commercial, residential and cultural districts into closer reach. For an address on Pochkhanawala Road, that means the advantage is not only where it sits today, but how the surrounding city continues to connect around it.",
+      ],
+    },
     coords: [19.0083692, 72.8177178],
-    mapUrl: 'https://maps.app.goo.gl/umV2taBM9z4xgvHh6',
-    summary:
-      'A 4.1 lakh sq ft residential tower at Worli. The biggest thing the group has finished, and the building that took it into the island city.',
-    body: [
-      'At 4,10,000 sq ft Shubhda Tower is still the single largest completed project on the schedule, and the one that moved the practice out of the northern suburbs and into South Mumbai.',
-      'The tower stands on a broad podium of lower wings at Worli, a walk away from the sea face.',
-    ],
+    mapUrl: "https://maps.app.goo.gl/umV2taBM9z4xgvHh6",
     images: [
-      {
-        src: IMG('shubhda-tower.jpg'),
-        alt: 'Shubhda Tower rising above its podium at Worli',
-        caption: 'The original scheme render',
-      },
+      { src: IMG("shubhda-tower.jpg"), alt: "Shubhda Tower rising above its podium at Worli", caption: "Street view elevation" },
     ],
   },
   {
-    slug: 'shailesh-apartment',
-    name: 'Shailesh Apartment',
-    developer: 'Divine Construction Co.',
-    location: 'Khar West, Mumbai',
-    start: 2003,
-    end: 2005,
-    timeline: '2003 to 2005',
-    category: 'Residential',
-    status: 'Completed',
-    areaSqFt: 20000,
-    coords: [19.0692816, 72.834966],
-    mapUrl: 'https://maps.app.goo.gl/mt4SEhCJ2da8R1DRA',
-    summary: 'A small residential building of 20,000 sq ft, tucked into the interior lanes of Khar West.',
-    body: [
-      'One of three buildings Divine Construction Co. finished across Khar, Bandra and Santacruz in the mid 2000s. Shailesh Apartment is a quiet, low density address in a settled residential pocket of Khar West.',
-    ],
-    images: [],
-  },
-  {
-    slug: 'akhand-aabhar-chsl',
-    name: 'Akhand Aabhar CHSL',
-    developer: 'Divine Construction Co.',
-    location: 'Bandra West, Mumbai',
-    start: 2003,
-    end: 2004,
-    timeline: '2003 to 2004',
-    category: 'Residential',
-    status: 'Completed',
-    areaSqFt: 17000,
-    coords: [19.0669772, 72.830246],
-    mapUrl: 'https://maps.app.goo.gl/qEpq9YF9eBsvSKeQ6',
-    summary:
-      'The smallest project on the record, and the quickest. A 17,000 sq ft building in Bandra West, turned around inside a year.',
-    body: [
-      'Akhand Aabhar CHSL went up in Bandra West across 2003 and 2004, the shortest programme on the completed record.',
-      'The plot was tight, so the elevation breaks it into stepped, colour blocked volumes. That is what keeps daylight and cross ventilation reaching every home.',
-    ],
-    images: [
-      {
-        src: IMG('akhand-aabhar.jpg'),
-        alt: 'Architectural render of Akhand Aabhar CHSL, Bandra West',
-        caption: 'The original scheme render',
-      },
-    ],
-  },
-  {
-    slug: 'navtarun-chsl',
-    name: 'Navtarun CHSL',
-    developer: 'Shri Sainath Developers',
-    location: 'Kandivali West, Mumbai',
+    slug: "navtarun-chsl",
+    name: "Navtarun",
+    listName: "Navtarun CHSL",
+    locality: "Kandivali West",
+    developer: "Shri Sainath Developers",
+    status: "Completed",
+    blurb: "At 0.65 Lakh sq. ft., represents one of the early SRA redevelopment initiatives undertaken during a period when Mumbai was beginning to reimagine informal settlements through planned rehabilitation and urban renewal. Conceived under the Slum Rehabilitation Scheme, the project contributed to the creation of formal housing while supporting the broader transformation of the surrounding neighbourhood.",
+    summary: "At 0.65 Lakh sq. ft., represents one of the early SRA redevelopment initiatives undertaken during a period when Mumbai was beginning to reimagine informal settlements through planned rehabilitation and urban renewal. Conceived under the Slum Rehabilitation Scheme, the project contributed to the creation of formal housing while supporting the broader transformation of the surrounding neighbourhood.",
+    location: "Mathuradas Road, Kandivali West",
+    category: "Residential",
+    configuration: "1 RK & 1 BHK",
+    timeline: "1999 - 2002",
     start: 1999,
     end: 2002,
-    timeline: '1999 to 2002',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "0.65 L+ Sq. Ft.",
     areaSqFt: 65000,
-    coords: [19.203395, 72.835318],
-    mapUrl: 'https://maps.app.goo.gl/pLGgTVNEWpCH5V8a7',
-    summary: 'A 65,000 sq ft housing society in Kandivali West, finished in 2002.',
-    body: [
-      'Navtarun CHSL is the larger of two Shri Sainath Developers buildings standing side by side in Kandivali West. Both went up around the turn of the millennium, as the western suburbs filled out along the Link Road corridor.',
+    connectivity: [
+      "Kandivali Railway Station — approx. 5-10 mins*",
+      "Kandivali West Metro Station — Line 2A — approx. 5-10 mins*",
+      "S.V. Road — approx. 5-10 mins*",
+      "Link Road — approx. 10 mins*",
+      "Western Express Highway — approx. 10-15 mins*",
     ],
+    amenities: ["24×7 Security", "Automated Fire Fighting System", "High-Speed Elevators", "CCTV at All Common Spaces", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A PROJECT FROM KANDIVALI'S EARLY REDEVELOPMENT YEARS",
+      paras: [
+        "Navtarun CHSL belongs to an important period in Kandivali's growth, when established residential neighbourhoods were beginning to take shape alongside Mumbai's wider rehabilitation movement. Its location on Mathuradas Road places it within a well-connected part of Kandivali West, with the railway station close by and Metro Line 2A adding a newer layer of suburban connectivity. Mathuradas Road is approximately 1 km by road from Kandivali station, while the surrounding Dahanukarwadi area is within easy reach of the Line 2A stations.",
+        "The project reflects an early chapter in rehabilitation-led development, where redevelopment was not simply about replacing structures, but about bringing formal housing into the changing fabric of Mumbai's neighbourhoods.",
+      ],
+    },
+    coords: [19.203395, 72.835318],
+    mapUrl: "https://maps.app.goo.gl/pLGgTVNEWpCH5V8a7",
     images: [],
   },
   {
-    slug: 'shri-ganesh-chsl',
-    name: 'Shri Ganesh CHSL',
-    developer: 'Shri Sainath Developers',
-    location: 'Kandivali West, Mumbai',
+    slug: "shree-ganesh-chsl",
+    name: "Shree Ganesh",
+    listName: "Shree Ganesh CHSL",
+    locality: "Kandivali West",
+    developer: "Shri Sainath Developers",
+    status: "Completed",
+    blurb: "At 0.45 Lakh sq. ft., Shree Ganesh CHSL holds a special place in our journey as the first SRA redevelopment project undertaken by Arham Realty. Developed between 1999 and 2001, during the early years of Mumbai’s rehabilitation-led urban transformation, the project marked an important step towards creating formal housing and improving living conditions for resident families. It also laid an early foundation for the community-focused redevelopment experience that continues to shape the business today.",
+    summary: "At 0.45 Lakh sq. ft., Shree Ganesh CHSL holds a special place in our journey as the first SRA redevelopment project undertaken by Arham Realty. Developed between 1999 and 2001, during the early years of Mumbai’s rehabilitation-led urban transformation, the project marked an important step towards creating formal housing and improving living conditions for resident families. It also laid an early foundation for the community-focused redevelopment experience that continues to shape the business today.",
+    location: "Mathuradas Road, Kandivali West",
+    category: "Residential",
+    configuration: "1 RK & 1 BHK",
+    timeline: "1999 - 2001",
     start: 1999,
     end: 2001,
-    timeline: '1999 to 2001',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "0.4 L+ Sq. Ft.",
     areaSqFt: 45000,
-    coords: [19.2036701, 72.8354621],
-    mapUrl: 'https://maps.app.goo.gl/x7Zc51o7xpuk1wfEA',
-    summary: 'A 45,000 sq ft housing society in Kandivali West, handed over in 2001.',
-    body: [
-      'Built alongside Navtarun CHSL on the same Kandivali West street. Between them the two societies added 1.1 lakh sq ft of housing to the neighbourhood in three years.',
+    connectivity: [
+      "Kandivali Railway Station — approx. 5-10 mins*",
+      "Kandivali West Metro Station — Line 2A — approx. 5-10 mins*",
+      "S.V. Road — approx. 5-10 mins*",
+      "Link Road — approx. 10 mins*",
+      "Western Express Highway — approx. 10-15 mins*",
     ],
+    amenities: ["24×7 Security", "Automated Fire Fighting System", "High-Speed Elevators", "CCTV at All Common Spaces", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A NEIGHBOURHOOD THAT HAS GROWN WITH THE CITY",
+      paras: [
+        "Mathuradas Road sits within the established residential fabric of Kandivali West, with rail, Metro and road networks providing convenient access across the western suburbs. Kandivali Railway Station and Metro Line 2A provide strong local connectivity, while S.V. Road, Link Road and the Western Express Highway connect the neighbourhood to the wider city. Metro Line 2A already links Kandivali West with Dahisar and Andheri West, strengthening east-west and north-south movement across the western suburbs.",
+        "The next chapter of connectivity is also taking shape along Mumbai’s western edge. The proposed Mumbai Coastal Road North is planned to extend the coastal corridor through the northern suburbs, with the alignment passing through the Kandivali-Gorai-Dahisar belt and incorporating major elevated stretches, interchanges and connections towards Dahisar and beyond. Over time, this wider infrastructure network is expected to add another layer of connectivity to the western suburbs.",
+      ],
+    },
+    coords: [19.2036701, 72.8354621],
+    mapUrl: "https://maps.app.goo.gl/x7Zc51o7xpuk1wfEA",
     images: [],
   },
   {
-    slug: 'pooja-park',
-    name: 'Pooja Park',
-    developer: 'Pooja Builders & Developers',
-    location: 'Mira Road East, Thane',
+    slug: "toral-apartment",
+    name: "Toral Apartments",
+    listName: "Toral Apartment",
+    locality: "Bhayandar East",
+    developer: "Pooja Developers",
+    status: "Completed",
+    blurb: "A 0.22 Lakh sq. ft. residential and retail development from an early chapter of our journey, Toral Apartments was developed in Kharegaon, Bhayandar East, at a time when the neighbourhood was steadily taking shape as a residential destination. Built alongside Jesal Apartments, the project reflects the practical experience of developing within a growing suburban community.",
+    summary: "A 0.22 Lakh sq. ft. residential and retail development from an early chapter of our journey, Toral Apartments was developed in Kharegaon, Bhayandar East, at a time when the neighbourhood was steadily taking shape as a residential destination. Built alongside Jesal Apartments, the project reflects the practical experience of developing within a growing suburban community.",
+    location: "Kharegaon, Bhayander East",
+    category: "Residential",
+    configuration: "1 RK & 1 BHK",
+    timeline: "1999 - 2001",
+    start: 1999,
+    end: 2001,
+    areaLabel: "0.2 L+ Sq. Ft.",
+    areaSqFt: 22000,
+    connectivity: [
+      "Bhayandar Railway Station — approx. 10-15 mins*",
+      "Western Express Highway — approx. 20-25 mins*",
+      "Mira Road — approx. 15-20 mins*",
+      "Ghodbunder Road — approx. 20-25 mins*",
+      "Thane — approx. 30-40 mins*",
+    ],
+    amenities: ["24×7 Security", "Automated Fire Fighting System", "High-Speed Elevators", "CCTV at All Common Spaces", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A NEIGHBOURHOOD TAKING SHAPE",
+      paras: [
+        "Kharegaon offered a setting where residential development was growing alongside the needs of an expanding suburban population. Toral Apartments brought together homes and ground-floor retail within this emerging neighbourhood, creating a development closely connected to the everyday life of its residents.",
+        "Its significance lies in the period it represents, the early years of our development journey, when projects such as Toral and Jesal Apartments helped build experience through the realities of developing in growing and densely occupied suburban locations.",
+      ],
+    },
+    coords: [19.3040422, 72.8559663],
+    mapUrl: "https://maps.app.goo.gl/rRu7QXPnPR5MGUVb9",
+    images: [],
+  },
+  {
+    slug: "pooja-park",
+    name: "Pooja Park",
+    listName: "Pooja Park",
+    locality: "Mira Road East",
+    developer: "Pooja Builders & Developers",
+    status: "Completed",
+    blurb: "At 1.7 Lakh+ sq. ft., Pooja Park was developed during a formative period in Mira Road’s residential growth, when the neighbourhood was steadily taking shape as a significant housing destination for Mumbai’s expanding suburban population.",
+    summary: "At 1.7 Lakh+ sq. ft., Pooja Park was developed during a formative period in Mira Road’s residential growth, when the neighbourhood was steadily taking shape as a significant housing destination for Mumbai’s expanding suburban population.",
+    location: "TPM Road, Mira Road East",
+    category: "Residential",
+    configuration: "1 RK, 1 & 2 BHK",
+    timeline: "1998 - 2002",
     start: 1998,
     end: 2002,
-    timeline: '1998 to 2002',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "1.7 L+ Sq. Ft.",
     areaSqFt: 170000,
+    connectivity: [
+      "Mira Road Railway Station — approx. 10-15 mins*",
+      "Mira–Bhayandar Road — approx. 5-10 mins*",
+      "Western Express Highway — approx. 15-20 mins*",
+      "Dahisar Check Naka — approx. 15-20 mins*",
+      "Kashigaon Metro Station — Line 9 — approx. 5-10 mins*",
+    ],
+    amenities: ["Gymnasium", "Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A NEIGHBOURHOOD ON THE RISE",
+      paras: [
+        "Pooja Park came at a time when Mira Road was moving through an important phase of residential expansion. With the suburban railway already providing a crucial link towards Mumbai and the road network connecting the area to Dahisar, the Western Express Highway and the wider western suburbs, the locality was steadily becoming a practical choice for families seeking accessible homes beyond the traditional city limits.",
+        "Metro Line 9 is being developed as an extension from Dahisar East towards Mira-Bhayandar, creating a new rapid-transit connection between the suburb, the Western Express Highway, Metro Line 7 and Metro Line 2A. The corridor is designed to strengthen public transport access and reduce dependence on road travel as the region continues to grow. The area's connectivity has strengthened further with Metro Line 9, now operational between Dahisar East and Kashigaon, just over a kilometre from Mira Road. The line connects the suburb to Metro Line 7 and Metro Line 2A, with the next stretch toward Bhandup currently undergoing testing ahead of commissioning.",
+      ],
+    },
     coords: [19.2800014, 72.8814387],
-    mapUrl: 'https://maps.app.goo.gl/VsrqGHHsSbXJEXYv7',
-    summary:
-      'A township sized layout of 1.7 lakh sq ft at Mira Road East, and the largest of the early projects in the Thane belt.',
-    body: [
-      'Pooja Park is the biggest of the early developments. Several wings, 1,70,000 sq ft in all, built at Mira Road East over four years while the Thane belt absorbed the city’s outward growth.',
-      'It sits close to Mira Road railway station, and it is still the group’s largest project outside the island city and the central suburbs.',
-    ],
+    mapUrl: "https://maps.app.goo.gl/VsrqGHHsSbXJEXYv7",
     images: [],
   },
   {
-    slug: 'toral-apartment',
-    name: 'Toral Apartment',
-    developer: 'Pooja Developers',
-    location: 'Bhayander East, Thane',
-    start: 1999,
-    end: 2001,
-    timeline: '1999 to 2001',
-    category: 'Residential',
-    status: 'Completed',
-    areaSqFt: 22000,
-    coords: [19.3040422, 72.8559663],
-    mapUrl: 'https://maps.app.goo.gl/rRu7QXPnPR5MGUVb9',
-    summary: 'A 22,000 sq ft residential building at Bhayander East, finished in 2001.',
-    body: [
-      'Toral Apartment stands a street away from Jesal Apartment in Bhayander East. The two went up back to back, while the practice was consolidating its work across the Thane belt.',
-    ],
-    images: [],
-  },
-  {
-    slug: 'jesal-apartment',
-    name: 'Jesal Apartment',
-    developer: 'Pooja Builders',
-    location: 'Bhayander East, Thane',
+    slug: "brahma-niwas",
+    name: "Brahma Niwas",
+    listName: "Brahma Niwas",
+    locality: "Mulund East",
+    developer: "Arham Group",
+    status: "Completed",
+    blurb: "At 0.3 Lakh+ sq. ft., Brahma Niwas was developed between 1998 and 2000, during a period when Mulund East was steadily taking shape as a residential extension of the eastern suburbs. The project sits within the established MHADA Colony, offering homes in a neighbourhood shaped by everyday community life and convenient access to the city’s major transport corridors.",
+    summary: "At 0.3 Lakh+ sq. ft., Brahma Niwas was developed between 1998 and 2000, during a period when Mulund East was steadily taking shape as a residential extension of the eastern suburbs. The project sits within the established MHADA Colony, offering homes in a neighbourhood shaped by everyday community life and convenient access to the city’s major transport corridors.",
+    location: "MHADA Colony, Mulund East",
+    category: "Residential",
+    configuration: "1 & 2 BHK",
+    timeline: "1998 - 2000",
     start: 1998,
     end: 2000,
-    timeline: '1998 to 2000',
-    category: 'Residential',
-    status: 'Completed',
-    areaSqFt: 60000,
-    coords: [19.3043464, 72.8550104],
-    mapUrl: 'https://maps.app.goo.gl/V4GeYD3rkKr8kRjPA',
-    summary: 'A 60,000 sq ft residential development at Bhayander East, handed over in the summer of 2000.',
-    body: [
-      'Jesal Apartment was finished at the turn of the millennium in Bhayander East. It is one of four Pooja developments in the Thane belt, which between them account for more than 3.1 lakh sq ft.',
+    areaLabel: "0.3 L+ Sq. Ft.",
+    areaSqFt: 30000,
+    connectivity: [
+      "Mulund Railway Station — approx. 8-10 mins*",
+      "Eastern Express Highway — approx. 5 mins*",
+      "Nahur Railway Station — approx. 10 mins*",
+      "Airoli-Mulund connectivity — convenient access",
+      "Thane — approx. 15-20 mins*",
     ],
+    amenities: ["Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A HOME IN THE FLOW OF THE EASTERN SUBURBS",
+      paras: [
+        "Brahma Niwas benefits from Mulund East’s natural position between Mumbai, Thane and Navi Mumbai. Mulund Railway Station provides Central Line connectivity, while the Eastern Express Highway offers direct road access towards South Mumbai and Thane. The Airoli–Mulund connection further extends the reach towards Navi Mumbai.",
+        "The neighbourhood has also continued to see infrastructure attention, including plans for improved access between the MHADA Colony and the Eastern Express Highway. For a residential development from the late 1990s, Brahma Niwas represents an early chapter in the continuing growth of Mulund East and its surrounding communities.",
+      ],
+    },
+    coords: [19.1643, 72.9635],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=MHADA+Colony+Mulund+East+Mumbai",
     images: [],
   },
   {
-    slug: 'sai-dhara',
-    name: 'Sai Dhara',
-    developer: 'Sai Dhara Constructions',
-    location: 'Nalasopara East, Thane',
+    slug: "jesal-apartment",
+    name: "Jesal Apartments",
+    listName: "Jesal Apartment",
+    locality: "Bhayandar East",
+    developer: "Pooja Builders",
+    status: "Completed",
+    blurb: "At 0.66 Lakh+ sq. ft., Jesal Apartments was developed in Kharegaon, Bhayandar East, during a period when the neighbourhood was taking shape as an important residential corridor. Combining homes with ground-floor retail, the project was designed around the everyday needs of a growing community.",
+    summary: "At 0.66 Lakh+ sq. ft., Jesal Apartments was developed in Kharegaon, Bhayandar East, during a period when the neighbourhood was taking shape as an important residential corridor. Combining homes with ground-floor retail, the project was designed around the everyday needs of a growing community.",
+    location: "Kharegaon, Bhayander East",
+    category: "Residential",
+    configuration: "1 RK & 1 BHK",
+    timeline: "1998 - 2000",
+    start: 1998,
+    end: 2000,
+    areaLabel: "0.6 L+ Sq. Ft.",
+    areaSqFt: 60000,
+    connectivity: [
+      "Bhayandar Railway Station — approx. 10-15 mins*",
+      "Mira Road Railway Station — approx. 15-20 mins*",
+      "Western Express Highway — approx. 20-25 mins*",
+      "Mira-Bhayandar Road — immediate local connectivity",
+      "Metro Line 9 (Phase 1) — now operational between Dahisar East and Kashigaon, with the next stretch toward Mira-Bhayandar currently under testing*",
+    ],
+    amenities: ["24×7 Security", "Automated Fire Fighting System", "High-Speed Elevators", "CCTV at All Common Spaces", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "A FOUNDATION IN A GROWING SUBURB",
+      paras: [
+        "Situated in Kharegaon, Bhayandar East, Jesal Apartments was developed at a time when the area was steadily taking shape as an important residential extension of Mumbai. Its location offered access to established road and rail networks while remaining within a neighbourhood that was developing its own residential character.",
+        "Today, the wider Bhayandar–Mira Road belt continues to benefit from improving regional connectivity and infrastructure. The area remains well connected to the Western Express Highway and the wider Mumbai-Ahmedabad corridor, while planned and ongoing infrastructure across the MMR is expected to further strengthen movement through the northern suburbs.",
+      ],
+    },
+    coords: [19.3043464, 72.8550104],
+    mapUrl: "https://maps.app.goo.gl/V4GeYD3rkKr8kRjPA",
+    images: [],
+  },
+  {
+    slug: "sai-dhara",
+    name: "Sai Dhara",
+    listName: "Sai Dhara",
+    locality: "Nalasopara East",
+    developer: "Sai Dhara Constructions",
+    status: "Completed",
+    blurb: "At 1.4 Lakh+ sq. ft., Sai Dhara CHSL was developed at a time when Nalasopara East was taking shape as an important residential destination for Mumbai’s growing workforce. Combining residential homes with ground-floor retail, the project formed part of the early development journey in a suburb that continues to grow as part of the wider Mumbai Metropolitan Region.",
+    summary: "At 1.4 Lakh+ sq. ft., Sai Dhara CHSL was developed at a time when Nalasopara East was taking shape as an important residential destination for Mumbai’s growing workforce. Combining residential homes with ground-floor retail, the project formed part of the early development journey in a suburb that continues to grow as part of the wider Mumbai Metropolitan Region.",
+    location: "Achole Road, Nalasopara East",
+    category: "Residential",
+    configuration: "1 & 2 BHK",
+    timeline: "1996 - 1999",
     start: 1996,
     end: 1999,
-    timeline: '1996 to 1999',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "1.4 L+ Sq. Ft.",
     areaSqFt: 140000,
-    coords: [19.4077897, 72.8238413],
-    mapUrl: 'https://maps.app.goo.gl/nvZEzqhM4v6jhmDq8',
-    summary:
-      'A residential community of 1.4 lakh sq ft at Nalasopara East, and only the second project the practice ever finished.',
-    body: [
-      'Sai Dhara followed Vardaman Park at Nalasopara East. At 1,40,000 sq ft it was three times the size of anything built before it, and the practice was barely two years old.',
-      'The two Nalasopara projects come to 1.86 lakh sq ft between them. This is where the group learnt to build at community scale.',
+    connectivity: [
+      "Nalasopara Railway Station — approx. 10-15 mins*",
+      "Virar Railway Station — approx. 15-20 mins*",
+      "Western Express Highway — approx. 30-40 mins*",
+      "Vasai — approx. 20-25 mins*",
+      "Mumbai — approx. 60-90 mins*",
     ],
+    amenities: ["Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "AN ADDRESS FROM THE EARLY YEARS",
+      paras: [
+        "Sai Dhara CHSL belongs to an important chapter in Nalasopara’s residential story, when the suburb was steadily taking shape as a housing destination for Mumbai’s expanding communities. Its combination of residential homes and ground-floor retail reflects the practical character of the developments of that period, creating a place where every day needs could remain close to home.",
+        "Today, Nalasopara East continues to benefit from its connection to the Western Railway network, with Nalasopara station serving as the principal rail link for the area and local bus routes providing access within the eastern suburb.",
+      ],
+    },
+    coords: [19.4077897, 72.8238413],
+    mapUrl: "https://maps.app.goo.gl/nvZEzqhM4v6jhmDq8",
     images: [],
   },
   {
-    slug: 'vardaman-park',
-    name: 'Vardaman Park',
-    developer: 'Shri Sainath Developers',
-    location: 'Nalasopara East, Thane',
+    slug: "vardhaman-park",
+    name: "Vardhaman Park",
+    listName: "Vardhaman Park",
+    locality: "Nalasopara East",
+    developer: "Shri Sainath Developers",
+    status: "Completed",
+    blurb: "At 0.46 Lakh+ sq. ft., Vardhaman Park marks the beginning of our promoter’s real estate journey, developed in Nalasopara East between 1994 and 1996. A residential development from the early years of the suburb’s expansion, it reflects the first steps of a journey that would go on to span more than three decades and multiple neighbourhoods across the Mumbai Metropolitan Region.",
+    summary: "At 0.46 Lakh+ sq. ft., Vardhaman Park marks the beginning of our promoter’s real estate journey, developed in Nalasopara East between 1994 and 1996. A residential development from the early years of the suburb’s expansion, it reflects the first steps of a journey that would go on to span more than three decades and multiple neighbourhoods across the Mumbai Metropolitan Region.",
+    location: "Tulinj Road, Nalasopara East",
+    category: "Residential",
+    configuration: "1 & 2 BHK",
+    timeline: "1994 - 1996",
     start: 1994,
     end: 1996,
-    timeline: '1994 to 1996',
-    category: 'Residential',
-    status: 'Completed',
+    areaLabel: "0.4 L+ Sq. Ft.",
     areaSqFt: 46000,
+    connectivity: [
+      "Nalasopara Railway Station — approx. 10-15 mins*",
+      "Tulinj Road — immediate access",
+      "Nalasopara–Virar Link Road — convenient access*",
+      "Western Express Highway — approx. 30-40 mins*",
+      "Vasai Road Railway Station — approx. 20-25 mins*",
+    ],
+    amenities: ["Relaxing Area", "24×7 Security", "Automated Fire Fighting System", "Ample Parking", "High-Speed Elevators", "CCTV at All Common Spaces", "Intercom Facility", "Vastu Compliant Planning", "Rainwater Harvesting", "Earthquake Resistant Design"],
+    neighbourhood: {
+      title: "WHERE THE JOURNEY BEGAN",
+      paras: [
+        "Vardhaman Park stands as an early chapter in the story, a residential development undertaken when Nalasopara East was still taking shape as a destination for growing families. Its location on Tulinj Road places it within an established residential network, with Nalasopara Railway Station providing access to Mumbai and the wider Western Railway corridor.",
+        "Today, the Vasai-Virar region continues to evolve as an important part of the wider MMR, with expanding road, rail and regional connectivity supporting its growth. For us, however, Vardhaman Park represents something more personal: the address where a real estate journey that began in 1994 first took shape.",
+      ],
+    },
     coords: [19.4233821, 72.8237361],
-    mapUrl: 'https://maps.app.goo.gl/cENu2pxJ2umPhovn6',
-    summary:
-      'Where it all started. The first project on the Arham schedule, finished at Nalasopara East in 1996.',
-    body: [
-      'Vardaman Park is the first entry on the Arham Group schedule. 46,000 sq ft at Nalasopara East, started in 1994 and handed over two years later.',
-      'Everything since traces back to it: thirteen more completed buildings, two under construction, and six more still to come.',
-    ],
+    mapUrl: "https://maps.app.goo.gl/cENu2pxJ2umPhovn6",
     images: [],
   },
-
-  /* ------------------------------ Up-coming ---------------------- */
-  /* Building names withheld at the client's instruction. */
+  /* ------------------------------ Upcoming ---------------------- */
   {
-    slug: 'upcoming-bandra-west',
-    name: 'Bandra West',
-    internalRef: 'CoziHom CHSL',
+    slug: "upcoming-bandra-west",
+    name: "Bandra West",
+    listName: "Bandra West",
     nameWithheld: true,
-    developer: 'Arham Land Developers Pvt. Ltd.',
-    location: 'Bandra West, Mumbai',
+    internalRef: "CoziHom CHSL",
+    developer: "Arham Land Developers Pvt. Ltd.",
+    status: "Upcoming",
+    blurb: "At over 6.85 Lakh Sq. ft., this is envisioned as a significant residential development in Pali Hill, bringing ultra-luxury residences to one of Mumbai's most established addresses.\nSet along Nargis Dutt Road, the development combines exceptional connectivity with elevated views of the Arabian Sea and the unmistakable character of Pali Hill.",
+    summary: "At over 6.85 Lakh Sq. ft., this is envisioned as a significant residential development in Pali Hill, bringing ultra-luxury residences to one of Mumbai's most established addresses.",
+    location: "Nargis Dutt Road, Pali Hill",
+    category: "Residential",
     start: 2025,
     end: 2029,
-    timeline: '2025 to 2029',
-    category: 'Residential',
-    status: 'Upcoming',
+    areaLabel: "6.8 L+ Sq. Ft.",
     areaSqFt: 685000,
-    coords: [19.0645718, 72.8262521],
-    mapUrl: 'https://maps.app.goo.gl/oxZzNQV8KpbgyDHJA',
-    summary:
-      'A 6.85 lakh sq ft residential development in Bandra West, in planning for a start in 2025.',
-    body: [
-      'At 6,85,000 sq ft this is the second largest scheme in the pipeline, and it takes the group back to Bandra West two decades after Akhand Aabhar CHSL.',
+    connectivity: [
+      "Bandra Railway Station — approx. 10–15 mins*",
+      "Khar Road Railway Station — approx. 10 mins*",
+      "Bandra Metro Station — Line 2B — upcoming*",
+      "Linking Road — approx. 5–10 mins*",
+      "S.V. Road — approx. 10 mins*",
+      "Western Express Highway — approx. 10–15 mins*",
+      "Bandra–Worli Sea Link — approx. 10 mins*",
+      "Mumbai International Airport — approx. 20–25 mins*",
     ],
+    amenities: [],
+    neighbourhood: {
+      title: "THE ADDRESS EVERY MUMBAIKAR DESIRES",
+      paras: [
+        "Pali Hill has long occupied a rare place in Mumbai’s imagination, an established residential enclave where privacy, prestige and proximity to the city come together.",
+        "Nargis Dutt Road places the development within this distinctive setting, surrounded by the character of Pali Hill and the wider Bandra neighbourhood, an address long associated with Mumbai’s film, business and cultural circles.",
+        "The location is equally defined by its connectivity. Linking Road, S.V. Road, the Western Express Highway and the Bandra – Worli Sea Link provide established road access, while Bandra and Khar Road railway stations serve the Western Railway network.",
+        "Metro Line 2B is being developed through Bandra, providing another future layer of east-west connectivity and interchange with other major Metro corridors.",
+        "The next chapter of connectivity is already taking shape along Mumbai’s western waterfront.",
+        "The northern extension of the Coastal Road is progressing from Versova towards Dahisar and beyond, with planned connections around the Bandra–Carter Road stretch.",
+        "The Bandra–Versova Sea Link, forming part of this wider coastal network, is also under construction and is expected to strengthen north-south movement along the western seafront.",
+        "For a Pali Hill address, the proposition ultimately comes down to rarity, a limited neighbourhood, a highly established social ecosystem, exceptional city connectivity and, from the upper levels, the possibility of looking out towards the Arabian Sea.",
+      ],
+    },
+    coords: [19.0645718, 72.8262521],
+    mapUrl: "https://maps.app.goo.gl/oxZzNQV8KpbgyDHJA",
     images: [],
   },
   {
-    slug: 'upcoming-borivali-east',
-    name: 'Borivali East',
-    internalRef: 'Jeevanjyoti & Ratnadeep CHSL',
+    slug: "upcoming-borivali-west",
+    name: "Borivali West",
+    listName: "Borivali West",
     nameWithheld: true,
-    developer: 'Viva Divine Ventures',
-    location: 'Borivali East, Mumbai',
-    start: 2025,
-    end: 2029,
-    timeline: '2025 to 2029',
-    category: 'Residential',
-    status: 'Upcoming',
-    areaSqFt: 415000,
-    coords: [19.2257018, 72.8570659],
-    mapUrl: 'https://maps.app.goo.gl/pYsA8jZPb1b5psAZ7',
-    summary: 'A 4.15 lakh sq ft residential redevelopment planned for Borivali East.',
-    images: [],
-  },
-  {
-    slug: 'upcoming-malad-east',
-    name: 'Malad East',
-    internalRef: 'Premji Compound',
-    nameWithheld: true,
-    developer: 'S S Kenarc Spaces LLP',
-    location: 'Malad East, Mumbai',
-    start: 2025,
-    end: 2028,
-    timeline: '2025 to 2028',
-    category: 'Residential / Retail',
-    status: 'Upcoming',
-    areaSqFt: 105000,
-    coords: [19.181178, 72.849392],
-    mapUrl: 'https://maps.app.goo.gl/o3jmDyy1biVwtAqF8',
-    summary:
-      'A 1.05 lakh sq ft scheme at Malad East mixing shops and homes, the first of its kind since Blossom CHSL.',
-    images: [],
-  },
-  {
-    slug: 'upcoming-borivali-west',
-    name: 'Borivali West',
-    internalRef: 'Nirvana',
-    nameWithheld: true,
-    developer: 'Divine Developers',
-    location: 'Borivali West, Mumbai',
+    internalRef: "Nirvana",
+    developer: "Divine Developers",
+    status: "Upcoming",
+    blurb: "At over 0.94 Lakh Sq. Ft., our promoter’s share in this ultra-luxury residential development brings elevated city living to Borivali West, with expansive views towards Gorai and the Arabian Sea, along with a distinctive outlook towards the Global Vipassana Pagoda.\nWell connected to Link Road, S.V. Road, Rail and Metro, it places refined living within one of Mumbai’s most established western suburban neighbourhoods.",
+    summary: "At over 0.94 Lakh Sq. Ft., our promoter’s share in this ultra-luxury residential development brings elevated city living to Borivali West, with expansive views towards Gorai and the Arabian Sea, along with a distinctive outlook towards the Global Vipassana Pagoda.",
+    location: "Link Road, Borivali West",
+    category: "Ultra-Luxury Residential",
     start: 2025,
     end: 2030,
-    timeline: '2025 to 2030',
-    category: 'Residential',
-    status: 'Upcoming',
-    areaSqFt: 84100,
+    areaLabel: "0.94 L+ Sq. Ft.",
+    areaSqFt: 94000,
+    connectivity: [
+      "Borivali Railway Station — approx. 10 - 15 mins*",
+      "Borivali Metro Station — Line 2A — approx. 5 - 10 mins*",
+      "Kandarpada Metro Station — Line 2A — approx. 5 - 10 mins*",
+      "Link Road — immediate access",
+      "S.V. Road — approx. 10 mins*",
+      "Gorai — approx. 10 - 15 mins*",
+    ],
+    amenities: [],
+    neighbourhood: {
+      title: "A WESTERN SUBURBAN ADDRESS, WITH THE SEA ON THE HORIZON",
+      paras: [
+        "Borivali West offers a rare combination of established connectivity and an open western outlook.",
+        "With Link Road and S.V. Road providing strong north–south access, Borivali Railway Station connecting the neighbourhood across the Western Railway network, and Metro Line 2A running along Link Road, the location is well placed for both everyday travel and movement across the western suburbs.",
+        "The future connectivity story is equally compelling.",
+        "The Mumbai Coastal Road North is progressing towards the northern suburbs, with the planned alignment passing through Gorai, including a dedicated Gorai Interchange and connections towards Dahisar and beyond.",
+        "The broader corridor is intended to provide a high-capacity alternative to existing north-south routes and ultimately extend coastal connectivity towards Bhayandar.",
+        "The development also benefits from its proximity to well-established social infrastructure, including the renowned Don Bosco School in Borivali, adding to the neighbourhood’s long-standing residential appeal.",
+        "For residents, the setting adds another dimension. From the upper levels, the development is positioned to capture open views towards Gorai, the Arabian Sea and the Global Vipassana Pagoda, bringing a sense of openness and calm that is increasingly rare within Mumbai’s dense urban fabric.",
+      ],
+    },
     coords: [19.227298, 72.840789],
-    mapUrl: 'https://maps.app.goo.gl/LTWFEZsuRn7JvgJu5',
-    summary: 'An 84,100 sq ft residential project planned for Borivali West.',
+    mapUrl: "https://maps.app.goo.gl/LTWFEZsuRn7JvgJu5",
     images: [],
   },
   {
-    slug: 'upcoming-mahalaxmi',
-    name: 'Mahalaxmi',
-    internalRef: 'Rasooljiva Umarjeeva Compound',
+    slug: "upcoming-borivali-east",
+    name: "Borivali East",
+    listName: "Borivali East",
     nameWithheld: true,
-    developer: 'Savla Constructions Pvt. Ltd.',
-    location: 'Mahalaxmi, Mumbai',
+    internalRef: "Jeevanjyoti & Ratnadeep CHSL",
+    developer: "Viva Divine Ventures",
+    status: "Upcoming",
+    blurb: "At over 4.15 Lakh Sq. Ft., this residential development brings well-connected homes to Borivali East, combining the convenience of Western suburban rail and road connectivity with quick access to the Western Express Highway and S.V. Road.",
+    summary: "At over 4.15 Lakh Sq. Ft., this residential development brings well-connected homes to Borivali East, combining the convenience of Western suburban rail and road connectivity with quick access to the Western Express Highway and S.V. Road.",
+    location: "Carter Road, Borivali East",
+    category: "Residential + Retail",
+    start: 2025,
+    end: 2029,
+    areaLabel: "4.1 L+ Sq. Ft.",
+    areaSqFt: 415000,
+    connectivity: [
+      "Borivali Railway Station — approx. 5 - 10 mins*",
+      "Magathane Metro Station — approx. 5 - 10 mins*",
+      "Western Express Highway — approx. 5 mins*",
+      "S.V. Road — approx. 10 mins*",
+      "Mumbai Domestic Airport — approx. 30 - 45 mins*",
+    ],
+    amenities: [],
+    neighbourhood: {
+      title: "A CONNECTED BORIVALI, WITH A GREEN EDGE AND FUTURE INFRASTRUCTURE GROWTH",
+      paras: [
+        "Borivali East offers strong everyday connectivity through rail, metro and arterial road networks, while also being uniquely positioned near to the Sanjay Gandhi National Park, bringing large green open spaces into proximity.",
+        "The Western Express Highway and S.V. Road ensure smooth access across the western suburbs, while Borivali Railway Station connects the area to both suburban and interstate rail networks.",
+        "The next major infrastructure upgrade shaping the region is the Thane – Borivali Twin Tunnel, currently under construction beneath Sanjay Gandhi National Park.",
+        "This 11.85 Kms. twin-tunnel corridor will connect the Western Express Highway in Borivali to Ghodbunder Road in Thane, significantly reducing travel distance and easing cross-city congestion between the eastern and western suburbs.",
+        "With strong existing connectivity and major infrastructure developments underway, Borivali East continues to evolve as a well-connected residential hub with long-term growth potential.",
+      ],
+    },
+    coords: [19.2257018, 72.8570659],
+    mapUrl: "https://maps.app.goo.gl/pYsA8jZPb1b5psAZ7",
+    images: [],
+  },
+  {
+    slug: "upcoming-malad-east",
+    name: "Malad East",
+    listName: "Malad East",
+    nameWithheld: true,
+    internalRef: "Premji Compound",
+    developer: "S S Kenarc Spaces LLP",
+    status: "Upcoming",
+    blurb: "At over 1.05 Lakh sq. ft., this residential development brings thoughtfully planned, accessible homes to Malad East, a well-connected neighbourhood with established social infrastructure, strong suburban connectivity and a growing pipeline of city-scale infrastructure improvements.",
+    summary: "At over 1.05 Lakh sq. ft., this residential development brings thoughtfully planned, accessible homes to Malad East, a well-connected neighbourhood with established social infrastructure, strong suburban connectivity and a growing pipeline of city-scale infrastructure improvements.",
+    location: "Haji Bapu Road, off Jitendra Road, Malad East",
+    category: "Affordable Residential",
+    start: 2025,
+    end: 2028,
+    areaLabel: "1.0 L+ Sq. Ft.",
+    areaSqFt: 105000,
+    connectivity: [
+      "Malad Railway Station — approx. 5 - 10 mins*",
+      "Dindoshi Metro Station — approx. 3 - 5 mins*",
+      "Western Express Highway — approx. 5 -10 mins*",
+      "S.V. Road — approx. 10 mins*",
+    ],
+    amenities: [],
+    neighbourhood: {
+      title: "A WELL-CONNECTED ADDRESS, WITH MORE TO COME",
+      paras: [
+        "Malad East has grown into a practical residential choice for families and working professionals, combining access to the Western Express Highway, S.V. Road, Malad Railway Station and Metro connectivity with established schools, hospitals and everyday urban infrastructure.",
+        "Haji Bapu Road sits within this established network, with Dindoshi Metro Station and Malad Railway Station both within convenient reach.",
+        "For a neighbourhood where affordability and everyday connectivity matter, these strengths are further enhanced by upcoming city-scale infrastructure such as the Goregaon–Mulund Link Road, which will significantly improve east-west movement across the suburban corridor through a tunnel-based connection beneath Sanjay Gandhi National Park.",
+      ],
+    },
+    coords: [19.181178, 72.849392],
+    mapUrl: "https://maps.app.goo.gl/o3jmDyy1biVwtAqF8",
+    images: [],
+  },
+  {
+    slug: "upcoming-mahalaxmi",
+    name: "Mahalaxmi",
+    listName: "Mahalaxmi",
+    nameWithheld: true,
+    internalRef: "Rasooljiva Umarjeeva Compound",
+    developer: "Savla Constructions Pvt. Ltd.",
+    status: "Upcoming",
+    blurb: "At over 6.47 Lakh Sq. Ft., this ultra-luxury residential development brings thoughtfully planned homes to one of South Mumbai’s most established and sought-after neighbourhoods with views towards the Mahalaxmi Racecourse and the Arabian Sea, and the commercial energy of Lower Parel close by.",
+    summary: "At over 6.47 Lakh Sq. Ft., this ultra-luxury residential development brings thoughtfully planned homes to one of South Mumbai’s most established and sought-after neighbourhoods with views towards the Mahalaxmi Racecourse and the Arabian Sea, and the commercial energy of Lower Parel close by.",
+    location: "Jacob Circle, Mahalaxmi",
+    category: "Ultra-Luxury Residential + Retail",
     start: 2026,
     end: 2031,
-    timeline: '2026 to 2031',
-    category: 'Residential',
-    status: 'Upcoming',
+    areaLabel: "6.4 L+ Sq. Ft.",
     areaSqFt: 647000,
-    coords: [18.9809561, 72.8282788],
-    mapUrl: 'https://maps.app.goo.gl/Haa9gQS9FHwcHW4G8',
-    summary:
-      'A 6.47 lakh sq ft development at Mahalaxmi, and the first South Mumbai address since Shubhda Tower.',
-    body: [
-      'Planned to start in 2026. It would be the first South Mumbai address since Shubhda Tower at Worli was handed over back in 2005.',
+    connectivity: [
+      "Mahalaxmi Railway Station — approx. 5 mins*",
+      "Mahalaxmi Metro Station — Metro Line 3 — approx. 5 mins*",
+      "Sant Gadge Maharaj Chowk Monorail Station — approx. 5 mins*",
+      "Lower Parel Commercial District — approx. 10 mins*",
+      "Coastal Road / Haji Ali — approx. 10 mins*",
+      "Atal Setu — approx. 20–25 mins*",
     ],
+    amenities: [],
+    neighbourhood: {
+      title: "A SOUTH MUMBAI ADDRESS, WITH THE CITY MOVING CLOSER",
+      paras: [
+        "Mahalaxmi sits at an unusual intersection of established South Mumbai and the city’s newest infrastructure.",
+        "The Coastal Road has already strengthened access towards Haji Ali, Worli and Marine Drive, while Atal Setu provides a direct connection towards Navi Mumbai and the wider MMR.",
+        "Metro Line 3 has added another layer of connectivity, with Mahalaxmi station linking the neighbourhood to BKC, the airport and South Mumbai.",
+        "The next phase is already taking shape around Jacob Circle and Mahalaxmi. Two major bridge projects are being developed to strengthen the missing road link between Saat Rasta/Jacob Circle, Mahalaxmi and Haji Ali.",
+        "The 639 Mtrs. flyover towards Dr. E. Moses Road is intended to complete the Mahalaxmi – Haji Ali connection. Per BMC's stated targets, the two bridges are expected to reduce the existing journey from roughly 25-45 minutes to around 5-7 minutes, with completion targeted for October 2026.",
+        "A separate 803 Mtrs. cable-stayed bridge, the BMC's first cable-stayed structure over railway tracks will connect Saat Rasta with Mahalaxmi across the railway tracks, also targeted for completion in October 2026.",
+        "The neighbourhood is also moving towards greater multimodal connectivity. The Mahalaxmi Multimodal Connectivity Project is nearing completion, linking the railway station, Metro Line 3 and Monorail through an elevated pedestrian connection.",
+        "A proposed underground walkway from Science Centre Metro to the Worli Promenade would further connect the transit network with the Racecourse and waterfront.",
+      ],
+    },
+    coords: [18.9809561, 72.8282788],
+    mapUrl: "https://maps.app.goo.gl/Haa9gQS9FHwcHW4G8",
     images: [],
   },
   {
-    slug: 'upcoming-bhandup-east',
-    name: 'Bhandup East',
-    internalRef: 'Shyam Nagar',
+    slug: "upcoming-bhandup-east",
+    name: "Bhandup East",
+    listName: "Bhandup East",
     nameWithheld: true,
-    developer: 'Impact Engineers Pvt. Ltd.',
-    location: 'Bhandup East, Mumbai',
+    internalRef: "Shyam Nagar",
+    developer: "Impact Engineers Pvt. Ltd.",
+    status: "Upcoming",
+    blurb: "At over 17.46 Lakh Sq. Ft., this is our largest and most ambitious development to date, bringing primarily 1 & 2 BHK homes and retail spaces to one of Mumbai’s emerging eastern neighbourhoods, with open, uninterrupted views across the saltpans and Thane Creek.",
+    summary: "At over 17.46 Lakh Sq. Ft., this is our largest and most ambitious development to date, bringing primarily 1 & 2 BHK homes and retail spaces to one of Mumbai’s emerging eastern neighbourhoods, with open, uninterrupted views across the saltpans and Thane Creek.",
+    location: "Veer Savarkar Road, Bhandup East",
+    category: "Affordable Residential + Retail",
     start: 2027,
     end: 2032,
-    timeline: '2027 to 2032',
-    category: 'Residential',
-    status: 'Upcoming',
+    areaLabel: "17.4 L+ Sq. Ft.",
     areaSqFt: 1746000,
-    coords: [19.1465263, 72.9398901],
-    mapUrl: 'https://maps.app.goo.gl/LwApSszbnW9BgKce8',
-    summary:
-      'At 17.46 lakh sq ft this is the largest project the group has taken on, bigger than every completed building put together.',
-    body: [
-      'Planned at 17,46,000 sq ft in Bhandup East. One project, larger than the entire completed record of 13.64 lakh sq ft, and close to half of everything in the pipeline.',
+    connectivity: [
+      "Bhandup Railway Station — 550 m*",
+      "Nahur Railway Station — approx. 2 km*",
+      "Upcoming Metro Line 4 — approx. 2–5 mins*",
+      "Eastern Express Highway — approx. 10 mins*",
+      "LBS Marg — approx. 10 mins*",
+      "Bhandup–Airoli Corridor — easy access",
     ],
+    amenities: [],
+    neighbourhood: {
+      title: "THE NEIGHBOURHOOD IS CHANGING",
+      paras: [
+        "Bhandup East is entering a significant new phase of urban growth.",
+        "The wider Bhandup – Kanjurmarg – Mulund belt is seeing major planning activity linked to the Dharavi Redevelopment Project, including the proposed use of large salt-pan land parcels for rehabilitation and associated development.",
+        "This is bringing previously constrained land into a broader development framework and is expected to reshape the eastern suburbs over time.",
+        "Closer to home, the proposed Bhandup East-West Road Over Bridge is planned to connect LBS Marg with Veer Savarkar Marg near Bhandup Station, a 530 Mtrs. structure intended to ease east-west movement through the locality, subject to civic approvals and construction timelines.",
+      ],
+    },
+    coords: [19.1465263, 72.9398901],
+    mapUrl: "https://maps.app.goo.gl/LwApSszbnW9BgKce8",
     images: [],
   },
 ]
@@ -688,32 +1025,20 @@ export const PROJECT_COUNTS: Record<ProjectStatus, number> = {
   Upcoming: byStatus('Upcoming').length,
 }
 
-export const AREA_TOTALS: Record<ProjectStatus, number> = {
-  Completed: byStatus('Completed').reduce((n, p) => n + p.areaSqFt, 0),
-  Ongoing: byStatus('Ongoing').reduce((n, p) => n + p.areaSqFt, 0),
-  Upcoming: byStatus('Upcoming').reduce((n, p) => n + p.areaSqFt, 0),
+/**
+ * Headline area figures, as the client states them. These are quoted
+ * rather than summed from the catalogue because the client's own totals
+ * are the ones their lawyers have signed off on.
+ */
+export const AREA_LABELS: Record<ProjectStatus, string> = {
+  Completed: '13.5 Lakh Sq. Ft.',
+  Ongoing: '2.1 Lakh Sq. Ft.',
+  Upcoming: '36.9 Lakh Sq. Ft.',
 }
 
 export const findProject = (slug: string) => PROJECTS.find((p) => p.slug === slug)
 
-/** Indian convention: 1 lakh = 100,000. "1,55,000 sq ft" → "1.55 L". */
-export const lakh = (sqft: number) => {
-  const l = sqft / 100000
-  return l >= 10 ? l.toFixed(1) : l.toFixed(2)
-}
-
-export const sqftLabel = (sqft: number) => sqft.toLocaleString('en-IN')
-
-/**
- * Every project has a page. The three with full brochure material read as
- * full case studies; the rest render from the schedule record — status,
- * timeline, area, location, map — plus whatever copy exists, and say
- * plainly where no photography was supplied.
- */
-export const hasFullMaterial = (p: Project) =>
-  Boolean(p.images.length && (p.highlights || p.amenities))
-
-/** Featured on the home page, in presentation order. */
-export const FEATURED = ['premia-towers-b-c', 'anvaya-medinee-niketan', 'premia-tower-a']
+/** Featured on the home page, in the client's presentation order. */
+export const FEATURED = ['premia-tower-a', 'premia-towers-b-c', 'anvaya']
   .map(findProject)
   .filter((p): p is Project => Boolean(p))

@@ -1,41 +1,19 @@
-import { ABOUT_PAGE, MISSION, VALUES, VALUES_HEADER, VISION } from '../data/content'
-import { AREA_TOTALS, PROJECTS, PROJECT_COUNTS } from '../data/projects'
+import { ABOUT_PAGE, LEADERSHIP, TIMELINE } from '../data/content'
 import { ArrowRight } from '../components/Icons'
-import { Counter, MaskedLines, Reveal } from '../components/Motion'
+import { MaskedLines, Reveal } from '../components/Motion'
 import { Timeline } from '../sections/About'
 import PageHead from '../components/PageHead'
 import { Link } from '../router'
 
-/* The group entities that actually delivered the work, in the order they
-   first appear on the schedule. Derived so it can never contradict the
-   project list. */
-const GROUP_COMPANIES = Array.from(
-  new Set([...PROJECTS].sort((a, b) => a.start - b.start).map((p) => p.developer)),
-)
-
-const FIGURES = [
-  { value: PROJECTS.length, suffix: '', label: 'Projects since 1994' },
-  { value: PROJECT_COUNTS.Completed, suffix: '', label: 'Completed & handed over' },
-  {
-    value: Math.round((AREA_TOTALS.Completed / 100000) * 10) / 10,
-    suffix: 'L',
-    label: 'Sq ft delivered',
-    decimals: 1,
-  },
-  {
-    value: Math.round((AREA_TOTALS.Upcoming / 100000) * 10) / 10,
-    suffix: 'L',
-    label: 'Sq ft in the pipeline',
-    decimals: 1,
-  },
-]
-
+/** About page — doc pp.6–9: about, our story, milestones, leadership. */
 export default function AboutPage() {
+  const { story, milestones, leadership } = ABOUT_PAGE
+
   return (
     <>
       <PageHead
         title="About · Arham Realty"
-        description="Arham Realty has been building across Mumbai and Thane since 1994. Fourteen completed projects, two under construction and six more in the pipeline."
+        description={ABOUT_PAGE.intro[0]}
       />
 
       <header className="phead">
@@ -54,7 +32,6 @@ export default function AboutPage() {
         </div>
       </header>
 
-      {/* Approved brand-guideline copy, set as a two-column read. */}
       <section className="section section--tight">
         <div className="wrap">
           <div className="introcols">
@@ -67,148 +44,90 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section section--tight section--dark">
+      <section className="section section--alt">
         <div className="wrap">
-          <div className="figures">
-            {FIGURES.map((f, i) => (
-              <Reveal key={f.label} delay={i * 0.07}>
-                <div className="figures__cell">
-                  <p className="figures__n">
-                    <Counter value={f.value} decimals={f.decimals} />
-                    <span>{f.suffix}</span>
-                  </p>
-                  <p className="figures__label">{f.label}</p>
+          <div className="sec-head">
+            <Reveal>
+              <p className="eyebrow" style={{ marginBottom: 22 }}>
+                {story.eyebrow}
+              </p>
+            </Reveal>
+            <h2 className="h-section">
+              <MaskedLines lines={story.title} accentIndex={1} />
+            </h2>
+          </div>
+
+          <div className="storycols">
+            {story.columns.map((c, i) => (
+              <Reveal key={c.lead.slice(0, 30)} delay={i * 0.06}>
+                <div className="storycol">
+                  <p className="storycol__lead">{c.lead}</p>
+                  <p>{c.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+
+          <Reveal>
+            <div className="tagline">
+              <p className="tagline__main">{story.tagline}</p>
+              <p className="tagline__sub">{story.taglineSub}</p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="section">
-        <div className="wrap">
-          <div className="sec-head sec-head__split">
-            <div>
-              <Reveal>
-                <p className="eyebrow" style={{ marginBottom: 22 }}>
-                  Our Story
-                </p>
-              </Reveal>
-              <h2 className="h-section">
-                <MaskedLines lines={['From Nalasopara', 'to the island city']} accentIndex={1} />
-              </h2>
-            </div>
-          </div>
-
-          <div className="storycols">
-            {ABOUT_PAGE.story.map((p, i) => (
-              <Reveal key={p.slice(0, 30)} delay={i * 0.06}>
-                <p>{p}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--tight section--alt">
         <div className="wrap">
           <div className="sec-head sec-head--tight">
             <Reveal>
               <p className="eyebrow" style={{ marginBottom: 22 }}>
-                Milestones
+                {milestones.eyebrow}
               </p>
             </Reveal>
             <h2 className="h-section">
-              <MaskedLines lines={['Three decades,', 'five chapters']} accentIndex={1} />
+              <MaskedLines lines={milestones.title} accentIndex={1} />
             </h2>
           </div>
           <Reveal distance={30}>
-            <Timeline />
+            <Timeline entries={TIMELINE} />
           </Reveal>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--alt" id="leadership">
         <div className="wrap">
-          <div className="sec-head sec-head__split">
-            <div>
-              <Reveal>
-                <p className="eyebrow" style={{ marginBottom: 22 }}>
-                  Structure
-                </p>
-              </Reveal>
-              <h2 className="h-section">
-                <MaskedLines lines={[ABOUT_PAGE.groupsTitle]} />
-              </h2>
-            </div>
-            <Reveal delay={0.12}>
-              <p className="lead">{ABOUT_PAGE.groupsBody}</p>
+          <div className="sec-head sec-head--tight">
+            <Reveal>
+              <p className="eyebrow">{leadership.eyebrow}</p>
             </Reveal>
           </div>
 
-          <div className="companies">
-            {GROUP_COMPANIES.map((c, i) => (
-              <Reveal key={c} delay={Math.min(i, 8) * 0.04}>
-                <div className="companies__cell">
-                  <span className="companies__n">{String(i + 1).padStart(2, '0')}</span>
-                  <span>{c}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--tight section--dark">
-        <div className="wrap">
-          <Reveal distance={30}>
-            <div className="mv">
-              {[MISSION, VISION].map((m) => (
-                <div className="mv__cell" key={m.label}>
-                  <p className="mv__label">{m.label}</p>
-                  <p className="mv__headline">{m.headline}</p>
-                  <p className="mv__body">{m.body}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="wrap">
-          <div className="sec-head sec-head__split">
-            <div>
-              <Reveal>
-                <p className="eyebrow" style={{ marginBottom: 22 }}>
-                  {VALUES_HEADER.eyebrow}
-                </p>
-              </Reveal>
-              <h2 className="h-section">
-                <MaskedLines lines={VALUES_HEADER.title} accentIndex={1} />
-              </h2>
-            </div>
-            <Reveal delay={0.12}>
-              <p className="lead">{VALUES_HEADER.body}</p>
-            </Reveal>
-          </div>
-
-          <div className="valuegrid">
-            {VALUES.map((v, i) => (
-              <Reveal key={v.n} delay={i * 0.07}>
-                <div className="valuegrid__cell">
-                  <span className="valuegrid__n">{v.n}</span>
-                  <p className="valuegrid__kicker">{v.kicker}</p>
-                  <h3 className="h-card">{v.title}</h3>
-                  <p className="valuegrid__body">{v.body}</p>
-                </div>
+          <div className="leaders">
+            {LEADERSHIP.map((l, i) => (
+              <Reveal key={l.name} delay={Math.min(i, 2) * 0.06}>
+                <article className="leader">
+                  <div className="leader__head">
+                    <h2 className="h-section leader__heading">
+                      <MaskedLines lines={l.heading} accentIndex={l.accentIndex} />
+                    </h2>
+                    <p className="leader__name">{l.name}</p>
+                    <p className="leader__role">{l.role}</p>
+                  </div>
+                  <div className="leader__body">
+                    {l.paras.map((p) => (
+                      <p key={p.slice(0, 40)}>{p}</p>
+                    ))}
+                    <p className="leader__quote">{l.quote}</p>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
 
           <div className="projects__more">
             <Link className="btn btn--solid" to="/projects">
-              See the {PROJECTS.length} projects behind it
+              See every address
               <span className="btn__arrow">
                 <ArrowRight />
               </span>

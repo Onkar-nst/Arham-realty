@@ -1,15 +1,28 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { ABOUT, MISSION, TIMELINE, VISION } from '../data/content'
-import { Caret } from '../components/Icons'
+import { ABOUT, INTENT, LEGACY, STORY, TIMELINE } from '../data/content'
+import { ArrowRight, Caret } from '../components/Icons'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
+import { Link } from '../router'
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
-export function Timeline() {
+export interface TimelineEntry {
+  era: string
+  kicker: string
+  title: string
+  body: string[]
+  image: string | null
+}
+
+/**
+ * Era-by-era slider. Used twice with different copy: the home page's
+ * "legacy" chapters and the About page's milestones.
+ */
+export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) {
   const [i, setI] = useState(0)
   const [dir, setDir] = useState(1)
-  const entry = TIMELINE[i]
+  const entry = entries[i]
 
   const go = (next: number) => {
     setDir(next > i ? 1 : -1)
@@ -20,10 +33,10 @@ export function Timeline() {
     <div className="tl">
       <div className="tl__head">
         <p className="tl__index">
-          <b>{pad(i + 1)}</b> / {pad(TIMELINE.length)}
+          <b>{pad(i + 1)}</b> / {pad(entries.length)}
         </p>
         <div className="tl__eras">
-          {TIMELINE.map((t, n) => (
+          {entries.map((t, n) => (
             <button
               key={t.era}
               className="tl__era"
@@ -40,16 +53,33 @@ export function Timeline() {
       <div className="tl__panel">
         <div className="tl__media">
           <AnimatePresence initial={false} mode="popLayout">
-            <motion.img
-              key={entry.era}
-              src={entry.image}
-              alt={entry.title}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: EASE }}
-              loading="lazy"
-            />
+            {entry.image ? (
+              <motion.img
+                key={entry.era}
+                src={entry.image}
+                alt={entry.title}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: EASE }}
+                loading="lazy"
+              />
+            ) : (
+              /* No renders survive from the 1990s projects — say so with
+                 the brand plate rather than a stock photograph. */
+              <motion.div
+                key={entry.era}
+                className="tl__plate"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: EASE }}
+                aria-hidden="true"
+              >
+                <img src="/brand/arham-mark.png" alt="" />
+                <span>{entry.era}</span>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
 
@@ -65,7 +95,11 @@ export function Timeline() {
               <p className="tl__kicker">{entry.kicker}</p>
               <p className="tl__year">{entry.era}</p>
               <h3 className="tl__title">{entry.title}</h3>
-              <p className="tl__body">{entry.body}</p>
+              {entry.body.map((b) => (
+                <p className="tl__body" key={b.slice(0, 30)}>
+                  {b}
+                </p>
+              ))}
             </motion.div>
           </AnimatePresence>
 
@@ -74,15 +108,15 @@ export function Timeline() {
               className="circ"
               onClick={() => go(i - 1)}
               disabled={i === 0}
-              aria-label="Previous milestone"
+              aria-label="Previous"
             >
               <Caret dir="left" />
             </button>
             <button
               className="circ"
               onClick={() => go(i + 1)}
-              disabled={i === TIMELINE.length - 1}
-              aria-label="Next milestone"
+              disabled={i === entries.length - 1}
+              aria-label="Next"
             >
               <Caret dir="right" />
             </button>
@@ -93,6 +127,7 @@ export function Timeline() {
   )
 }
 
+/** Home page "About Arham Realty" — doc p.3, in the client's order. */
 export default function About() {
   return (
     <>
@@ -106,35 +141,112 @@ export default function About() {
                 </p>
               </Reveal>
               <h2 className="h-section">
-                <MaskedLines lines={ABOUT.title} />
+                <MaskedLines lines={ABOUT.title} accentIndex={1} />
               </h2>
             </div>
             <Reveal delay={0.12}>
-              <p className="about__lead">
-                {ABOUT.lead.before}
-                <em>{ABOUT.lead.emphasis}</em>
-                {ABOUT.lead.after}
-              </p>
+              <div className="about__lead">
+                {ABOUT.paras.map((p) => (
+                  <p key={p.slice(0, 30)}>{p}</p>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="sec-head sec-head__split legacy__head">
+            <Reveal>
+              <p className="eyebrow">{LEGACY.eyebrow}</p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p className="lead">{LEGACY.body}</p>
             </Reveal>
           </div>
 
           <Reveal distance={30}>
-            <Timeline />
+            <Timeline entries={LEGACY.chapters} />
+          </Reveal>
+
+          <Reveal>
+            <p className="legacy__closing">
+              {LEGACY.closing[0]}
+              <br />
+              <span className="accent-line">{LEGACY.closing[1]}</span>
+            </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="section section--tight section--dark">
+      <section className="section">
         <div className="wrap">
-          <Reveal distance={30}>
-            <div className="mv">
-              {[MISSION, VISION].map((m) => (
-                <div className="mv__cell" key={m.label}>
-                  <p className="mv__label">{m.label}</p>
-                  <p className="mv__headline">{m.headline}</p>
-                  <p className="mv__body">{m.body}</p>
-                </div>
+          <div className="intent">
+            <div>
+              <h2 className="h-section">
+                <MaskedLines lines={INTENT.title} accentIndex={1} />
+              </h2>
+              <Reveal delay={0.1}>
+                <p className="intent__lead">{INTENT.lead}</p>
+              </Reveal>
+            </div>
+
+            <div className="intent__copy">
+              {INTENT.paras.map((p, i) => (
+                <Reveal key={p.slice(0, 30)} delay={i * 0.06}>
+                  <p>{p}</p>
+                </Reveal>
               ))}
+              <Reveal>
+                <p className="intent__pull">{INTENT.pull}</p>
+              </Reveal>
+              {INTENT.paras2.map((p, i) => (
+                <Reveal key={p.slice(0, 30)} delay={i * 0.06}>
+                  <p>{p}</p>
+                </Reveal>
+              ))}
+              <Reveal>
+                <p className="intent__pull">{INTENT.closing}</p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--alt">
+        <div className="wrap">
+          <div className="sec-head sec-head__split">
+            <div>
+              <Reveal>
+                <p className="eyebrow" style={{ marginBottom: 22 }}>
+                  {STORY.eyebrow}
+                </p>
+              </Reveal>
+              <h2 className="h-section">
+                <MaskedLines lines={STORY.title} accentIndex={1} />
+              </h2>
+            </div>
+            <Reveal delay={0.12}>
+              <p className="lead">{STORY.lead}</p>
+            </Reveal>
+          </div>
+
+          <div className="story">
+            {STORY.paras.map((p, i) => (
+              <Reveal key={p.text.slice(0, 30)} delay={Math.min(i, 4) * 0.05}>
+                <p className="story__para">
+                  {p.lead && <strong>{p.lead} </strong>}
+                  {p.text}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <div className="projects__more">
+              <Link className="btn btn--ghost" to="/about">
+                Our Story
+                <span className="btn__arrow">
+                  <ArrowRight />
+                </span>
+              </Link>
             </div>
           </Reveal>
         </div>

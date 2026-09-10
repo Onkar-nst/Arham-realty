@@ -13,7 +13,7 @@ export default function Hero() {
         <motion.div className="hero__media" style={{ y }}>
           <motion.img
             src={HERO.image}
-            alt="Arham Realty landmark tower at Worli Sea Face"
+            alt="Premia Towers B & C, Tilak Nagar, Chembur"
             initial={{ scale: 1.12 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.8, ease: EASE }}
@@ -35,7 +35,7 @@ export default function Hero() {
             </motion.p>
 
             <h1 className="h-display hero__title">
-              <MaskedLines lines={HERO.titleLines} delay={0.28} accentIndex={2} />
+              <MaskedLines lines={HERO.titleLines} delay={0.28} accentIndex={HERO.accentIndex} />
             </h1>
 
             <motion.p
@@ -83,7 +83,7 @@ export default function Hero() {
                 transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
               >
                 <div className="stats__value">
-                  <Counter value={s.value} decimals={s.decimals ?? 0} />
+                  <Counter value={s.value} />
                   <span className="stats__suffix">{s.suffix}</span>
                 </div>
                 <div className="stats__label">{s.label}</div>

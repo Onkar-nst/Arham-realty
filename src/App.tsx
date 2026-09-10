@@ -5,25 +5,28 @@ import About from './sections/About'
 import Footprint from './sections/Footprint'
 import Values from './sections/Values'
 import Contact from './sections/Contact'
-import { Cta, Footer, Marquee } from './sections/Closing'
+import { Cta, Footer } from './sections/Closing'
 import ProjectsPage from './pages/ProjectsPage'
 import ProjectPage from './pages/ProjectPage'
 import AboutPage from './pages/AboutPage'
 import NotFoundPage from './pages/NotFoundPage'
+import LegalPage from './pages/LegalPage'
+import DisclaimerGate from './components/DisclaimerGate'
+import CookieBanner from './components/CookieBanner'
 import PageHead from './components/PageHead'
 import { findProject } from './data/projects'
+import { findLegal } from './data/legal'
 import { RouterProvider, useRouter } from './router'
 
 function Home() {
   return (
     <>
       <PageHead
-        title="Arham Realty · Redefining Mumbai's Skyline for 30+ Years"
-        description="Arham Realty has built across Mumbai and Thane since 1994. Fourteen completed projects, two under construction and six more in the pipeline."
+        title="Arham Realty · A Legacy In Every Detail"
+        description="30+ years of building spaces with permanence, character and purpose. Arham Realty has built across Mumbai and Thane since 1994."
       />
       <Hero />
       <Projects />
-      <Marquee />
       <About />
       <Footprint />
       <Values />
@@ -39,6 +42,11 @@ function Routes() {
   if (path === '/') return <Home />
   if (path === '/about') return <AboutPage />
   if (path === '/projects') return <ProjectsPage />
+
+  if (path.startsWith('/legal/')) {
+    const doc = findLegal(path.slice('/legal/'.length))
+    if (doc) return <LegalPage doc={doc} />
+  }
 
   if (path.startsWith('/projects/')) {
     const project = findProject(path.slice('/projects/'.length))
@@ -56,6 +64,8 @@ export default function App() {
         <Routes />
       </main>
       <Footer />
+      <CookieBanner />
+      <DisclaimerGate />
     </RouterProvider>
   )
 }

@@ -31,12 +31,12 @@ export default function Contact() {
             </h2>
 
             <Reveal delay={0.1}>
-              <p className="contact__sub">
-                {CONTACT.sub[0]}
+              <p className="contact__sub">{CONTACT.sub}</p>
+              <p className="lead">
+                {CONTACT.body[0]}
                 <br />
-                {CONTACT.sub[1]}
+                {CONTACT.body[1]}
               </p>
-              <p className="lead">{CONTACT.body}</p>
             </Reveal>
 
             <Reveal delay={0.16}>
@@ -45,11 +45,13 @@ export default function Contact() {
                   <div className="detail" key={d.label}>
                     <div className="detail__label">{d.label}</div>
                     <div className="detail__value">
-                      {d.href ? (
-                        <a href={d.href}>{d.lines[0]}</a>
-                      ) : (
-                        d.lines.map((l) => <div key={l}>{l}</div>)
-                      )}
+                      {d.links
+                        ? d.links.map((l) => (
+                            <div key={l.href}>
+                              <a href={l.href}>{l.label}</a>
+                            </div>
+                          ))
+                        : (d.lines ?? []).map((l) => <div key={l}>{l}</div>)}
                     </div>
                   </div>
                 ))}
@@ -71,9 +73,9 @@ export default function Contact() {
                     <div className="form__done__mark">
                       <Check />
                     </div>
-                    <h3 className="form__title">Enquiry received</h3>
+                    <h3 className="form__title">{CONTACT.form.done.title}</h3>
                     <p className="form__sub" style={{ marginBottom: 0 }}>
-                      Thank you. Our team will be in touch within one business day.
+                      {CONTACT.form.done.body}
                     </p>
                     <button className="btn btn--ghost" onClick={() => setSent(false)}>
                       Send another
@@ -121,7 +123,7 @@ export default function Contact() {
 
                     <div className="field field--row">
                       <div>
-                        <label htmlFor="interest">Interested In</label>
+                        <label htmlFor="interest">Project</label>
                         <select id="interest" name="interest" defaultValue="">
                           <option value="" disabled>
                             Select a project
@@ -146,7 +148,7 @@ export default function Contact() {
                       <textarea
                         id="message"
                         name="message"
-                        placeholder="Tell us what you're looking for…"
+                        placeholder={CONTACT.form.messagePlaceholder}
                       />
                     </div>
 

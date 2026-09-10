@@ -1,13 +1,14 @@
-import { FEATURED, PROJECTS } from '../data/projects'
+import { DEVELOPMENTS } from '../data/content'
+import { FEATURED } from '../data/projects'
 import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
 import ProjectCard from '../components/ProjectCard'
+import { Marquee } from './Closing'
 import { Link } from '../router'
 
 /**
- * The home page shows the three projects the client has full material
- * for. Everything else lives on /projects — the home page is a shop
- * window, not the catalogue.
+ * "Our Developments" — doc p.2. The three projects the client has full
+ * material for, under the locality band. Everything else is on /projects.
  */
 export default function Projects() {
   return (
@@ -17,32 +18,32 @@ export default function Projects() {
           <div>
             <Reveal>
               <p className="eyebrow" style={{ marginBottom: 22 }}>
-                Our Portfolio
+                {DEVELOPMENTS.eyebrow}
               </p>
             </Reveal>
             <h2 className="h-section">
-              <MaskedLines lines={['Selected', 'Projects']} accentIndex={1} />
+              <MaskedLines lines={DEVELOPMENTS.title} accentIndex={1} />
             </h2>
           </div>
           <Reveal delay={0.12}>
-            <p className="lead">
-              Two towers going up at Chembur, a society rebuild underway at Andheri, and the
-              finished first phase behind them both. The full record of {PROJECTS.length}{' '}
-              projects across Mumbai and Thane is in the portfolio.
-            </p>
+            <p className="lead">{DEVELOPMENTS.body}</p>
           </Reveal>
         </div>
+      </div>
 
+      <Marquee items={DEVELOPMENTS.marquee} />
+
+      <div className="wrap">
         <div className="projects__list">
           {FEATURED.map((p, i) => (
-            <ProjectCard project={p} index={i} key={p.slug} />
+            <ProjectCard project={p} index={i} key={p.slug} variant="feature" />
           ))}
         </div>
 
         <Reveal>
           <div className="projects__more">
             <Link className="btn btn--ghost" to="/projects">
-              View All {PROJECTS.length} Projects
+              View All Projects
               <span className="btn__arrow">
                 <ArrowRight />
               </span>

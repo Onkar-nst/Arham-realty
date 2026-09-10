@@ -1,14 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import type { ProjectStatus } from '../data/projects'
-import {
-  AREA_TOTALS,
-  PROJECTS,
-  PROJECT_COUNTS,
-  STATUSES,
-  byStatus,
-  lakh,
-} from '../data/projects'
+import { AREA_LABELS, PROJECT_COUNTS, STATUSES, UPCOMING_NOTE, byStatus } from '../data/projects'
+import { PORTFOLIO } from '../data/content'
+import { PROJECTS_DISCLAIMER } from '../data/legal'
 import { ArrowDown } from '../components/Icons'
 import { Counter, EASE, MaskedLines, Reveal } from '../components/Motion'
 import ProjectCard from '../components/ProjectCard'
@@ -16,6 +11,9 @@ import PageHead from '../components/PageHead'
 
 /** Cards revealed before "Show more" is needed. */
 const PAGE = 6
+
+/** Tab order as the client lists them: Completed, Ongoing, Upcoming — opening on Ongoing. */
+const TABS: ProjectStatus[] = STATUSES
 
 export default function ProjectsPage() {
   const [tab, setTab] = useState<ProjectStatus>('Ongoing')
@@ -34,42 +32,32 @@ export default function ProjectsPage() {
     <>
       <PageHead
         title="Projects · Arham Realty"
-        description={`Every Arham Group project since 1994. ${PROJECT_COUNTS.Completed} completed, ${PROJECT_COUNTS.Ongoing} under construction and ${PROJECT_COUNTS.Upcoming} still to come across Mumbai and Thane.`}
+        description={`${PROJECT_COUNTS.Completed} completed, ${PROJECT_COUNTS.Ongoing} ongoing and ${PROJECT_COUNTS.Upcoming} upcoming projects across Mumbai and Thane, from a 46,000 sq. ft. start at Nalasopara in 1994.`}
       />
 
       <header className="phead">
         <div className="wrap">
           <Reveal>
             <p className="eyebrow" style={{ marginBottom: 22 }}>
-              Portfolio · 1994 to 2032
+              {PORTFOLIO.eyebrow}
             </p>
           </Reveal>
           <h1 className="h-display phead__title">
-            <MaskedLines lines={['Every project', 'we have built']} accentIndex={1} />
+            <MaskedLines lines={PORTFOLIO.title} />
           </h1>
           <Reveal delay={0.14}>
-            <p className="lead phead__lead">
-              {PROJECTS.length} projects across Mumbai and Thane, from a 46,000 sq ft start at
-              Nalasopara in 1994 to a 17.5 lakh sq ft scheme at Bhandup. Areas shown are
-              construction areas taken from the Arham Group project schedule.
-            </p>
+            <p className="lead phead__lead">{PORTFOLIO.body}</p>
           </Reveal>
 
           <div className="phead__stats">
-            {STATUSES.map((s, i) => (
+            {TABS.map((s, i) => (
               <Reveal key={s} delay={0.1 + i * 0.06}>
-                <button
-                  className="tally"
-                  data-active={tab === s}
-                  onClick={() => selectTab(s)}
-                >
+                <button className="tally" data-active={tab === s} onClick={() => selectTab(s)}>
                   <span className="tally__n">
                     <Counter value={PROJECT_COUNTS[s]} />
                   </span>
                   <span className="tally__label">{s}</span>
-                  <span className="tally__area">
-                    {lakh(AREA_TOTALS[s])} lakh sq ft
-                  </span>
+                  <span className="tally__area">{AREA_LABELS[s]}</span>
                 </button>
               </Reveal>
             ))}
@@ -81,7 +69,7 @@ export default function ProjectsPage() {
         <div className="wrap">
           <Reveal>
             <div className="filters" role="tablist" aria-label="Filter projects by status">
-              {STATUSES.map((t) => (
+              {TABS.map((t) => (
                 <button
                   key={t}
                   className="filter"
@@ -97,12 +85,19 @@ export default function ProjectsPage() {
             </div>
           </Reveal>
 
+          {PORTFOLIO.captions[tab] && (
+            <Reveal>
+              <p className="eyebrow projects__caption">{PORTFOLIO.captions[tab]}</p>
+            </Reveal>
+          )}
+
           {tab === 'Upcoming' && (
             <Reveal>
-              <p className="note">
-                Building names for upcoming projects are withheld until statutory approvals
-                come through. Locality, scale and timeline are all shown in full.
-              </p>
+              <div className="note">
+                {UPCOMING_NOTE.map((l) => (
+                  <p key={l.slice(0, 30)}>{l}</p>
+                ))}
+              </div>
             </Reveal>
           )}
 
@@ -132,6 +127,10 @@ export default function ProjectsPage() {
               </button>
             </div>
           )}
+
+          <Reveal>
+            <p className="projects__disclaimer">{PROJECTS_DISCLAIMER}</p>
+          </Reveal>
         </div>
       </section>
     </>

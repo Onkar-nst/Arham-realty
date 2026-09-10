@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import type { Project } from '../data/projects'
-import { PROJECTS, lakh, sqftLabel } from '../data/projects'
+import { PRELAUNCH_NOTE, PROJECTS } from '../data/projects'
+import { PROJECTS_DISCLAIMER } from '../data/legal'
 import { ArrowRight, Caret } from '../components/Icons'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
 import PageHead from '../components/PageHead'
 import { Plate } from '../components/ProjectCard'
+import { ProjectExtras, ProjectFacts } from '../components/ProjectDetails'
 import { Link } from '../router'
 
 /* ------------------------------- Gallery ------------------------- */
@@ -23,9 +25,7 @@ function Gallery({ project }: { project: Project }) {
         <div className="pgal__stage pgal__stage--empty">
           <Plate project={project} />
         </div>
-        <p className="pgal__caption">
-          Photography for this project is not yet released.
-        </p>
+        <p className="pgal__caption">Photography for this project is not yet released.</p>
       </div>
     )
   }
@@ -90,6 +90,12 @@ function Gallery({ project }: { project: Project }) {
 
 /* ------------------------------- Page ---------------------------- */
 
+const STATUS_TAG: Record<Project['status'], string> = {
+  Ongoing: 'On-Going Project',
+  Completed: 'Completed Project',
+  Upcoming: 'Upcoming Project',
+}
+
 export default function ProjectPage({ project }: { project: Project }) {
   /* Three siblings, preferring the same status so a completed building
      leads to other completed work rather than the pipeline. */
@@ -98,14 +104,6 @@ export default function ProjectPage({ project }: { project: Project }) {
     ...rest.filter((p) => p.status === project.status),
     ...rest.filter((p) => p.status !== project.status),
   ].slice(0, 3)
-
-  const facts = [
-    { label: 'Status', value: project.status },
-    { label: 'Group Company', value: project.developer },
-    { label: 'Location', value: project.location },
-    { label: 'Timeline', value: project.timeline },
-    { label: 'Category', value: project.category },
-  ]
 
   return (
     <>
@@ -132,15 +130,21 @@ export default function ProjectPage({ project }: { project: Project }) {
                 <Reveal>
                   <p className="eyebrow" style={{ marginBottom: 20 }}>
                     <i className={`dot dot--${project.status}`} />
-                    {project.status} · {project.timeline}
+                    {STATUS_TAG[project.status]}
+                    {project.timeline && ` · ${project.timeline}`}
                   </p>
                 </Reveal>
                 <h1 className="h-display">
                   <MaskedLines lines={[project.name]} />
                 </h1>
+                <Reveal delay={0.08}>
+                  <p className="pdetail__loc">
+                    {project.nameWithheld ? 'Building name to be announced.' : project.locality}
+                  </p>
+                </Reveal>
               </div>
               <Reveal delay={0.14}>
-                <p className="lead">{project.summary}</p>
+                <p className="lead pdetail__blurb">{project.blurb}</p>
               </Reveal>
             </div>
           </div>
@@ -156,77 +160,19 @@ export default function ProjectPage({ project }: { project: Project }) {
           <div className="wrap">
             <div className="pdetail__grid">
               <div className="pdetail__main">
-                {(project.body ?? [project.summary]).map((para) => (
-                  <Reveal key={para.slice(0, 40)}>
-                    <p className="pdetail__para">{para}</p>
-                  </Reveal>
-                ))}
-
-                {project.nameWithheld && (
-                  <Reveal>
-                    <p className="pdetail__note">
-                      The building name for this development is not being disclosed yet.
-                      It is listed here by locality until the launch.
-                    </p>
-                  </Reveal>
-                )}
-
-                {project.highlights && (
-                  <Reveal>
-                    <div className="pdetail__block">
-                      <h2 className="pdetail__h">Project Highlights</h2>
-                      <ul className="ticklist">
-                        {project.highlights.map((h) => (
-                          <li key={h}>{h}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Reveal>
-                )}
-
-                {project.amenities && (
-                  <Reveal>
-                    <div className="pdetail__block">
-                      <h2 className="pdetail__h">Amenities</h2>
-                      <div className="amengroups">
-                        {project.amenities.map((g) => (
-                          <div className="amengroup" key={g.group}>
-                            <p className="amengroup__h">{g.group}</p>
-                            <ul className="pcard__chips">
-                              {g.items.map((it) => (
-                                <li className="chip" key={it}>
-                                  {it}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </Reveal>
-                )}
+                <Reveal>
+                  <ProjectExtras project={project} />
+                </Reveal>
               </div>
 
               <aside className="pdetail__aside">
                 <Reveal delay={0.1}>
                   <div className="factcard">
-                    <dl className="factcard__list">
-                      {facts.map((f) => (
-                        <div key={f.label}>
-                          <dt>{f.label}</dt>
-                          <dd>{f.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
+                    <ProjectFacts project={project} />
 
-                    <div className="factcard__scale">
-                      <span className="factcard__big">{lakh(project.areaSqFt)}</span>
-                      <span className="factcard__unit">
-                        lakh sq ft
-                        <br />
-                        {sqftLabel(project.areaSqFt)} sq ft construction area
-                      </span>
-                    </div>
+                    {project.status === 'Upcoming' && (
+                      <p className="extras__fine factcard__fine">{PRELAUNCH_NOTE}</p>
+                    )}
 
                     <a
                       className="btn btn--ghost factcard__btn"
@@ -249,6 +195,10 @@ export default function ProjectPage({ project }: { project: Project }) {
                 </Reveal>
               </aside>
             </div>
+
+            <Reveal>
+              <p className="projects__disclaimer">{PROJECTS_DISCLAIMER}</p>
+            </Reveal>
           </div>
         </section>
 
