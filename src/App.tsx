@@ -3,7 +3,6 @@ import Hero from './sections/Hero'
 import Projects from './sections/Projects'
 import About from './sections/About'
 import Footprint from './sections/Footprint'
-import Values from './sections/Values'
 import Contact from './sections/Contact'
 import { Cta, Footer } from './sections/Closing'
 import ProjectsPage from './pages/ProjectsPage'
@@ -29,7 +28,6 @@ function Home() {
       <Projects />
       <About />
       <Footprint />
-      <Values />
       <Contact />
       <Cta />
     </>

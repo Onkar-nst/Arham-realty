@@ -191,7 +191,7 @@ export default function ProjectCard({
                   <ArrowRight />
                 </a>
                 <Link className="link-arrow" to="/#contact">
-                  Enquire About This Project
+                  Enquire Now
                   <ArrowRight />
                 </Link>
               </>

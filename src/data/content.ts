@@ -28,7 +28,7 @@ export const NAV = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects' },
   { label: 'About Us', href: '/about' },
-  { label: 'Our Values', href: '/#values' },
+  { label: 'Our Values', href: '/about#values' },
   { label: 'Contact', href: '/#contact' },
 ]
 
@@ -134,7 +134,7 @@ export const LEGACY = {
 
 /** "More than thirty years. Many neighbourhoods. One intent." */
 export const INTENT = {
-  title: ['More than thirty years.', 'Many neighbourhoods.', 'One intent.'],
+  title: [ 'Many neighbourhoods.', 'One intent.'],
   lead:
     'It started with 46,000 sq. ft. in Nalasopara. What followed was a journey through neighbourhoods, generations and changing ideas of what a home should be.',
   paras: [
@@ -190,7 +190,7 @@ export const VALUES_HEADER = {
   eyebrow: 'Why Arham?',
   title: ['The values we', 'build on'],
   body: 'The principles have shaped every project since 1994;',
-  lines: ['How we design,', 'How we build, and', 'How we stand behind every home we hand over.'],
+  // lines: ['How we design,', 'How we build, and', 'How we stand behind every home we hand over.'],
 }
 
 /* Icons are the ones embedded in the client's document (doc p.4). */

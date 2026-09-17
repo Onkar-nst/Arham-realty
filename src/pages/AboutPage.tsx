@@ -2,6 +2,7 @@ import { ABOUT_PAGE, LEADERSHIP, TIMELINE } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
 import { Timeline } from '../sections/About'
+import Values from '../sections/Values'
 import PageHead from '../components/PageHead'
 import { Link } from '../router'
 
@@ -32,17 +33,9 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <section className="section section--tight">
-        <div className="wrap">
-          <div className="introcols">
-            {ABOUT_PAGE.intro.slice(1).map((p, i) => (
-              <Reveal key={p.slice(0, 30)} delay={i * 0.08}>
-                <p>{p}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+     
+
+      <Values />
 
       <section className="section section--alt">
         <div className="wrap">

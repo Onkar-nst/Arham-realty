@@ -23,7 +23,7 @@ export default function Footprint() {
     setHidden((h) => (h.includes(s) ? h.filter((x) => x !== s) : [...h, s]))
 
   return (
-    <section className="section">
+    <section className="section section--alt">
       <div className="wrap">
         <div className="sec-head sec-head__split">
           <div>

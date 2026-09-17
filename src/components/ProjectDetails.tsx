@@ -42,9 +42,25 @@ export function ProjectFacts({ project, compact = false }: { project: Project; c
 }
 
 /** Connectivity list, key amenities and the neighbourhood note — the "show more" block. */
-export function ProjectExtras({ project }: { project: Project }) {
+export function ProjectExtras({
+  project,
+  showDescription = false,
+}: {
+  project: Project
+  showDescription?: boolean
+}) {
   return (
     <div className="extras">
+      {showDescription && project.blurb && (
+        <div className="extras__block">
+          {project.blurb.split('\n').map((p, idx) => (
+            <p className="extras__para" key={idx}>
+              {p}
+            </p>
+          ))}
+        </div>
+      )}
+
       {project.connectivity.length > 0 && (
         <div className="extras__block">
           <p className="extras__h">Connectivity</p>

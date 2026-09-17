@@ -1,9 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { ABOUT, INTENT, LEGACY, STORY, TIMELINE } from '../data/content'
-import { ArrowRight, Caret } from '../components/Icons'
+import { ABOUT, INTENT, LEGACY, TIMELINE } from '../data/content'
+import { Caret } from '../components/Icons'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
-import { Link } from '../router'
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
@@ -153,14 +152,7 @@ export default function About() {
             </Reveal>
           </div>
 
-          <div className="sec-head sec-head__split legacy__head">
-            <Reveal>
-              <p className="eyebrow">{LEGACY.eyebrow}</p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p className="lead">{LEGACY.body}</p>
-            </Reveal>
-          </div>
+          
 
           <Reveal distance={30}>
             <Timeline entries={LEGACY.chapters} />
@@ -210,7 +202,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section section--alt">
+      {/* <section className="section section--alt">
         <div className="wrap">
           <div className="sec-head sec-head__split">
             <div>
@@ -250,7 +242,7 @@ export default function About() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

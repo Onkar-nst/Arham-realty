@@ -18,16 +18,7 @@ export default function Values() {
               <MaskedLines lines={VALUES_HEADER.title} accentIndex={1} />
             </h2>
           </div>
-          <Reveal delay={0.12}>
-            <p className="lead">
-              {VALUES_HEADER.body}
-              {VALUES_HEADER.lines.map((l) => (
-                <span className="lead__line" key={l}>
-                  {l}
-                </span>
-              ))}
-            </p>
-          </Reveal>
+          
         </div>
 
         <div className="values">

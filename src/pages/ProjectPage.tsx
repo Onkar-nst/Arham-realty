@@ -143,9 +143,6 @@ export default function ProjectPage({ project }: { project: Project }) {
                   </p>
                 </Reveal>
               </div>
-              <Reveal delay={0.14}>
-                <p className="lead pdetail__blurb">{project.blurb}</p>
-              </Reveal>
             </div>
           </div>
         </header>
@@ -161,38 +158,36 @@ export default function ProjectPage({ project }: { project: Project }) {
             <div className="pdetail__grid">
               <div className="pdetail__main">
                 <Reveal>
-                  <ProjectExtras project={project} />
+                  <ProjectExtras project={project} showDescription />
                 </Reveal>
               </div>
 
               <aside className="pdetail__aside">
-                <Reveal delay={0.1}>
-                  <div className="factcard">
-                    <ProjectFacts project={project} />
+                <div className="factcard">
+                  <ProjectFacts project={project} />
 
-                    {project.status === 'Upcoming' && (
-                      <p className="extras__fine factcard__fine">{PRELAUNCH_NOTE}</p>
-                    )}
+                  {project.status === 'Upcoming' && (
+                    <p className="extras__fine factcard__fine">{PRELAUNCH_NOTE}</p>
+                  )}
 
-                    <a
-                      className="btn btn--ghost factcard__btn"
-                      href={project.mapUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      View on Google Maps
-                      <span className="btn__arrow">
-                        <ArrowRight />
-                      </span>
-                    </a>
-                    <Link className="btn btn--solid factcard__btn" to="/#contact">
-                      Enquire About This Project
-                      <span className="btn__arrow">
-                        <ArrowRight />
-                      </span>
-                    </Link>
-                  </div>
-                </Reveal>
+                  <a
+                    className="btn btn--ghost factcard__btn"
+                    href={project.mapUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View on Google Maps
+                    <span className="btn__arrow">
+                      <ArrowRight />
+                    </span>
+                  </a>
+                  <Link className="btn btn--solid factcard__btn" to="/#contact">
+                    Enquire Now
+                    <span className="btn__arrow">
+                      <ArrowRight />
+                    </span>
+                  </Link>
+                </div>
               </aside>
             </div>
 
