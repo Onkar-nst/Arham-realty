@@ -3150,56 +3150,15 @@
   color: var(--muted);
 }
 
-.leaders {
-  display: grid;
-  gap: 0;
-  border-top: 1px solid var(--line);
-  margin-bottom: 56px;
-}
+/* ---------- Leadership quote styling ---------- */
 
-.leader {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 56px;
-  padding: 56px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.leader__heading {
-  font-size: clamp(28px, 3.4vw, 42px);
-}
-
-.leader__name {
-  margin-top: 28px;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.leader__role {
-  margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-}
-
-.leader__body p {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: var(--muted);
-}
-
-.leader__body p + p {
-  margin-top: 1.2em;
-}
-
-.leader__body .leader__quote {
-  margin-top: 1.6em;
+.leader__quote {
+  margin-top: 18px;
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(17px, 1.5vw, 21px);
+  font-size: clamp(15px, 1.35vw, 17.5px);
   color: var(--accent);
+  line-height: 1.55;
 }
 
 /* ---------- Launch disclaimer popup ---------- */
@@ -3403,8 +3362,7 @@
 }
 
 @media (max-width: 900px) {
-  .intent,
-  .leader {
+  .intent {
     grid-template-columns: 1fr;
     gap: 28px;
   }

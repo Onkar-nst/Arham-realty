@@ -96,22 +96,33 @@ export default function AboutPage() {
             </Reveal>
           </div>
 
-          <div className="leaders">
+          <div className="projects__list">
             {LEADERSHIP.map((l, i) => (
-              <Reveal key={l.name} delay={Math.min(i, 2) * 0.06}>
-                <article className="leader">
-                  <div className="leader__head">
-                    <h2 className="h-section leader__heading">
-                      <MaskedLines lines={l.heading} accentIndex={l.accentIndex} />
-                    </h2>
-                    <p className="leader__name">{l.name}</p>
-                    <p className="leader__role">{l.role}</p>
+              <Reveal key={l.name} delay={Math.min(i, 2) * 0.06} distance={30}>
+                <article className="pcard">
+                  <div className="pcard__media">
+                    <div className="plate" aria-hidden="true">
+                      <img className="plate__mark" src="/brand/arham-mark.png" alt="" />
+                      <span className="plate__year">{l.role}</span>
+                    </div>
+                    <span className="pcard__status">
+                      <i className="dot dot--Completed" />
+                      {l.role}
+                    </span>
                   </div>
-                  <div className="leader__body">
-                    {l.paras.map((p) => (
-                      <p key={p.slice(0, 40)}>{p}</p>
+
+                  <div className="pcard__body">
+                    <p className="pcard__dev">Our Leadership · {String(i + 1).padStart(2, '0')}</p>
+                    <h3 className="h-card pcard__title">{l.name}</h3>
+                    <p className="pcard__loc">{l.role}</p>
+
+                    {l.paras.map((p, pIdx) => (
+                      <p key={pIdx} className="pcard__desc">{p}</p>
                     ))}
-                    <p className="leader__quote">{l.quote}</p>
+
+                    {l.quote && (
+                      <p className="leader__quote">{l.quote}</p>
+                    )}
                   </div>
                 </article>
               </Reveal>

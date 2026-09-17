@@ -429,8 +429,7 @@ export const LEADERSHIP = [
     name: 'Mr. Sanjay Hirji Savla',
     role: 'Promoter / Managing Director',
     paras: [
-      'Mr. Sanjay Savla began his professional journey in 1982 in the construction materials and logistics business, gaining first-hand experience of the industry from the ground up. In 1994, he entered the real estate landscape of Mumbai and Thane, investing in projects associated with Mr. Purshottam Bansi, including ventures such as Oricon Developers, Global Oricon Developers, Pooja Developers, Pooja Builders, Divine Developers, Pooja Builders & Developers, Shree Sainath Developers and Sai Dhara Constructions; an association through which he gained a deeper understanding of land, development and the many facets of the real estate business, laying the foundation for his own journey in the industry.',
-      'Over the next three decades, he steadily built his presence across Mumbai and the MMR region through a measured and disciplined approach, guided by a focus on the right location, thoughtful planning, quality execution and value that endures. Today, his experience and vision continue to guide the business as it enters its next chapter, carrying forward a legacy built on trust, relationships and a long-term commitment to quality.',
+      'Beginning in 1982 in construction materials and logistics before entering Mumbai and Thane real estate in 1994, Mr. Sanjay Savla has shaped a three-decade legacy guided by location discipline, thoughtful planning, and enduring value across Mumbai and the MMR region.',
     ],
     quote: '“Three decades of experience, one enduring philosophy — build thoughtfully and build to endure.”',
   },
@@ -440,8 +439,7 @@ export const LEADERSHIP = [
     name: 'Mr. Karan Sanjay Savla',
     role: 'Co-Promoter / Chief Executive Officer',
     paras: [
-      'Mr. Karan Savla represents the next generation of the business, combining a strong foundation in civil engineering, real estate development and management with a contemporary understanding of Mumbai\'s evolving urban landscape. His academic journey spans a Diploma in Civil Engineering from Thakur Polytechnic, Mumbai, a B.Tech and MBA (MBA.Tech) from Mukesh Patel School of Technology Management & Engineering, Mumbai, and an MSc in Real Estate Development from the University of Westminster, London, bringing together engineering, business and global real estate perspectives.',
-      'Having joined the business in 2022, he leads its day-to-day legal, sales, marketing and technical functions, carrying forward the values, discipline and experience established over three decades. Working alongside a legacy built across generations, he continues to contribute to the company\'s expansion across Mumbai and the MMR region, with a focus on thoughtful development and long-term value.',
+      'Representing the next generation, Mr. Karan Savla combines Civil Engineering, an MBA.Tech from NMIMS, and an MSc in Real Estate Development from Westminster, London. Since joining in 2022, he leads day-to-day operations, sales, marketing, and strategic growth.',
     ],
     quote: '“Grounded in experience. Looking ahead with a new perspective.”',
   },
@@ -451,8 +449,7 @@ export const LEADERSHIP = [
     name: 'Mr. Prakash Shivji Visaria',
     role: 'Non-Executive Director',
     paras: [
-      'Mr. Prakash Visaria\'s association with Mr. Sanjay Savla dates back to 1992, beginning in the construction materials and logistics business. Over more than three decades, he has remained a trusted presence through the business\'s evolution and its transition into real estate.',
-      'He serves today as a Non-Executive Director on the boards of certain group companies, bringing a depth of institutional understanding and continuity to the organisation. Alongside this, he oversees the day-to-day administrative operations of the business, including vendor coordination and staff management, lending a steady and trusted hand to its continued growth.',
+      'Associated with the leadership since 1992, Mr. Prakash Visaria brings over three decades of continuity to group company boards, while overseeing day-to-day administration, operations, and vendor coordination.',
     ],
     quote: '“Over Three decades of trust. Experience that continues forward.”',
   },
@@ -462,8 +459,7 @@ export const LEADERSHIP = [
     name: 'Mr. Purshottam Gobindram Bansi',
     role: 'Mentor',
     paras: [
-      'Mr. Purshottam Bansi belongs to a generation that helped build modern Mumbai, beginning his professional journey in the post-Partition era as the nation was laying the foundations of its new built environment. A Civil Engineering graduate from the Victoria Jubilee Technical Institute (VJTI), University of Bombay, in 1958, he went on to specialise in marine construction engineering, building a career spanning more than 40 years as a Contractor, Builder and Developer, including as a Class 1 Contractor for Government projects. He served as Chairman of the Builders\' Association of India from 1991 to 1992, was a Special Executive Magistrate from 1981 to 1989, became a Chartered Engineer in 1989, and was recognised as a Life Fellow of the Indian Water Works Association in 1988.',
-      'It was this depth of experience that made him an important early mentor to Mr. Sanjay Savla, who entered real estate as an investor in 1994, and later to Mr. Karan Savla, who joined the business in 2022, offering both an invaluable understanding of construction, development and the discipline required to build in Mumbai.',
+      'A 1958 VJTI graduate, former BAI Chairman (1991–92), Chartered Engineer, and marine engineering contractor with over 40 years of experience, Mr. Purshottam Bansi provided foundational mentorship guiding generations of leadership.',
     ],
     quote: '“A lifetime spent building knowledge, an influence carried across generations.”',
   },
