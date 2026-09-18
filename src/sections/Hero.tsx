@@ -83,7 +83,7 @@ export default function Hero() {
                 transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
               >
                 <div className="stats__value">
-                  <Counter value={s.value} />
+                  <Counter value={s.value} decimals={s.decimals} />
                   <span className="stats__suffix">{s.suffix}</span>
                 </div>
                 <div className="stats__label">{s.label}</div>

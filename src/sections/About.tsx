@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { ABOUT, INTENT, LEGACY, TIMELINE } from '../data/content'
+import { ABOUT, LEGACY, TIMELINE } from '../data/content'
 import { Caret } from '../components/Icons'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
 
@@ -173,29 +173,30 @@ export default function About() {
           <div className="intent">
             <div>
               <h2 className="h-section">
-                <MaskedLines lines={INTENT.title} accentIndex={1} />
+                <MaskedLines lines={['Many neighbourhoods.', 'One intent.']} accentIndex={1} />
               </h2>
-              <Reveal delay={0.1}>
-                <p className="intent__lead">{INTENT.lead}</p>
-              </Reveal>
             </div>
 
             <div className="intent__copy">
-              {INTENT.paras.map((p, i) => (
-                <Reveal key={p.slice(0, 30)} delay={i * 0.06}>
-                  <p>{p}</p>
-                </Reveal>
-              ))}
-              <Reveal>
-                <p className="intent__pull">{INTENT.pull}</p>
+              <Reveal delay={0}>
+                <p>
+                  Arham Realty’s story began in 1994 with a modest development in Nalasopara and a
+                  straightforward belief: good homes should be dependable, thoughtfully planned and
+                  made for the people who live in them. Three decades later, that belief continues
+                  to shape the way we approach every opportunity.
+                </p>
               </Reveal>
-              {INTENT.paras2.map((p, i) => (
-                <Reveal key={p.slice(0, 30)} delay={i * 0.06}>
-                  <p>{p}</p>
-                </Reveal>
-              ))}
-              <Reveal>
-                <p className="intent__pull">{INTENT.closing}</p>
+              <Reveal delay={0.06}>
+                <p>
+                  From Nalasopara and Bhayandar in the early years to established addresses across
+                  Mumbai, each project has brought a new setting, a new set of challenges and a
+                  deeper understanding of the city we work in. The places may have changed, the
+                  scale may have grown, but the intent has stayed familiar —{' '}
+                  <strong>
+                    to build with care, to build with purpose and to leave something that continues
+                    to matter after the keys are handed over.
+                  </strong>
+                </p>
               </Reveal>
             </div>
           </div>

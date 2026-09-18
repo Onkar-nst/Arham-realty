@@ -49,7 +49,7 @@ export const HERO = {
 export const HERO_STATS = [
   { value: 30, suffix: '+', label: 'Years' },
   { value: 15, suffix: '', label: 'Projects Delivered' },
-  { value: 13, suffix: '+ L', label: 'Sq. Ft. Delivered' },
+  { value: 13.5, suffix: 'L+', label: 'Sq. Ft. Delivered', decimals: 1 },
   { value: 2300, suffix: '+', label: 'Homes Created' },
 ]
 
@@ -132,23 +132,6 @@ export const LEGACY = {
   closing: ['30+ years behind us.', 'The next chapter ahead.'],
 }
 
-/** "More than thirty years. Many neighbourhoods. One intent." */
-export const INTENT = {
-  title: [ 'Many neighbourhoods.', 'One intent.'],
-  lead:
-    'It started with 46,000 sq. ft. in Nalasopara. What followed was a journey through neighbourhoods, generations and changing ideas of what a home should be.',
-  paras: [
-    'Arham Realty’s story began in 1994 with a modest development in Nalasopara and a straightforward belief: good homes should be dependable, thoughtfully planned and made for the people who live in them. Three decades later, that belief continues to shape the way we approach every opportunity.',
-    'From Nalasopara and Bhayandar in the early years to established addresses across Mumbai, each project has brought a new setting, a new set of challenges and a deeper understanding of the city we work in. The places may have changed, the scale may have grown, but the intent has stayed familiar — to build with care, to build with purpose and to leave something that continues to matter after the keys are handed over.',
-  ],
-  pull: 'Experience, Carried Forward. Perspective, Moving Ahead.',
-  paras2: [
-    'Today, our work spans a growing portfolio across Mumbai and Thane, with a pipeline that takes the same experience into the next chapter.',
-    'The business remains grounded in the values that shaped its beginning quality, dependability and a genuine respect for the people and communities we build for. At the same time, a new generation is bringing its own perspective to the business, building upon what has come before rather than moving away from it.',
-    'Because progress does not mean starting over. Sometimes, it means taking what has worked for thirty years and seeing where it can go next.',
-  ],
-  closing: 'Over Three Decades of Experience. A Perspective for What Comes Next.',
-}
 
 /** "Our Story" on the home page. */
 export const STORY = {

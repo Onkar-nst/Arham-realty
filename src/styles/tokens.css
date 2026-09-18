@@ -37,10 +37,10 @@
      legibility against the dark plot plate. */
   --st-completed: #017c60;
   --st-completed-pin: #17b184;
-  --st-ongoing: #12a87a;
-  --st-ongoing-pin: #6fe0b8;
+  --st-ongoing: #0284c7;
+  --st-ongoing-pin: #38bdf8;
   --st-upcoming: #a8802f;
-  --st-upcoming-pin: #d9b76b;
+  --st-upcoming-pin: #f59e0b;
 
   /* Inverted block (dark bands) — deep green rather than neutral black */
   --inv-bg: #0b1a15;

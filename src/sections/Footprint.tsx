@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
-import { CLUSTERS, FOOTPRINT, FOOTPRINT_PINS, FOOTPRINT_STATS } from '../data/content'
+import { CLUSTERS, FOOTPRINT, FOOTPRINT_PINS } from '../data/content'
 import type { ProjectStatus } from '../data/projects'
 import { ArrowRight, Chevron } from '../components/Icons'
-import { Counter, EASE, MaskedLines, Reveal } from '../components/Motion'
+import { EASE, MaskedLines, Reveal } from '../components/Motion'
 import FootprintMap from '../components/FootprintMap'
 import { Link, useRouter } from '../router'
 
@@ -41,7 +41,7 @@ export default function Footprint() {
           </Reveal>
         </div>
 
-        <Reveal distance={30}>
+        {/* <Reveal distance={30}>
           <div className="fp__stats">
             {FOOTPRINT_STATS.map((s) => (
               <div className="fp__stat" key={s.label}>
@@ -53,7 +53,7 @@ export default function Footprint() {
               </div>
             ))}
           </div>
-        </Reveal>
+        </Reveal> */}
 
         <div className="fp__grid">
           <Reveal>
@@ -121,7 +121,7 @@ export default function Footprint() {
           <Reveal delay={0.1} distance={30}>
             <div className="fp__plot">
               <div className="fp__plot-head">
-                <p className="eyebrow">Interactive plot</p>
+                <p className=""></p>
                 <div className="legend">
                   {LEGEND.map((l) => (
                     <button

@@ -127,7 +127,7 @@ export function MaskedLines({
 /** Counts up to `value` once scrolled into view. */
 export function Counter({
   value,
-  decimals = 0,
+  decimals,
   duration = 1.6,
 }: {
   value: number
@@ -136,7 +136,9 @@ export function Counter({
 }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
-  const [display, setDisplay] = useState(decimals ? (0).toFixed(decimals) : '0')
+  const numDecimals =
+    decimals ?? (value.toString().includes('.') ? value.toString().split('.')[1]?.length ?? 0 : 0)
+  const [display, setDisplay] = useState(numDecimals ? (0).toFixed(numDecimals) : '0')
 
   useEffect(() => {
     if (!inView) return
@@ -146,12 +148,12 @@ export function Counter({
       const t = Math.min((now - start) / (duration * 1000), 1)
       // easeOutExpo — fast start, long settle
       const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
-      setDisplay((value * eased).toFixed(decimals))
+      setDisplay((value * eased).toFixed(numDecimals))
       if (t < 1) frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [inView, value, decimals, duration])
+  }, [inView, value, numDecimals, duration])
 
   return <span ref={ref}>{display}</span>
 }

@@ -31,7 +31,7 @@ export default function Projects() {
         </div>
       </div>
 
-      <Marquee items={DEVELOPMENTS.marquee} />
+     
 
       <div className="wrap">
         <div className="projects__list">
@@ -51,6 +51,11 @@ export default function Projects() {
           </div>
         </Reveal>
       </div>
+
+      <div className="projects__marquee">
+        <Marquee items={DEVELOPMENTS.marquee} />
+      </div>
     </section>
+    
   )
 }
