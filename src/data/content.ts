@@ -37,7 +37,6 @@ export const NAV = [
 export const HERO = {
   eyebrow: 'Est. 1994 | Mumbai & Thane',
   titleLines: ['A Legacy', 'In Every Detail.'],
-  /** Index of the line set in the green italic. */
   accentIndex: 0,
   body: '30+ years of building spaces with permanence, character and purpose.',
   primary: { label: 'Our Story', href: '/about' },

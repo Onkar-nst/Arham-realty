@@ -87,7 +87,6 @@ export function MaskedLines({
   lines: MaskedLine[]
   className?: string
   delay?: number
-  /** Render this line in the accent serif-italic treatment. */
   accentIndex?: number
 }) {
   /* The observer must sit on the wrapper, not on the sliding line: each
