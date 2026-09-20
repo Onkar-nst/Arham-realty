@@ -268,7 +268,7 @@ const REGION_OF: Record<string, string> = {
   'Dr. Ambedkar Road, Bandra West': 'Bandra, Khar & Santacruz',
   'S.V. Road, Santacruz West': 'Bandra, Khar & Santacruz',
   'Nargis Dutt Road, Pali Hill': 'Bandra, Khar & Santacruz',
-  'TPM Road, Mira Road East': 'Mira Road, Bhayandar & Nalasopara',
+  'Mira Bhayandar Road, Mira Road East': 'Mira Road, Bhayandar & Nalasopara',
   'Kharegaon, Bhayander East': 'Mira Road, Bhayandar & Nalasopara',
   'Achole Road, Nalasopara East': 'Mira Road, Bhayandar & Nalasopara',
   'Tulinj Road, Nalasopara East': 'Mira Road, Bhayandar & Nalasopara',

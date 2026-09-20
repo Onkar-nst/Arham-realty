@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MISSION, VALUES, VALUES_HEADER, VISION } from '../data/content'
+import { VALUES, VALUES_HEADER } from '../data/content'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
 
 /** "Why Arham?" — doc p.4: the four values, then mission and vision. */
@@ -39,17 +39,6 @@ export default function Values() {
           ))}
         </div>
 
-        <Reveal distance={30}>
-          <div className="mv mv--inline">
-            {[MISSION, VISION].map((m) => (
-              <div className="mv__cell" key={m.label}>
-                <p className="mv__label">{m.label}</p>
-                <p className="mv__headline">{m.headline}</p>
-                <p className="mv__body">{m.body}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </div>
     </section>
   )

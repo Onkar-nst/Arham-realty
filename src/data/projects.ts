@@ -326,7 +326,8 @@ export const PROJECTS: Project[] = [
     coords: [19.0680226, 72.8987901],
     mapUrl: "https://maps.app.goo.gl/WcmR6bPmuWBXyBNu7",
     images: [
-      { src: IMG("dakshata-chsl.jpg"), alt: "Architectural render of Dakshata CHSL, Chembur", caption: "Street view elevation" },
+      { src: "/Sketch/Dakshata1 - Sketch - Final.png", alt: "Architectural render of Dakshata CHSL, Chembur", caption: "Street view elevation" },
+      { src: "/Sketch/Dakshata2 - Sketch - Final.png", alt: "Architectural render of Dakshata CHSL, Chembur", caption: "Another view" },
     ],
   },
   {
@@ -365,7 +366,8 @@ export const PROJECTS: Project[] = [
     coords: [19.0835767, 72.8381361],
     mapUrl: "https://maps.app.goo.gl/hDNQVDZDGKLgs4ZW6",
     images: [
-      { src: IMG("blossom-chsl.jpg"), alt: "Architectural render of Blossom CHSL, Santacruz West", caption: "Street view elevation" },
+      { src: "/Sketch/Blossom1 - Sketch - Final.png", alt: "Architectural render of Blossom CHSL, Santacruz West", caption: "Street view elevation" },
+      { src: "/Sketch/Blossom2 - Sketch - Final.png", alt: "Architectural render of Blossom CHSL, Santacruz West", caption: "Another view" },
     ],
   },
   {
@@ -404,7 +406,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.0692816, 72.834966],
     mapUrl: "https://maps.app.goo.gl/mt4SEhCJ2da8R1DRA",
-    images: [],
+    images: [
+      { src: "/Sketch/Sailesh Apartments - Sketch - Final.png", alt: "Architectural render of Shailesh Apartments, Khar West", caption: "Street view elevation" }
+    ],
   },
   {
     slug: "akhand-aabhar-chsl",
@@ -442,7 +446,8 @@ export const PROJECTS: Project[] = [
     coords: [19.0669772, 72.830246],
     mapUrl: "https://maps.app.goo.gl/qEpq9YF9eBsvSKeQ6",
     images: [
-      { src: IMG("akhand-aabhar.jpg"), alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Street view elevation" },
+      { src: "/Sketch/Akhand Abhaar1 - Sketch - Final.svg", alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Street view elevation" },
+      { src: "/Sketch/Akhand Abhaar2 - Sketch - Final.png", alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Another view" },
     ],
   },
   {
@@ -481,7 +486,7 @@ export const PROJECTS: Project[] = [
     coords: [19.0083692, 72.8177178],
     mapUrl: "https://maps.app.goo.gl/umV2taBM9z4xgvHh6",
     images: [
-      { src: IMG("shubhda-tower.jpg"), alt: "Shubhda Tower rising above its podium at Worli", caption: "Street view elevation" },
+      { src: "/Sketch/Shubhda Tower - Sketch - Final.png", alt: "Shubhda Tower rising above its podium at Worli", caption: "Street view elevation" },
     ],
   },
   {
@@ -554,7 +559,10 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.2036701, 72.8354621],
     mapUrl: "https://maps.app.goo.gl/x7Zc51o7xpuk1wfEA",
-    images: [],
+    images: [
+      { src: "/Sketch/Shree Ganesh1 - Sketch - Final.png", alt: "Architectural render of Shree Ganesh CHSL, Kandivali West", caption: "Street view elevation" },
+      { src: "/Sketch/Shree Ganesh2 - Sketch - Final.png", alt: "Architectural render of Shree Ganesh CHSL, Kandivali West", caption: "Another view" },
+    ],
   },
   {
     slug: "toral-apartment",
@@ -590,7 +598,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.3040422, 72.8559663],
     mapUrl: "https://maps.app.goo.gl/rRu7QXPnPR5MGUVb9",
-    images: [],
+    images: [
+      { src: "/Sketch/Toral Apartment - Sketch - Final.png", alt: "Architectural render of Toral Apartments, Bhayandar East", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "pooja-park",
@@ -601,7 +611,7 @@ export const PROJECTS: Project[] = [
     status: "Completed",
     blurb: "At 1.7 Lakh+ sq. ft., Pooja Park was developed during a formative period in Mira Road’s residential growth, when the neighbourhood was steadily taking shape as a significant housing destination for Mumbai’s expanding suburban population.",
     summary: "At 1.7 Lakh+ sq. ft., Pooja Park was developed during a formative period in Mira Road’s residential growth, when the neighbourhood was steadily taking shape as a significant housing destination for Mumbai’s expanding suburban population.",
-    location: "TPM Road, Mira Road East",
+    location: "Mira Bhayandar Road, Mira Road East",
     category: "Residential",
     configuration: "1 RK, 1 & 2 BHK",
     timeline: "1998 - 2002",
@@ -662,7 +672,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.1643, 72.9635],
     mapUrl: "https://www.google.com/maps/search/?api=1&query=MHADA+Colony+Mulund+East+Mumbai",
-    images: [],
+    images: [
+      { src: "/Sketch/Brahma Niwas - Sketch - Final.png", alt: "Architectural render of Brahma Niwas, Mulund East", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "jesal-apartment",
@@ -698,7 +710,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.3043464, 72.8550104],
     mapUrl: "https://maps.app.goo.gl/V4GeYD3rkKr8kRjPA",
-    images: [],
+    images: [
+      { src: "/Sketch/Jesal Apartment - Sketch - Final.png", alt: "Architectural render of Jesal Apartments, Bhayandar East", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "sai-dhara",
@@ -734,7 +748,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.4077897, 72.8238413],
     mapUrl: "https://maps.app.goo.gl/nvZEzqhM4v6jhmDq8",
-    images: [],
+    images: [
+      { src: "/Sketch/Sai Dhara - Sketch - Final.png", alt: "Architectural render of Sai Dhara, Nalasopara East", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "vardhaman-park",
@@ -770,7 +786,10 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.4233821, 72.8237361],
     mapUrl: "https://maps.app.goo.gl/cENu2pxJ2umPhovn6",
-    images: [],
+    images: [
+      { src: "/Sketch/Vardaman Park1 - Sketch - Final.png", alt: "Architectural render of Vardhaman Park, Nalasopara East", caption: "Street view elevation" },
+      { src: "/Sketch/Vardaman Park2 - Sketch - Final.png", alt: "Architectural render of Vardhaman Park, Nalasopara East", caption: "Another view" },
+    ],
   },
   /* ------------------------------ Upcoming ---------------------- */
   {

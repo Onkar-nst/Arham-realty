@@ -1,4 +1,4 @@
-import { ABOUT_PAGE, LEADERSHIP, TIMELINE } from '../data/content'
+import { ABOUT_PAGE, LEADERSHIP, TIMELINE, MISSION, VISION } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
 import { Timeline } from '../sections/About'
@@ -19,16 +19,32 @@ export default function AboutPage() {
 
       <header className="phead">
         <div className="wrap">
-          <Reveal>
-            <p className="eyebrow" style={{ marginBottom: 22 }}>
-              {ABOUT_PAGE.eyebrow}
-            </p>
-          </Reveal>
-          <h1 className="h-display phead__title">
-            <MaskedLines lines={ABOUT_PAGE.title} accentIndex={1} />
-          </h1>
-          <Reveal delay={0.14}>
-            <p className="about__lead phead__lead">{ABOUT_PAGE.intro[0]}</p>
+          <div className="sec-head sec-head__split">
+            <div>
+              <Reveal>
+                <p className="eyebrow" style={{ marginBottom: 22 }}>
+                  {ABOUT_PAGE.eyebrow}
+                </p>
+              </Reveal>
+              <h1 className="h-display phead__title">
+                <MaskedLines lines={ABOUT_PAGE.title} accentIndex={1} />
+              </h1>
+            </div>
+            <Reveal delay={0.14}>
+              <p className="about__lead phead__lead">{ABOUT_PAGE.intro[0]}</p>
+            </Reveal>
+          </div>
+
+          <Reveal distance={30}>
+            <div className="mv mv--inline" style={{ marginTop: '64px' }}>
+              {[MISSION, VISION].map((m) => (
+                <div className="mv__cell" key={m.label}>
+                  <p className="mv__label">{m.label}</p>
+                  <p className="mv__headline">{m.headline}</p>
+                  <p className="mv__body">{m.body}</p>
+                </div>
+              ))}
+            </div>
           </Reveal>
         </div>
       </header>
