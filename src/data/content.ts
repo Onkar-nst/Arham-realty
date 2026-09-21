@@ -47,8 +47,8 @@ export const HERO = {
 /* Page 2 — headline figures exactly as the client states them. */
 export const HERO_STATS = [
   { value: 30, suffix: '+', label: 'Years' },
-  { value: 15, suffix: '', label: 'Projects Delivered' },
-  { value: 13.5, suffix: 'L+', label: 'Sq. Ft. Delivered', decimals: 1 },
+  { value: 14, suffix: '', label: 'Projects Delivered' },
+  { value: 13.6, suffix: 'L+', label: 'Sq. Ft. Delivered', decimals: 1 },
   { value: 2300, suffix: '+', label: 'Homes Created' },
 ]
 
@@ -85,10 +85,9 @@ export const LEGACY = {
       era: '1994 – 2002',
       title: 'From Nalasopara to Mulund and Mira Road',
       body: [
-        'Vardhaman Park, Sai Dhara, Jesal Apartment, Brahma Niwas, Toral Apartment and Pooja Park marked the beginning, establishing a foundation built on thoughtful development, enduring relationships and a commitment to quality.',
+        'Vardhaman Park, Sai Dhara, Jesal Apartment, Toral Apartment and Pooja Park marked the beginning, establishing a foundation built on thoughtful development, enduring relationships and a commitment to quality.',
       ],
-      /* No renders exist for the 1990s projects; the plate is used. */
-      image: null as string | null,
+      image: '/Sketch/Vardaman Park1 - Sketch - Final.png',
     },
     {
       kicker: 'Into Mumbai',
@@ -220,7 +219,7 @@ export const MISSION = {
 
 export const VISION = {
   label: 'Our Vision',
-  headline: 'To be Mumbai’s most trusted real estate brand, shaping iconic skyline landmarks.',
+  headline: 'To be Mumbai’s most trusted real estate developers, shaping iconic skyline landmarks.',
   body:
     'Known for creating sustainable, future ready spaces and enriching communities for generations to come. We aim to revolutionise urban living through visionary, community centric designs to enrich the lives of generations that excel the test of time.',
 }
@@ -237,10 +236,10 @@ export const FOOTPRINT = {
 
 /* Figures as the client states them. */
 export const FOOTPRINT_STATS = [
-  { value: 13.5, suffix: 'L+', label: 'Sq. Ft. Delivered', decimals: 1 },
-  { value: 2.1, suffix: 'L+', label: 'Sq. Ft. Under Construction', decimals: 1 },
-  { value: 36.9, suffix: 'L+', label: 'Sq. Ft. Upcoming', decimals: 1 },
-  { value: 23, suffix: '+', label: 'Projects from 1994 to 2032' },
+  { value: 13.6, suffix: 'L+', label: 'Sq. Ft. Delivered', decimals: 1 },
+  { value: 2.4, suffix: 'L+', label: 'Sq. Ft. Under Construction', decimals: 1 },
+  { value: 29.5, suffix: 'L+', label: 'Sq. Ft. Upcoming', decimals: 1 },
+  { value: 20, suffix: '+', label: 'Projects from 1994 to 2032' },
 ]
 
 export interface Cluster {
@@ -362,7 +361,7 @@ export const TIMELINE = [
     body: [
       'Established in Nalasopara at Vardhaman Park, having our first development of 46,000 sq. ft., it was a modest beginning with a plan to build quality & dependable homes for families.',
     ],
-    image: null as string | null,
+    image: '/Sketch/Vardaman Park1 - Sketch - Final.png',
   },
   {
     era: '2000s',
@@ -398,7 +397,7 @@ export const TIMELINE = [
     kicker: 'What comes next',
     title: 'The Next Horizon',
     body: [
-      'A growing pipeline across Bandra West, Mahalaxmi, Borivali West and East, Malad East and Bhandup East carries over three decades of experience into the next skyline with the same intent to build thoughtfully, and build for generations.',
+      'A growing pipeline across Bandra West, Borivali East, Malad East and Bhandup East carries over three decades of experience into the next skyline with the same intent to build thoughtfully, and build for generations.',
     ],
     image: '/projects/premia-bc-1.jpg',
   },
@@ -453,7 +452,7 @@ export const PORTFOLIO = {
   eyebrow: 'Portfolio – 1994 to 2032',
   title: ['Every address.'],
   body:
-    'What began with a 46,000 sq. ft. development in Nalasopara in 1994 has grown into a portfolio of over 23 projects across Mumbai and Thane, culminating in opportunities as significant as a 17.5 Lakh sq. ft. development at Bhandup East.',
+    'What began with a 46,000 sq. ft. development in Nalasopara in 1994 has grown into a portfolio of 20 projects across Mumbai and Thane, culminating in opportunities as significant as a 17.5 Lakh sq. ft. development at Bhandup East.',
   /* The client captions only the ongoing group; the others carry none. */
   captions: {
     Ongoing: 'Ongoing – 2018 to 2027',
