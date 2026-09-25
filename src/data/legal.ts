@@ -158,7 +158,7 @@ export const LEGAL: LegalDoc[] = [
     updated: "Last Updated: [] September 2026",
     intro: [
       { text: "Please read these Terms & Conditions of Website Use (“Terms”) carefully before accessing or using this website (“Website”)." },
-      { text: "This Website is operated under the brand name “Arham Realty” by M/s. Arham Land Developers Pvt. Ltd., a private limited company incorporated/registered under the applicable laws of India, having its registered office at Office No.7, 1st Floor, Shantinath Shopping Centre, S.V. Road, Malad West, Mumbai, Maharashtra, India, 400064 (“Arham Realty”, “we”, “us” or “our”)." },
+      { text: "This Website is operated under the brand name “Arham Realty” by M/s. Arham Land Developers Pvt. Ltd., a private limited company incorporated/registered under the applicable laws of India, having its registered office at Office No.6&7, 1st Floor, Shantinath Shopping Centre, SV Road, Malad West, Mumbai, Maharashtra, India - 400 064 (“Arham Realty”, “we”, “us” or “our”)." },
       { text: "For the purposes of these Terms, “you”, “your” or “User” means any person who accesses, browses, visits or otherwise uses the Website." },
       { text: "By accessing, browsing or using the Website, you acknowledge that you have read, understood and agreed to be bound by these Terms and all applicable laws and regulations. If you do not agree with these Terms, please discontinue use of the Website." },
     ],
@@ -359,7 +359,7 @@ export const LEGAL: LegalDoc[] = [
           { text: "In accordance with applicable law, we have designated a Grievance Officer for this Website, who may be contacted in respect of any complaint or grievance relating to the Website, these Terms, or the handling of personal information submitted through the Website:" },
           { text: "Name: Mr. Karan S. Savla", list: true },
           { text: "Designation: CEO", list: true },
-          { text: "Address: Office No.7, 1st Floor, Shantinath Shopping Centre, S.V. Road, Malad West, Mumbai, Maharashtra, India, 400064", list: true },
+          { text: "Address: Office No.6&7, 1st Floor, Shantinath Shopping Centre, SV Road, Malad West, Mumbai, Maharashtra, India - 400 064.", list: true },
           { text: "E-Mail: karansavla@arhamlanddeveloper.com", list: true },
           { text: "Phone: +91 9820073890", list: true },
           { text: "Grievances will be acknowledged and addressed within the timelines prescribed under applicable law." },

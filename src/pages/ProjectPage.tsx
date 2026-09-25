@@ -170,17 +170,19 @@ export default function ProjectPage({ project }: { project: Project }) {
                     <p className="extras__fine factcard__fine">{PRELAUNCH_NOTE}</p>
                   )}
 
-                  <a
-                    className="btn btn--ghost factcard__btn"
-                    href={project.mapUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    View on Google Maps
-                    <span className="btn__arrow">
-                      <ArrowRight />
-                    </span>
-                  </a>
+                  {project.status !== 'Upcoming' && (
+                    <a
+                      className="btn btn--ghost factcard__btn"
+                      href={project.mapUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View on Google Maps
+                      <span className="btn__arrow">
+                        <ArrowRight />
+                      </span>
+                    </a>
+                  )}
                   <Link className="btn btn--solid factcard__btn" to="/#contact">
                     Enquire Now
                     <span className="btn__arrow">

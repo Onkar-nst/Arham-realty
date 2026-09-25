@@ -287,7 +287,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.0808679, 72.9000875],
     mapUrl: "https://maps.app.goo.gl/XwmnxRgfoZ8qsiV28",
-    images: [],
+    images: [
+      { src: "/Sketch/Pramod - Sketch - Final.png", alt: "Architectural render of Pramod CHSL, Ghatkopar East", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "dakshata-chsl",
@@ -523,7 +525,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.203395, 72.835318],
     mapUrl: "https://maps.app.goo.gl/pLGgTVNEWpCH5V8a7",
-    images: [],
+    images: [
+      { src: "/Sketch/Navtarun - Sketch - Final.png", alt: "Architectural render of Navtarun CHSL, Kandivali West", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "shree-ganesh-chsl",
@@ -598,7 +602,9 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.2800014, 72.8814387],
     mapUrl: "https://maps.app.goo.gl/VsrqGHHsSbXJEXYv7",
-    images: [],
+    images: [
+      { src: "/Sketch/Pooja Park - Sketch - Final.png", alt: "Architectural render of Pooja Park, Mira Road East", caption: "Street view elevation" },
+    ],
   },
   {
     slug: "toral-apartment",
@@ -798,7 +804,44 @@ export const PROJECTS: Project[] = [
     mapUrl: "https://maps.app.goo.gl/oxZzNQV8KpbgyDHJA",
     images: [],
   },
- 
+  {
+    slug: "upcoming-borivali-east",
+    name: "Borivali East",
+    listName: "Borivali East",
+    nameWithheld: true,
+    internalRef: "Jeevanjyoti & Ratnadeep CHSL",
+    developer: "Viva Divine Ventures",
+    status: "Upcoming",
+    blurb: "At over 4.15 Lakh Sq. Ft., this residential development brings well-connected homes to Borivali East, combining the convenience of Western suburban rail and road connectivity with quick access to the Western Express Highway and S.V. Road.",
+    summary: "At over 4.15 Lakh Sq. Ft., this residential development brings well-connected homes to Borivali East, combining the convenience of Western suburban rail and road connectivity with quick access to the Western Express Highway and S.V. Road.",
+    location: "Carter Road, Borivali East",
+    category: "Residential + Retail",
+    start: 2025,
+    end: 2029,
+    areaLabel: "4.1 L+ Sq. Ft.",
+    areaSqFt: 415000,
+    connectivity: [
+      "Borivali Railway Station — approx. 5 - 10 mins*",
+      "Magathane Metro Station — approx. 5 - 10 mins*",
+      "Western Express Highway — approx. 5 mins*",
+      "S.V. Road — approx. 10 mins*",
+      "Mumbai Domestic Airport — approx. 30 - 45 mins*",
+    ],
+    amenities: [],
+    neighbourhood: {
+      title: "A CONNECTED BORIVALI, WITH A GREEN EDGE AND FUTURE INFRASTRUCTURE GROWTH",
+      paras: [
+        "Borivali East offers strong everyday connectivity through rail, metro and arterial road networks, while also being uniquely positioned near to the Sanjay Gandhi National Park, bringing large green open spaces into proximity.",
+        "The Western Express Highway and S.V. Road ensure smooth access across the western suburbs, while Borivali Railway Station connects the area to both suburban and interstate rail networks.",
+        "The next major infrastructure upgrade shaping the region is the Thane – Borivali Twin Tunnel, currently under construction beneath Sanjay Gandhi National Park.",
+        "This 11.85 Kms. twin-tunnel corridor will connect the Western Express Highway in Borivali to Ghodbunder Road in Thane, significantly reducing travel distance and easing cross-city congestion between the eastern and western suburbs.",
+        "With strong existing connectivity and major infrastructure developments underway, Borivali East continues to evolve as a well-connected residential hub with long-term growth potential.",
+      ],
+    },
+    coords: [19.2257018, 72.8570659],
+    mapUrl: "https://maps.app.goo.gl/pYsA8jZPb1b5psAZ7",
+    images: [],
+  },
   {
     slug: "upcoming-malad-east",
     name: "Malad East",

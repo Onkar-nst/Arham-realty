@@ -270,8 +270,8 @@ const REGION_OF: Record<string, string> = {
   'Kharegaon, Bhayander East': 'Mira Road, Bhayandar & Nalasopara',
   'Achole Road, Nalasopara East': 'Mira Road, Bhayandar & Nalasopara',
   'Tulinj Road, Nalasopara East': 'Mira Road, Bhayandar & Nalasopara',
-  'Dr. Ambedkar Road, Worli': 'Worli & Mahalaxmi',
-  'Jacob Circle, Mahalaxmi': 'Worli & Mahalaxmi',
+  'Dr. Ambedkar Road, Worli': 'Worli',
+  'Jacob Circle': 'Worli',
 }
 
 const REGION_ORDER = [
@@ -279,7 +279,7 @@ const REGION_ORDER = [
   'Andheri, Kandivali, Borivali & Malad',
   'Bandra, Khar & Santacruz',
   'Mira Road, Bhayandar & Nalasopara',
-  'Worli & Mahalaxmi',
+  'Worli',
 ]
 
 export const CLUSTERS: Cluster[] = REGION_ORDER.map((region) => {
@@ -479,8 +479,8 @@ export const CONTACT = {
     {
       label: 'Office',
       lines: [
-        'Office No.7, 1st Floor, Shantinath Shopping Centre,',
-        'SV Malad, West, Mumbai – 400 067.',
+        'Office No.6&7, 1st Floor, Shantinath Shopping Centre,',
+        'SV Road, Malad West, Mumbai, Maharashtra, India - 400 064.',
       ],
     },
     {
@@ -535,7 +535,7 @@ export const FOOTER = {
     { label: 'Anvaya', href: '/projects/anvaya' },
     { label: 'All Projects', href: '/projects' },
   ],
-  address: 'S.V. Road, Malad, West, Mumbai – 400 067.',
+  address: 'Office No.6&7, 1st Floor, Shantinath Shopping Centre, SV Road, Malad West, Mumbai, Maharashtra, India - 400 064.',
   legal: [
     { label: 'Disclaimer & Terms of Use', href: '/legal/disclaimer' },
     { label: 'Privacy Policy', href: '/legal/privacy' },
