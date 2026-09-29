@@ -3,14 +3,15 @@ import { useEffect, useState } from 'react'
 import { NAV } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { EASE } from '../components/Motion'
-import { Link, useRouter } from '../router'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo'
 
 export default function Nav() {
   const [stuck, setStuck] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('#home')
-  const { path, navigate } = useRouter()
+  const { pathname: path } = useLocation()
+  const navigate = useNavigate()
 
   const onHome = path === '/'
 

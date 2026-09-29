@@ -4,7 +4,7 @@ import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
 import ProjectCard from '../components/ProjectCard'
 import { Marquee } from './Closing'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 /**
  * "Our Developments" — doc p.2. The three projects the client has full

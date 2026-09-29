@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { LAUNCH_DISCLAIMER } from '../data/legal'
 import { ArrowRight } from './Icons'
 import { EASE } from './Motion'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 const KEY = 'arham:disclaimer-accepted'
 

@@ -15,7 +15,8 @@ import CookieBanner from './components/CookieBanner'
 import PageHead from './components/PageHead'
 import { findProject } from './data/projects'
 import { findLegal } from './data/legal'
-import { RouterProvider, useRouter } from './router'
+import { BrowserRouter, Routes, Route, useParams, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function Home() {
   return (
@@ -34,36 +35,56 @@ function Home() {
   )
 }
 
-function Routes() {
-  const { path } = useRouter()
-
-  if (path === '/') return <Home />
-  if (path === '/about') return <AboutPage />
-  if (path === '/projects') return <ProjectsPage />
-
-  if (path.startsWith('/legal/')) {
-    const doc = findLegal(path.slice('/legal/'.length))
-    if (doc) return <LegalPage doc={doc} />
-  }
-
-  if (path.startsWith('/projects/')) {
-    const project = findProject(path.slice('/projects/'.length))
-    if (project) return <ProjectPage project={project} />
-  }
-
+function LegalPageWrapper() {
+  const { slug } = useParams()
+  const doc = findLegal(slug || '')
+  if (doc) return <LegalPage doc={doc} />
   return <NotFoundPage />
+}
+
+function ProjectPageWrapper() {
+  const { slug } = useParams()
+  const project = findProject(slug || '')
+  if (project) return <ProjectPage project={project} />
+  return <NotFoundPage />
+}
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '')
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 0)
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+  }, [pathname, hash])
+  return null
 }
 
 export default function App() {
   return (
-    <RouterProvider>
+    <BrowserRouter>
+      <ScrollToTop />
       <Nav />
       <main>
-        <Routes />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/legal/:slug" element={<LegalPageWrapper />} />
+          <Route path="/projects/:slug" element={<ProjectPageWrapper />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       <Footer />
       <CookieBanner />
       <DisclaimerGate />
-    </RouterProvider>
+    </BrowserRouter>
   )
 }

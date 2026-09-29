@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { EASE } from './Motion'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 const KEY = 'arham:cookie-consent'
 const EVENT = 'arham:cookie-preferences'

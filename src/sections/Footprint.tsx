@@ -5,12 +5,12 @@ import type { ProjectStatus } from '../data/projects'
 import { ArrowRight, Chevron } from '../components/Icons'
 import { EASE, MaskedLines, Reveal } from '../components/Motion'
 import FootprintMap from '../components/FootprintMap'
-import { Link, useRouter } from '../router'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LEGEND: ProjectStatus[] = ['Completed', 'Ongoing', 'Upcoming']
 
 export default function Footprint() {
-  const { navigate } = useRouter()
+  const navigate = useNavigate()
   const [open, setOpen] = useState<string | null>(null)
   const [hidden, setHidden] = useState<ProjectStatus[]>([])
 

@@ -8,7 +8,7 @@ import { EASE, MaskedLines, Reveal } from '../components/Motion'
 import PageHead from '../components/PageHead'
 import { Plate } from '../components/ProjectCard'
 import { ProjectExtras, ProjectFacts } from '../components/ProjectDetails'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 /* ------------------------------- Gallery ------------------------- */
 

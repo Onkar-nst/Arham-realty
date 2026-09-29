@@ -4,7 +4,7 @@ import { MaskedLines, Reveal } from '../components/Motion'
 import { Timeline } from '../sections/About'
 import Values from '../sections/Values'
 import PageHead from '../components/PageHead'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 /** About page — doc pp.6–9: about, our story, milestones, leadership. */
 export default function AboutPage() {

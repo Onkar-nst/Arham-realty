@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { HERO, HERO_STATS } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { Counter, EASE, MaskedLines, useParallax } from '../components/Motion'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 export default function Hero() {
   const { ref, y } = useParallax(56)

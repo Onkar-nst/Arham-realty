@@ -4,7 +4,7 @@ import type { Project } from '../data/projects'
 import { ArrowRight, Caret, Chevron } from '../components/Icons'
 import { EASE, Reveal } from '../components/Motion'
 import { ProjectExtras, ProjectFacts } from './ProjectDetails'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 /**
  * The plate shown where the client has supplied no photograph. Saying so

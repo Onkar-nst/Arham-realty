@@ -2,7 +2,7 @@ import type { LegalDoc } from '../data/legal'
 import { LEGAL } from '../data/legal'
 import { MaskedLines, Reveal } from '../components/Motion'
 import PageHead from '../components/PageHead'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 const letter = (n: number) => String.fromCharCode(97 + n)
 

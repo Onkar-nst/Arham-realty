@@ -1,7 +1,7 @@
 import { BRAND, CTA, FOOTER, NAV, CONTACT } from '../data/content'
 import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 import Logo from '../components/Logo'
 import { openCookiePreferences } from '../components/CookieBanner'
 

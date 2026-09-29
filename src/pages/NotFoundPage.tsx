@@ -1,7 +1,7 @@
 import { ArrowRight } from '../components/Icons'
 import { MaskedLines, Reveal } from '../components/Motion'
 import PageHead from '../components/PageHead'
-import { Link } from '../router'
+import { Link } from 'react-router-dom'
 
 export default function NotFoundPage() {
   return (
