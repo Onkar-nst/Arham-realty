@@ -3,8 +3,9 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 /* The theme's one easing curve: cubic-bezier(0.25, 0.1, 0.25, 1) */
-export const EASE = [0.25, 0.1, 0.25, 1] as const
-export const DUR = 0.4
+const EASE = [0.25, 0.1, 0.25, 1] as const
+export { EASE }
+const DUR = 0.4
 
 /**
  * Scroll-triggered fade-up. Framer's appear effects move 10/20/30px —
@@ -38,7 +39,7 @@ export function Reveal({
 }
 
 /** Reveals children in sequence with a fixed stagger. */
-export function RevealGroup({
+function RevealGroup({
   children,
   stagger = 0.08,
   className,
@@ -63,7 +64,7 @@ export function RevealGroup({
   )
 }
 
-export const revealItem = {
+const revealItem = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: DUR + 0.25, ease: EASE } },
 }

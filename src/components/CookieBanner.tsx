@@ -12,7 +12,7 @@ export interface CookieConsent {
   marketing: boolean
 }
 
-export function readConsent(): CookieConsent | null {
+function readConsent(): CookieConsent | null {
   try {
     const raw = localStorage.getItem(KEY)
     return raw ? (JSON.parse(raw) as CookieConsent) : null

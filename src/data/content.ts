@@ -132,7 +132,7 @@ export const LEGACY = {
 
 
 /** "Our Story" on the home page. */
-export const STORY = {
+const STORY = {
   eyebrow: 'Our Story',
   title: ['From a first home', 'to a growing city story.'],
   lead:
@@ -235,7 +235,7 @@ export const FOOTPRINT = {
 }
 
 /* Figures as the client states them. */
-export const FOOTPRINT_STATS = [
+const FOOTPRINT_STATS = [
   { value: 13.6, suffix: 'L+', label: 'Sq. Ft. Delivered', decimals: 1 },
   { value: 2.4, suffix: 'L+', label: 'Sq. Ft. Under Construction', decimals: 1 },
   { value: 29.5, suffix: 'L+', label: 'Sq. Ft. Upcoming', decimals: 1 },
@@ -477,7 +477,7 @@ export const CONTACT = {
   sub: 'Reach the Arham team',
   body: [
     'Our team responds to every enquiry personally.',
-    'Visit us, call or send us a note and we’ll be in touch about 15 working days.',
+    'Visit us, call or send us a note and we’ll be in touch shortly.',
   ],
   details: [
     {
@@ -519,7 +519,7 @@ export const CONTACT = {
     submit: 'Submit Enquiry',
     done: {
       title: 'Enquiry received',
-      body: 'Thank you. Our team will be in touch about 15 working days.',
+      body: 'Thank you. Our team will be in touch shortly.',
     },
   },
 }

@@ -26,7 +26,7 @@
 
 export type ProjectStatus = 'Completed' | 'Ongoing' | 'Upcoming'
 
-export interface ProjectImage {
+interface ProjectImage {
   src: string
   alt: string
   caption?: string

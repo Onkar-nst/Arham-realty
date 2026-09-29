@@ -8,13 +8,13 @@
    the client has not yet filled in the day.
    ------------------------------------------------------------------ */
 
-export interface LegalPara {
+interface LegalPara {
   text: string
   /** Rendered as a lettered list item (a), (b), … within its section. */
   list?: boolean
 }
 
-export interface LegalSection {
+interface LegalSection {
   heading: string
   paras: LegalPara[]
 }
