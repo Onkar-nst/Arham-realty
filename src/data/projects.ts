@@ -802,7 +802,7 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.0645718, 72.8262521],
     mapUrl: "https://maps.app.goo.gl/oxZzNQV8KpbgyDHJA",
-    images: [],
+    images: [{ src: "/upcoming_projects/Bandra West - Map - Final.png", alt: "Bandra West Map" }],
   },
   {
     slug: "upcoming-borivali-east",
@@ -840,7 +840,7 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.2257018, 72.8570659],
     mapUrl: "https://maps.app.goo.gl/pYsA8jZPb1b5psAZ7",
-    images: [],
+    images: [{ src: "/upcoming_projects/Borivali East - Map - Final.png", alt: "Borivali East Map" }],
   },
   {
     slug: "upcoming-malad-east",
@@ -875,7 +875,7 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.181178, 72.849392],
     mapUrl: "https://maps.app.goo.gl/o3jmDyy1biVwtAqF8",
-    images: [],
+    images: [{ src: "/upcoming_projects/Malad East - Map - Final.png", alt: "Malad East Map" }],
   },
   {
     slug: "upcoming-bhandup-east",
@@ -913,7 +913,7 @@ export const PROJECTS: Project[] = [
     },
     coords: [19.1465263, 72.9398901],
     mapUrl: "https://maps.app.goo.gl/LwApSszbnW9BgKce8",
-    images: [],
+    images: [{ src: "/upcoming_projects/Bhandup East - Map - Final.png", alt: "Bhandup East Map" }],
   },
 ]
 

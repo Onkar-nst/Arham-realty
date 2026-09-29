@@ -7,12 +7,29 @@ import { EASE, MaskedLines, Reveal } from '../components/Motion'
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<'' | 'sending' | 'error'>('')
 
-  /* No backend on this build — the form validates and confirms locally.
-     Wire `onSubmit` to the enquiry endpoint when one exists. */
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
+    setStatus('sending')
+    const form = new FormData(e.currentTarget)
+    const data = Object.fromEntries(form.entries())
+    
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setSent(true)
+        setStatus('')
+      } else {
+        setStatus('error')
+      }
+    } catch (err) {
+      setStatus('error')
+    }
   }
 
   return (
@@ -157,12 +174,17 @@ export default function Contact() {
                       <span>{CONTACT.form.consent}</span>
                     </label>
 
-                    <button className="btn btn--solid form__submit" type="submit">
-                      {CONTACT.form.submit}
+                    <button className="btn btn--solid form__submit" type="submit" disabled={status === 'sending'}>
+                      {status === 'sending' ? 'Sending...' : CONTACT.form.submit}
                       <span className="btn__arrow">
                         <ArrowRight />
                       </span>
                     </button>
+                    {status === 'error' && (
+                      <p style={{ color: 'var(--accent)', marginTop: '16px', fontSize: '14px' }}>
+                        Something went wrong. Please try again.
+                      </p>
+                    )}
                   </motion.form>
                 )}
               </AnimatePresence>

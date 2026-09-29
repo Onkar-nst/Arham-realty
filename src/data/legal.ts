@@ -31,7 +31,7 @@ export const LEGAL: LegalDoc[] = [
   {
     slug: "disclaimer",
     title: "Legal Disclaimer",
-    updated: "Last Updated: [] September 2026",
+    updated: "Last Updated: 1st October 2026",
     intro: [
       { text: "The information, content, materials, photographs, images, plans, specifications, illustrations, architectural representations, renders, videos, visualisations, project details, amenities, facilities, dimensions, areas, prices, payment plans, timelines, location and connectivity information and other material (“Information”) displayed on this Website are provided for general informational and/or marketing purposes. The Information is subject to the following Disclaimer and should be read together with the Terms & Conditions of Website Use and applicable project documentation." },
     ],
@@ -147,7 +147,13 @@ export const LEGAL: LegalDoc[] = [
       {
         heading: "GRIEVANCE OFFICER AND CONTACT",
         paras: [
-          { text: "See the Grievance Officer details in our Legal Disclaimer." },
+          { text: "In accordance with applicable law, we have designated a Grievance Officer for this Website, who may be contacted in respect of any complaint or grievance relating to the Website, these Terms, or the handling of personal information submitted through the Website:" },
+          { text: "Name: Mr. Karan S. Savla", list: true },
+          { text: "Designation: CEO", list: true },
+          { text: "Address: Office No.7, 1st Floor, Shantinath Shopping Centre, S.V. Road, Malad West, Mumbai, Maharashtra, India, 400064", list: true },
+          { text: "E-Mail: karansavla@arhamlanddeveloper.com", list: true },
+          { text: "Phone: +91 9820073890", list: true },
+          { text: "Grievances will be acknowledged and addressed within the timelines prescribed under applicable law." },
         ],
       },
     ],
@@ -155,10 +161,10 @@ export const LEGAL: LegalDoc[] = [
   {
     slug: "terms",
     title: "Terms & Conditions of Website Use",
-    updated: "Last Updated: [] September 2026",
+    updated: "Last Updated: 1st October 2026",
     intro: [
       { text: "Please read these Terms & Conditions of Website Use (“Terms”) carefully before accessing or using this website (“Website”)." },
-      { text: "This Website is operated under the brand name “Arham Realty” by M/s. Arham Land Developers Pvt. Ltd., a private limited company incorporated/registered under the applicable laws of India, having its registered office at Office No.6&7, 1st Floor, Shantinath Shopping Centre, SV Road, Malad West, Mumbai, Maharashtra, India - 400 064 (“Arham Realty”, “we”, “us” or “our”)." },
+      { text: "This Website is operated under the brand name “Arham Realty” by M/s. Arham Land Developers Pvt. Ltd., a private limited company incorporated/registered under the applicable laws of India, having its registered office at Office No.7, 1st Floor, Shantinath Shopping Centre, S.V. Road, Malad West, Mumbai, Maharashtra, India, 400064 (“Arham Realty”, “we”, “us” or “our”)." },
       { text: "For the purposes of these Terms, “you”, “your” or “User” means any person who accesses, browses, visits or otherwise uses the Website." },
       { text: "By accessing, browsing or using the Website, you acknowledge that you have read, understood and agreed to be bound by these Terms and all applicable laws and regulations. If you do not agree with these Terms, please discontinue use of the Website." },
     ],
@@ -359,7 +365,7 @@ export const LEGAL: LegalDoc[] = [
           { text: "In accordance with applicable law, we have designated a Grievance Officer for this Website, who may be contacted in respect of any complaint or grievance relating to the Website, these Terms, or the handling of personal information submitted through the Website:" },
           { text: "Name: Mr. Karan S. Savla", list: true },
           { text: "Designation: CEO", list: true },
-          { text: "Address: Office No.6&7, 1st Floor, Shantinath Shopping Centre, SV Road, Malad West, Mumbai, Maharashtra, India - 400 064.", list: true },
+          { text: "Address: Office No.7, 1st Floor, Shantinath Shopping Centre, S.V. Road, Malad West, Mumbai, Maharashtra, India, 400064", list: true },
           { text: "E-Mail: karansavla@arhamlanddeveloper.com", list: true },
           { text: "Phone: +91 9820073890", list: true },
           { text: "Grievances will be acknowledged and addressed within the timelines prescribed under applicable law." },
@@ -376,7 +382,7 @@ export const LEGAL: LegalDoc[] = [
   {
     slug: "privacy",
     title: "Privacy Policy",
-    updated: "Effective Date: [ ] September 2026",
+    updated: "Effective Date: 1st October 2026",
     intro: [
     ],
     sections: [
@@ -437,7 +443,13 @@ export const LEGAL: LegalDoc[] = [
       {
         heading: "GRIEVANCE OFFICER AND CONTACT US",
         paras: [
-          { text: "See the Grievance Officer details in our Legal Disclaimer" },
+          { text: "In accordance with applicable law, we have designated a Grievance Officer for this Website, who may be contacted in respect of any complaint or grievance relating to the Website, these Terms, or the handling of personal information submitted through the Website:" },
+          { text: "Name: Mr. Karan S. Savla", list: true },
+          { text: "Designation: CEO", list: true },
+          { text: "Address: Office No.7, 1st Floor, Shantinath Shopping Centre, S.V. Road, Malad West, Mumbai, Maharashtra, India, 400064", list: true },
+          { text: "E-Mail: karansavla@arhamlanddeveloper.com", list: true },
+          { text: "Phone: +91 9820073890", list: true },
+          { text: "Grievances will be acknowledged and addressed within the timelines prescribed under applicable law." },
         ],
       },
     ],
@@ -445,7 +457,7 @@ export const LEGAL: LegalDoc[] = [
   {
     slug: "cookies",
     title: "Cookie Policy",
-    updated: "Last Updated: [ ] September 2026",
+    updated: "Last Updated: 1st October 2026",
     intro: [
     ],
     sections: [

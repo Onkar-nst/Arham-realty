@@ -80,6 +80,9 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
               </motion.div>
             )}
           </AnimatePresence>
+          {entry.image && (
+            <span className="tl__artistic-note">Artistic Impression</span>
+          )}
         </div>
 
         <div>

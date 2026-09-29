@@ -409,6 +409,7 @@ export const LEADERSHIP = [
     accentIndex: 1,
     name: 'Mr. Sanjay Hirji Savla',
     role: 'Promoter / Managing Director',
+    image: '/founders/Sanjay Savla.png',
     paras: [
       'Beginning in 1982 in construction materials and logistics before entering Mumbai and Thane real estate in 1994, Mr. Sanjay Savla has shaped a three-decade legacy guided by location discipline, thoughtful planning, and enduring value across Mumbai and the MMR region.',
     ],
@@ -419,6 +420,7 @@ export const LEADERSHIP = [
     accentIndex: 0,
     name: 'Mr. Karan Sanjay Savla',
     role: 'Co-Promoter / Chief Executive Officer',
+    image: '/founders/Karan Savla.png',
     paras: [
       'Representing the next generation, Mr. Karan Savla combines Civil Engineering, an MBA.Tech from NMIMS, and an MSc in Real Estate Development from Westminster, London. Since joining in 2022, he leads day-to-day operations, sales, marketing, and strategic growth.',
     ],
@@ -429,6 +431,7 @@ export const LEADERSHIP = [
     accentIndex: 0,
     name: 'Mr. Prakash Shivji Visaria',
     role: 'Non-Executive Director',
+    image: '/founders/Prakash Visaria.png',
     paras: [
       'Associated with the leadership since 1992, Mr. Prakash Visaria brings over three decades of continuity to group company boards, while overseeing day-to-day administration, operations, and vendor coordination.',
     ],
@@ -439,6 +442,7 @@ export const LEADERSHIP = [
     accentIndex: 0,
     name: 'Mr. Purshottam Gobindram Bansi',
     role: 'Mentor',
+    image: '/founders/Purshottam Bansi.png',
     paras: [
       'A 1958 VJTI graduate, former BAI Chairman (1991–92), Chartered Engineer, and marine engineering contractor with over 40 years of experience, Mr. Purshottam Bansi provided foundational mentorship guiding generations of leadership.',
     ],
@@ -479,8 +483,7 @@ export const CONTACT = {
     {
       label: 'Office',
       lines: [
-        'Office No.6&7, 1st Floor, Shantinath Shopping Centre,',
-        'SV Road, Malad West, Mumbai, Maharashtra, India - 400 064.',
+        'Office No.6&7, 1st Floor, Shantinath Shopping Centre, SV Road, Malad West, Mumbai, Maharashtra, India - 400 064.',
       ],
     },
     {

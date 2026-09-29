@@ -115,12 +115,16 @@ export default function AboutPage() {
           <div className="projects__list">
             {LEADERSHIP.map((l, i) => (
               <Reveal key={l.name} delay={Math.min(i, 2) * 0.06} distance={30}>
-                <article className="pcard">
-                  <div className="pcard__media">
-                    <div className="plate" aria-hidden="true">
-                      <img className="plate__mark" src="/brand/arham-mark.png" alt="" />
-                      <span className="plate__year">{l.role}</span>
-                    </div>
+                <article className="pcard pcard--leader">
+                  <div className="pcard__media pcard__media--leader">
+                    {l.image ? (
+                      <img src={l.image} alt={l.name} />
+                    ) : (
+                      <div className="plate" aria-hidden="true">
+                        <img className="plate__mark" src="/brand/arham-mark.png" alt="" />
+                        <span className="plate__year">{l.role}</span>
+                      </div>
+                    )}
                     <span className="pcard__status">
                       <i className="dot dot--Completed" />
                       {l.role}

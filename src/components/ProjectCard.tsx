@@ -97,7 +97,7 @@ export default function ProjectCard({
 
   return (
     <Reveal delay={Math.min(index, 3) * 0.06} distance={30}>
-      <article className="pcard" data-open={open}>
+      <article className={`pcard ${project.status === 'Upcoming' ? 'pcard--upcoming' : ''}`} data-open={open}>
         <div className="pcard__media">
           <Gallery project={project} />
           <span className="pcard__status">
