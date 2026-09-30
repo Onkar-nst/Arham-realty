@@ -82,12 +82,21 @@ export const LEGACY = {
   chapters: [
     {
       kicker: 'The Foundation',
-      era: '1994 – 2002',
+      era: '1994 – 2000',
       title: 'From Nalasopara to Mulund and Mira Road',
       body: [
         'Vardhaman Park, Sai Dhara, Jesal Apartment, Toral Apartment and Pooja Park marked the beginning, establishing a foundation built on thoughtful development, enduring relationships and a commitment to quality.',
       ],
-      image: '/Sketch/Jesal Apartment - Sketch - Final.png',
+      images: [
+        '/Sketch/Vardaman Park1 - Sketch - Final.png',
+        '/Sketch/Sai Dhara - Sketch - Final.png',
+        '/Sketch/Jesal Apartment - Sketch - Final.png',
+        '/Sketch/Toral Apartment - Sketch - Final.png',
+        '/Sketch/Pooja Park - Sketch - Final.png',
+        '/Sketch/Shree Ganesh1 - Sketch - Final.png',
+        '/Sketch/Navtarun - Sketch - Final.png',
+        '/Sketch/Shubhda Tower - Sketch - Final.png'
+      ],
     },
     {
       kicker: 'Into Mumbai',
@@ -96,16 +105,24 @@ export const LEGACY = {
       body: [
         'With Shubhda Tower, Akhand Aabhar, Shailesh Apartment and Blossom, our footprint extended into some of Mumbai’s most established neighbourhoods, bringing with it greater scale and a more refined approach to development.',
       ],
-      image: '/Sketch/Shubhda Tower - Sketch - Final.png',
+      images: [
+        '/Sketch/Shubhda Tower - Sketch - Final.png',
+        '/Sketch/Akhand Abhaar1 - Sketch - Final.svg',
+        '/Sketch/Sailesh Apartments - Sketch - Final.png',
+        '/Sketch/Blossom1 - Sketch - Final.png'
+      ],
     },
     {
       kicker: 'A Wider Footprint',
-      era: '2010 – 2018',
+      era: '2008 – 2018',
       title: 'Chembur and Ghatkopar',
       body: [
         'Dakshata CHSL and Pramod CHSL marked a new chapter of considered development across Mumbai’s evolving residential landscape, with an increasingly refined approach to design, planning and the way people live.',
       ],
-      image: '/Sketch/Dakshata1 - Sketch - Final.png',
+      images: [
+        '/Sketch/Dakshata1 - Sketch - Final.png',
+        '/Sketch/Pramod - Sketch - Final.png'
+      ],
     },
     {
       kicker: 'A New Standard',
@@ -115,7 +132,7 @@ export const LEGACY = {
         'Anvaya and Premia marked the next chapter of our evolution, bringing together contemporary design, thoughtful amenities and strategically chosen locations.',
         'With Premia Tower B & C now shaping the future of Tilak Nagar, the journey continues with greater ambition and a sharper vision.',
       ],
-      image: '/projects/anvaya-1.jpg',
+      images: ['/projects/anvaya-1.jpg'],
     },
     {
       kicker: 'The Next Horizon',
@@ -124,7 +141,7 @@ export const LEGACY = {
       body: [
         'With over three decades of experience behind us, we look ahead with the same discipline that shaped our journey, pursuing distinctive locations, thoughtful design and developments created to hold their value for generations.',
       ],
-      image: '/projects/premia-bc-1.jpg',
+      images: ['/projects/premia-bc-1.jpg'],
     },
   ],
   closing: ['30+ years behind us.', 'The next chapter ahead.'],

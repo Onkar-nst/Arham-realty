@@ -11,7 +11,7 @@ export interface TimelineEntry {
   kicker: string
   title: string
   body: string[]
-  image: string | null
+  images: string[]
 }
 
 /**
@@ -21,11 +21,20 @@ export interface TimelineEntry {
 export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) {
   const [i, setI] = useState(0)
   const [dir, setDir] = useState(1)
+  const [slide, setSlide] = useState(0)
   const entry = entries[i]
 
   const go = (next: number) => {
     setDir(next > i ? 1 : -1)
     setI(next)
+    setSlide(0)
+  }
+
+  const stepSlide = (d: number) => {
+    const total = entry.images?.length || 0
+    if (total > 0) {
+      setSlide((s) => (s + d + total) % total)
+    }
   }
 
   return (
@@ -52,17 +61,17 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
       <div className="tl__panel">
         <div className="tl__media">
           <AnimatePresence initial={false} mode="popLayout">
-            {entry.image ? (
+            {entry.images && entry.images.length > 0 ? (
               <motion.img
-                key={entry.era}
-                src={entry.image}
+                key={entry.images[slide]}
+                src={entry.images[slide]}
                 alt={entry.title}
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6, ease: EASE }}
                 loading="lazy"
-                data-fit={entry.image.includes('/Sketch/') || entry.image.includes('actual-view') || entry.image.includes('Medinee Niketan CHSL') ? 'contain' : undefined}
+                data-fit={entry.images[slide].includes('/Sketch/') || entry.images[slide].includes('actual-view') || entry.images[slide].includes('Medinee Niketan CHSL') || entry.images[slide].includes('premia-a-2') ? 'contain' : undefined}
               />
             ) : (
               /* No renders survive from the 1990s projects — say so with
@@ -81,10 +90,31 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
               </motion.div>
             )}
           </AnimatePresence>
-          {entry.image && (
+          {entry.images && entry.images.length > 0 && (
             <span className="tl__artistic-note">
-              {entry.image.includes('anvaya-4') || entry.image.includes('Medinee Niketan CHSL') || entry.image.includes('actual-view') ? 'Actual Views' : 'Artistic Impression'}
+              {entry.images[slide].includes('anvaya-4') || entry.images[slide].includes('Medinee Niketan CHSL') || entry.images[slide].includes('actual-view') || entry.images[slide].includes('premia-a-2') ? 'Actual Views' : 'Artistic Impression'}
             </span>
+          )}
+          {entry.images && entry.images.length > 1 && (
+            <div className="pcard__nav">
+              <button
+                className="pcard__arrow"
+                onClick={() => stepSlide(-1)}
+                aria-label="Previous image"
+              >
+                <Caret dir="left" />
+              </button>
+              <span className="pcard__count">
+                {slide + 1} / {entry.images.length}
+              </span>
+              <button
+                className="pcard__arrow"
+                onClick={() => stepSlide(1)}
+                aria-label="Next image"
+              >
+                <Caret dir="right" />
+              </button>
+            </div>
           )}
         </div>
 
