@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "postbuild": "if [ \"\" != \"1\" ]; then react-snap; fi"
+    "postbuild": "if [ \"$VERCEL\" != \"1\" ]; then react-snap; fi"
   },
   "dependencies": {
     "framer-motion": "^11.15.0",

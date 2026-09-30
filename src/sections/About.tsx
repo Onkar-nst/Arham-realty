@@ -62,6 +62,7 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6, ease: EASE }}
                 loading="lazy"
+                data-fit={entry.image.includes('/Sketch/') ? 'contain' : undefined}
               />
             ) : (
               /* No renders survive from the 1990s projects — say so with
@@ -81,7 +82,9 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
             )}
           </AnimatePresence>
           {entry.image && (
-            <span className="tl__artistic-note">Artistic Impression</span>
+            <span className="tl__artistic-note">
+              {entry.image.includes('anvaya') || entry.image.includes('premia') ? 'Actual Views' : 'Artistic Impression'}
+            </span>
           )}
         </div>
 

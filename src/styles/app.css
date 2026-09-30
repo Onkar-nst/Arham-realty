@@ -3467,3 +3467,40 @@
   border-radius: 4px;
   background: #fff;
 }
+
+/* Overlay Label for Project Images */
+.image-overlay-label {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 10;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.nextcard .image-overlay-label {
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+}
+
+.pcard .image-overlay-label {
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+}
+
+/* Override object-fit for sketch images */
+img[data-fit="contain"] {
+  object-fit: contain !important;
+}

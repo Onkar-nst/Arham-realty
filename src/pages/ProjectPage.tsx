@@ -47,6 +47,10 @@ function Gallery({ project }: { project: Project }) {
           />
         </AnimatePresence>
 
+        <div className="image-overlay-label">
+          {project.slug === 'anvaya' || project.slug === 'premia-towers-b-c' ? 'Actual Views' : 'Artistic Impression'}
+        </div>
+
         {total > 1 && (
           <>
             <button
@@ -212,11 +216,21 @@ export default function ProjectPage({ project }: { project: Project }) {
                   <Reveal key={p.slug} delay={i * 0.08}>
                     <Link className="nextcard" to={`/projects/${p.slug}`}>
                       {p.images[0] ? (
-                        <img src={p.images[0].src} alt="" loading="lazy" />
+                        <img 
+                          src={p.images[0].src} 
+                          alt="" 
+                          loading="lazy" 
+                          data-fit={p.images[0].src.includes('/Sketch/') || p.images[0].src.includes('premia-bc-3') || p.images[0].src.includes('premia-bc-4') ? 'contain' : undefined}
+                        />
                       ) : (
                         <span className="nextcard__plate">
                           <Plate project={p} />
                         </span>
+                      )}
+                      {p.images[0] && (
+                        <div className="image-overlay-label">
+                          {p.slug === 'anvaya' || p.slug === 'premia-towers-b-c' ? 'Actual Views' : 'Artistic Impression'}
+                        </div>
                       )}
                       <div className="nextcard__body">
                         <p className="nextcard__status">

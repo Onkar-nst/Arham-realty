@@ -87,7 +87,7 @@ export const LEGACY = {
       body: [
         'Vardhaman Park, Sai Dhara, Jesal Apartment, Toral Apartment and Pooja Park marked the beginning, establishing a foundation built on thoughtful development, enduring relationships and a commitment to quality.',
       ],
-      image: '/Sketch/Vardaman Park1 - Sketch - Final.png',
+      image: '/Sketch/Jesal Apartment - Sketch - Final.png',
     },
     {
       kicker: 'Into Mumbai',
@@ -96,7 +96,7 @@ export const LEGACY = {
       body: [
         'With Shubhda Tower, Akhand Aabhar, Shailesh Apartment and Blossom, our footprint extended into some of Mumbai’s most established neighbourhoods, bringing with it greater scale and a more refined approach to development.',
       ],
-      image: '/projects/shubhda-tower.jpg',
+      image: '/Sketch/Shubhda Tower - Sketch - Final.png',
     },
     {
       kicker: 'A Wider Footprint',
@@ -105,7 +105,7 @@ export const LEGACY = {
       body: [
         'Dakshata CHSL and Pramod CHSL marked a new chapter of considered development across Mumbai’s evolving residential landscape, with an increasingly refined approach to design, planning and the way people live.',
       ],
-      image: '/projects/dakshata-chsl.jpg',
+      image: '/Sketch/Dakshata1 - Sketch - Final.png',
     },
     {
       kicker: 'A New Standard',
@@ -115,7 +115,7 @@ export const LEGACY = {
         'Anvaya and Premia marked the next chapter of our evolution, bringing together contemporary design, thoughtful amenities and strategically chosen locations.',
         'With Premia Tower B & C now shaping the future of Tilak Nagar, the journey continues with greater ambition and a sharper vision.',
       ],
-      image: '/projects/premia-a-1.jpg',
+      image: '/projects/anvaya-1.jpg',
     },
     {
       kicker: 'The Next Horizon',

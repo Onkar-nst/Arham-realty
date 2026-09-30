@@ -200,7 +200,7 @@ export const PROJECTS: Project[] = [
       { src: IMG("anvaya-2.jpg"), alt: "Evening render of Anvaya", caption: "Night view elevation" },
       { src: IMG("anvaya-3.jpg"), alt: "Aerial render of the landscaped terrace deck at Anvaya", caption: "Rooftop layout" },
       { src: IMG("anvaya-4.jpg"), alt: "View from the site toward Mumbai airport and the mid-town skyline", caption: "View from project" },
-      { src: IMG("anvaya-5.jpg"), alt: "View from the site over the tree cover of Andheri East", caption: "View from project" },
+      { src: IMG("Medinee Niketan CHSL 09JUNE20228394.jpg"), alt: "View from the site over the tree cover of Andheri East", caption: "View from project" },
     ],
   },
   /* ------------------------------ Completed --------------------- */
@@ -329,7 +329,6 @@ export const PROJECTS: Project[] = [
     mapUrl: "https://maps.app.goo.gl/WcmR6bPmuWBXyBNu7",
     images: [
       { src: "/Sketch/Dakshata1 - Sketch - Final.png", alt: "Architectural render of Dakshata CHSL, Chembur", caption: "Street view elevation" },
-      { src: "/Sketch/Dakshata2 - Sketch - Final.png", alt: "Architectural render of Dakshata CHSL, Chembur", caption: "Another view" },
     ],
   },
   {
@@ -369,7 +368,6 @@ export const PROJECTS: Project[] = [
     mapUrl: "https://maps.app.goo.gl/hDNQVDZDGKLgs4ZW6",
     images: [
       { src: "/Sketch/Blossom1 - Sketch - Final.png", alt: "Architectural render of Blossom CHSL, Santacruz West", caption: "Street view elevation" },
-      { src: "/Sketch/Blossom2 - Sketch - Final.png", alt: "Architectural render of Blossom CHSL, Santacruz West", caption: "Another view" },
     ],
   },
   {
@@ -449,7 +447,6 @@ export const PROJECTS: Project[] = [
     mapUrl: "https://maps.app.goo.gl/qEpq9YF9eBsvSKeQ6",
     images: [
       { src: "/Sketch/Akhand Abhaar1 - Sketch - Final.svg", alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Street view elevation" },
-      { src: "/Sketch/Akhand Abhaar2 - Sketch - Final.png", alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Another view" },
     ],
   },
   {
@@ -565,7 +562,6 @@ export const PROJECTS: Project[] = [
     mapUrl: "https://maps.app.goo.gl/x7Zc51o7xpuk1wfEA",
     images: [
       { src: "/Sketch/Shree Ganesh1 - Sketch - Final.png", alt: "Architectural render of Shri Ganesh CHSL, Kandivali West", caption: "Street view elevation" },
-      { src: "/Sketch/Shree Ganesh2 - Sketch - Final.png", alt: "Architectural render of Shri Ganesh CHSL, Kandivali West", caption: "Another view" },
     ],
   },
   {
@@ -756,7 +752,6 @@ export const PROJECTS: Project[] = [
     mapUrl: "https://maps.app.goo.gl/cENu2pxJ2umPhovn6",
     images: [
       { src: "/Sketch/Vardaman Park1 - Sketch - Final.png", alt: "Architectural render of Vardhaman Park, Nalasopara East", caption: "Street view elevation" },
-      { src: "/Sketch/Vardaman Park2 - Sketch - Final.png", alt: "Architectural render of Vardhaman Park, Nalasopara East", caption: "Another view" },
     ],
   },
   /* ------------------------------ Upcoming ---------------------- */

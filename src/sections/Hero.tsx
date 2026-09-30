@@ -22,6 +22,9 @@ export default function Hero() {
         </motion.div>
         <div className="hero__scrim" />
         <div className="hero__grain" />
+        <div className="image-overlay-label hero__label" style={{ position: 'absolute', right: 24, bottom: 24, zIndex: 15 }}>
+          {HERO.image.includes('anvaya') || HERO.image.includes('premia') ? 'Actual Views' : 'Artistic Impression'}
+        </div>
 
         <div className="hero__inner">
           <div className="wrap">
