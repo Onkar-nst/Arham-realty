@@ -40,12 +40,12 @@ function Gallery({ project }: { project: Project }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.55, ease: EASE }}
           loading="lazy"
-          data-fit={project.images[slide].src.includes('/Sketch/') || project.images[slide].src.includes('premia-bc-3') || project.images[slide].src.includes('premia-bc-4') ? 'contain' : undefined}
+          data-fit={project.images[slide].src.includes('/Sketch/') || project.images[slide].src.includes('premia-bc-3') || project.images[slide].src.includes('premia-bc-4') || project.images[slide].src.includes('actual-view') || project.images[slide].src.includes('Medinee Niketan CHSL') ? 'contain' : undefined}
         />
       </AnimatePresence>
 
       <div className="image-overlay-label">
-        {project.slug === 'anvaya' || project.slug === 'premia-towers-b-c' ? 'Actual Views' : 'Artistic Impression'}
+        {project.images[slide].src.includes('anvaya-4') || project.images[slide].src.includes('Medinee Niketan CHSL') || project.images[slide].src.includes('actual-view') ? 'Actual Views' : 'Artistic Impression'}
       </div>
 
       {total > 1 && (

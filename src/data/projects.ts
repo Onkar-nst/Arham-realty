@@ -148,6 +148,8 @@ export const PROJECTS: Project[] = [
       { src: IMG("premia-bc-2.jpg"), alt: "Premia Towers B & C illuminated at night", caption: "Night view elevation" },
       { src: IMG("premia-bc-3.jpg"), alt: "Aerial view of the rooftop sports terrace at Premia B & C", caption: "Rooftop layout" },
       { src: IMG("premia-bc-4.jpg"), alt: "Podium level plan showing the amenity layout", caption: "Podium layout" },
+      { src: IMG("premia-b-c-actual-view-1.png"), alt: "Actual view from Premia Towers B & C", caption: "Actual view" },
+      { src: IMG("premia-b-c-actual-view-2.png"), alt: "Another actual view from Premia Towers B & C", caption: "Actual view" },
     ],
   },
   {
@@ -201,6 +203,7 @@ export const PROJECTS: Project[] = [
       { src: IMG("anvaya-3.jpg"), alt: "Aerial render of the landscaped terrace deck at Anvaya", caption: "Rooftop layout" },
       { src: IMG("anvaya-4.jpg"), alt: "View from the site toward Mumbai airport and the mid-town skyline", caption: "View from project" },
       { src: IMG("Medinee Niketan CHSL 09JUNE20228394.jpg"), alt: "View from the site over the tree cover of Andheri East", caption: "View from project" },
+      { src: IMG("anvaya-actual-view.png"), alt: "Another actual view from Anvaya", caption: "Actual view" },
     ],
   },
   /* ------------------------------ Completed --------------------- */

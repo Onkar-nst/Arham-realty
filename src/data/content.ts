@@ -345,7 +345,7 @@ export const ABOUT_PAGE = {
   },
   milestones: {
     eyebrow: 'Milestones',
-    title: ['Three and a half decades,', '5 chapters'],
+    title: ['Over Three Decades,', '5 chapters'],
   },
   leadership: {
     eyebrow: 'Our Leadership',
@@ -353,55 +353,7 @@ export const ABOUT_PAGE = {
 }
 
 /** Milestones on the About page (doc p.8). Distinct copy from the home-page LEGACY chapters. */
-export const TIMELINE = [
-  {
-    era: '1994',
-    kicker: 'Beginning',
-    title: 'Founded in 1994',
-    body: [
-      'Established in Nalasopara at Vardhaman Park, having our first development of 46,000 sq. ft., it was a modest beginning with a plan to build quality & dependable homes for families.',
-    ],
-    image: '/Sketch/Vardaman Park1 - Sketch - Final.png',
-  },
-  {
-    era: '2000s',
-    kicker: 'Into the island city',
-    title: 'A Presence in Mumbai',
-    body: [
-      'The practice moved into South Mumbai and Western Suburbs, with developments in Worli, Bandra, Khar and Santacruz. Shubhda Tower, completed in 2005, marked a significant step up in scale at 4 Lakh sq. ft.',
-    ],
-    image: '/projects/shubhda-tower.jpg',
-  },
-  {
-    era: '2010s',
-    kicker: 'Redevelopment at scale',
-    title: 'Building Across Mumbai',
-    body: [
-      'With Dakshata in Chembur and Pramod in Ghatkopar, our work established as a dependable redevelopment partner for housing societies rooted in central suburbs.',
-    ],
-    image: '/projects/dakshata-chsl.jpg',
-  },
-  {
-    era: '2020s',
-    kicker: 'A landmark address',
-    title: 'A New Perspective',
-    body: [
-      'Anvaya in Andheri East reflects how our approach has evolved with the city combining connectivity, considered design and spaces made for modern living.',
-      'Premia Tower ‘A’ was finished in 2023, a residential tower with premium finishes and excellent connectivity.',
-      'Tower ‘B’ & ‘C’ are now underway on the same estate.',
-    ],
-    image: '/projects/premia-a-1.jpg',
-  },
-  {
-    era: '2027',
-    kicker: 'What comes next',
-    title: 'The Next Horizon',
-    body: [
-      'A growing pipeline across Bandra West, Borivali East, Malad East and Bhandup East carries over three decades of experience into the next skyline with the same intent to build thoughtfully, and build for generations.',
-    ],
-    image: '/projects/premia-bc-1.jpg',
-  },
-]
+export const TIMELINE = LEGACY.chapters
 
 export const LEADERSHIP = [
   {
@@ -411,9 +363,10 @@ export const LEADERSHIP = [
     role: 'Promoter / Managing Director',
     image: '/founders/Sanjay Savla.png',
     paras: [
-      'Beginning in 1982 in construction materials and logistics before entering Mumbai and Thane real estate in 1994, Mr. Sanjay Savla has shaped a three-decade legacy guided by location discipline, thoughtful planning, and enduring value across Mumbai and the MMR region.',
+      'Mr. Sanjay Savla began his professional journey in 1982 in the construction materials business. In 1994, he entered the real estate landscape of Mumbai and Thane, investing in projects alongside Mr. Purshottam Bansi across multiple ventures. Through this association, he gained a deep understanding of land, development and the real estate business, laying the foundation for his own journey.',
+      'Over the next three decades, he steadily built his presence across Mumbai and the MMR region. Guided by a focus on the right location, thoughtful planning and quality execution, his experience and vision continue to guide the business today, carrying forward a legacy built on trust and a long-term commitment to quality.'
     ],
-    quote: '“Three decades of experience, one enduring philosophy — build thoughtfully and build to endure.”',
+    quote: 'Three decades of experience, one enduring philosophy, build thoughtfully and build to endure.',
   },
   {
     heading: ['A new perspective', 'on what we build'],
@@ -422,9 +375,10 @@ export const LEADERSHIP = [
     role: 'Co-Promoter / Chief Executive Officer',
     image: '/founders/Karan Savla.png',
     paras: [
-      'Representing the next generation, Mr. Karan Savla combines Civil Engineering, an MBA.Tech from NMIMS, and an MSc in Real Estate Development from Westminster, London. Since joining in 2022, he leads day-to-day operations, sales, marketing, and strategic growth.',
+      'Mr. Karan Savla represents the next generation of the business, combining a strong foundation in civil engineering and real estate management with a contemporary understanding of Mumbai\'s evolving urban landscape. He holds a Diploma in Civil Engineering, an MBA.Tech from NMIMS, and an MSc in Real Estate Development from the University of Westminster, London.',
+      'Having joined the business in 2022, he leads its day-to-day legal, sales, marketing and technical functions. Working alongside a legacy built across generations, he continues to contribute to the company\'s expansion across Mumbai and the MMR region with a focus on thoughtful development and long-term value.'
     ],
-    quote: '“Grounded in experience. Looking ahead with a new perspective.”',
+    quote: 'Grounded in experience. Looking ahead with a new perspective.',
   },
   {
     heading: ['A legacy of trust', 'behind the numbers'],
@@ -433,9 +387,10 @@ export const LEADERSHIP = [
     role: 'Non-Executive Director',
     image: '/founders/Prakash Visaria.png',
     paras: [
-      'Associated with the leadership since 1992, Mr. Prakash Visaria brings over three decades of continuity to group company boards, while overseeing day-to-day administration, operations, and vendor coordination.',
+      'Mr. Prakash Visaria\'s association with Mr. Sanjay Savla dates back to 1992 in the construction materials and logistics business. Over more than three decades, he has remained a trusted presence through the business\'s evolution and its transition into real estate.',
+      'Serving as a Non-Executive Director on the boards of group companies, he brings a depth of institutional understanding and continuity. He oversees the day-to-day administrative operations, including vendor coordination and staff management, lending a steady and trusted hand to continued growth.'
     ],
-    quote: '“Over Three decades of trust. Experience that continues forward.”',
+    quote: 'Over Three decades of trust. Experience that continues forward.',
   },
   {
     heading: ['A legacy of knowledge', 'that continues to inspire'],
@@ -444,9 +399,10 @@ export const LEADERSHIP = [
     role: 'Mentor',
     image: '/founders/Purshottam Bansi.png',
     paras: [
-      'A 1958 VJTI graduate, former BAI Chairman (1991–92), Chartered Engineer, and marine engineering contractor with over 40 years of experience, Mr. Purshottam Bansi provided foundational mentorship guiding generations of leadership.',
+      'Mr. Purshottam Bansi belongs to a generation that helped build modern Mumbai. A Civil Engineering graduate from VJTI in 1958, he specialised in marine construction engineering, building a career spanning over 40 years. He served as Chairman of the Builders\' Association of India and was a Special Executive Magistrate, becoming a Chartered Engineer in 1989.',
+      'This depth of experience made him an important early mentor to Mr. Sanjay Savla in 1994, and later to Mr. Karan Savla in 2022. He offered an invaluable understanding of construction, development and the discipline required to build in Mumbai.'
     ],
-    quote: '“A lifetime spent building knowledge, an influence carried across generations.”',
+    quote: 'A lifetime spent building knowledge, an influence carried across generations.',
   },
 ]
 
