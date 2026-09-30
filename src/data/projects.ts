@@ -250,9 +250,9 @@ export const PROJECTS: Project[] = [
     coords: [19.0699916, 72.8993181],
     mapUrl: "https://maps.app.goo.gl/RbLstG7W9p18THdj7",
     images: [
-      { src: IMG("premia-a-1.jpg"), alt: "Premia Tower A seen from the street in Tilak Nagar, Chembur", caption: "Street view elevation" },
-      { src: IMG("premia-a-2.png"), alt: "Premia Tower A illuminated at night", caption: "Night view elevation" },
-      { src: IMG("premia-a-3.jpg"), alt: "Aerial view of the rooftop amenity deck at Premia Tower A", caption: "Rooftop layout" },
+      { src: IMG("premia/Premia A - Day Vew.png"), alt: "Premia Tower A seen from the street in Tilak Nagar, Chembur", caption: "Street view elevation" },
+      { src: IMG("premia/Premia A - Evening Vew.png"), alt: "Premia Tower A illuminated at night", caption: "Night view elevation" },
+      { src: IMG("premia/Premia A - Terrace Vew.png"), alt: "Aerial view of the rooftop amenity deck at Premia Tower A", caption: "Rooftop layout" },
     ],
   },
   {

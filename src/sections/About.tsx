@@ -71,7 +71,7 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6, ease: EASE }}
                 loading="lazy"
-                data-fit={entry.images[slide].includes('/Sketch/') || entry.images[slide].includes('actual-view') || entry.images[slide].includes('Medinee Niketan CHSL') || entry.images[slide].includes('premia-a-2') ? 'contain' : undefined}
+                data-fit={entry.images[slide].includes('/Sketch/') || entry.images[slide].includes('actual-view') || entry.images[slide].includes('Medinee Niketan CHSL') || entry.images[slide].includes('Premia A - Evening Vew') ? 'contain' : undefined}
               />
             ) : (
               /* No renders survive from the 1990s projects — say so with
@@ -92,7 +92,7 @@ export function Timeline({ entries = TIMELINE }: { entries?: TimelineEntry[] }) 
           </AnimatePresence>
           {entry.images && entry.images.length > 0 && (
             <span className="tl__artistic-note">
-              {entry.images[slide].includes('anvaya-4') || entry.images[slide].includes('Medinee Niketan CHSL') || entry.images[slide].includes('actual-view') || entry.images[slide].includes('premia-a-2') ? 'Actual Views' : 'Artistic Impression'}
+              {entry.images[slide].includes('anvaya-4') || entry.images[slide].includes('Medinee Niketan CHSL') || entry.images[slide].includes('actual-view') || entry.images[slide].includes('Premia A - Evening Vew') ? 'Actual Views' : 'Artistic Impression'}
             </span>
           )}
           {entry.images && entry.images.length > 1 && (

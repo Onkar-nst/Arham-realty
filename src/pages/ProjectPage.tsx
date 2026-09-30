@@ -48,7 +48,7 @@ function Gallery({ project }: { project: Project }) {
         </AnimatePresence>
 
         <div className="image-overlay-label">
-          {current.src.includes('anvaya-4') || current.src.includes('Medinee Niketan CHSL') || current.src.includes('actual-view') || current.src.includes('premia-a-2') ? 'Actual Views' : 'Artistic Impression'}
+          {current.src.includes('anvaya-4') || current.src.includes('Medinee Niketan CHSL') || current.src.includes('actual-view') || current.src.includes('Premia A - Evening Vew') ? 'Actual Views' : 'Artistic Impression'}
         </div>
 
         {total > 1 && (
@@ -220,7 +220,7 @@ export default function ProjectPage({ project }: { project: Project }) {
                           src={p.images[0].src} 
                           alt="" 
                           loading="lazy" 
-                          data-fit={p.images[0].src.includes('/Sketch/') || p.images[0].src.includes('premia-bc-3') || p.images[0].src.includes('premia-bc-4') || p.images[0].src.includes('actual-view') || p.images[0].src.includes('Medinee Niketan CHSL') || p.images[0].src.includes('premia-a-2') ? 'contain' : undefined}
+                          data-fit={p.images[0].src.includes('/Sketch/') || p.images[0].src.includes('premia-bc-3') || p.images[0].src.includes('premia-bc-4') || p.images[0].src.includes('actual-view') || p.images[0].src.includes('Medinee Niketan CHSL') || p.images[0].src.includes('Premia A - Evening Vew') ? 'contain' : undefined}
                         />
                       ) : (
                         <span className="nextcard__plate">
@@ -229,7 +229,7 @@ export default function ProjectPage({ project }: { project: Project }) {
                       )}
                       {p.images[0] && (
                         <div className="image-overlay-label">
-                          {p.images[0].src.includes('anvaya-4') || p.images[0].src.includes('Medinee Niketan CHSL') || p.images[0].src.includes('actual-view') || p.images[0].src.includes('premia-a-2') ? 'Actual Views' : 'Artistic Impression'}
+                          {p.images[0].src.includes('anvaya-4') || p.images[0].src.includes('Medinee Niketan CHSL') || p.images[0].src.includes('actual-view') || p.images[0].src.includes('Premia A - Evening Vew') ? 'Actual Views' : 'Artistic Impression'}
                         </div>
                       )}
                       <div className="nextcard__body">

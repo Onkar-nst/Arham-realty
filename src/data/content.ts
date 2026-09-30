@@ -134,7 +134,7 @@ export const LEGACY = {
       ],
       images: [
         '/projects/anvaya-1.jpg',
-        '/projects/premia-a-1.jpg',
+        '/projects/premia/Premia A - Day Vew.png',
         '/projects/premia-bc-1.jpg'
       ],
     },
