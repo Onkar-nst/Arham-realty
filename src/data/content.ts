@@ -107,7 +107,7 @@ export const LEGACY = {
       ],
       images: [
         '/Sketch/Shubhda Tower - Sketch - Final.png',
-        '/Sketch/Akhand Abhaar1 - Sketch - Final.svg',
+        '/Sketch/Akhand Abhaar2 - Sketch - Final.png',
         '/Sketch/Sailesh Apartments - Sketch - Final.png',
         '/Sketch/Blossom1 - Sketch - Final.png'
       ],
@@ -132,7 +132,11 @@ export const LEGACY = {
         'Anvaya and Premia marked the next chapter of our evolution, bringing together contemporary design, thoughtful amenities and strategically chosen locations.',
         'With Premia Tower B & C now shaping the future of Tilak Nagar, the journey continues with greater ambition and a sharper vision.',
       ],
-      images: ['/projects/anvaya-1.jpg'],
+      images: [
+        '/projects/anvaya-1.jpg',
+        '/projects/premia-a-1.jpg',
+        '/projects/premia-bc-1.jpg'
+      ],
     },
     {
       kicker: 'The Next Horizon',
@@ -141,7 +145,11 @@ export const LEGACY = {
       body: [
         'With over three decades of experience behind us, we look ahead with the same discipline that shaped our journey, pursuing distinctive locations, thoughtful design and developments created to hold their value for generations.',
       ],
-      images: ['/projects/premia-bc-1.jpg'],
+      images: [
+        '/projects/premia-bc-1.jpg',
+        '/projects/premia-bc-2.jpg',
+        '/projects/premia-b-c-actual-view-1.png'
+      ],
     },
   ],
   closing: ['30+ years behind us.', 'The next chapter ahead.'],

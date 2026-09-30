@@ -449,7 +449,7 @@ export const PROJECTS: Project[] = [
     coords: [19.0669772, 72.830246],
     mapUrl: "https://maps.app.goo.gl/qEpq9YF9eBsvSKeQ6",
     images: [
-      { src: "/Sketch/Akhand Abhaar1 - Sketch - Final.svg", alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Street view elevation" },
+      { src: "/Sketch/Akhand Abhaar2 - Sketch - Final.png", alt: "Architectural render of Akhand Aabhar CHSL, Bandra West", caption: "Street view elevation" },
     ],
   },
   {
@@ -886,7 +886,7 @@ export const PROJECTS: Project[] = [
     blurb: "At over 17.46 Lakh Sq. Ft., this is our largest and most ambitious development to date, bringing primarily 1 & 2 BHK homes and retail spaces to one of Mumbai’s emerging eastern neighbourhoods, with open, uninterrupted views across the saltpans and Thane Creek.",
     summary: "At over 17.46 Lakh Sq. Ft., this is our largest and most ambitious development to date, bringing primarily 1 & 2 BHK homes and retail spaces to one of Mumbai’s emerging eastern neighbourhoods, with open, uninterrupted views across the saltpans and Thane Creek.",
     location: "Veer Savarkar Road, Bhandup East",
-    category: "Residential",
+    category: "Residential/Retail",
     start: 2027,
     end: 2032,
     areaLabel: "17.4 L+ Sq. Ft.",
