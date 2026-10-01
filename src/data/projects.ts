@@ -200,7 +200,7 @@ export const PROJECTS: Project[] = [
     images: [
       { src: IMG("anvaya-1.jpg"), alt: "Daytime render of Anvaya, Andheri East", caption: "Street view elevation" },
       { src: IMG("anvaya-2.jpg"), alt: "Evening render of Anvaya", caption: "Night view elevation" },
-      { src: IMG("anvaya-3.jpg"), alt: "Aerial render of the landscaped terrace deck at Anvaya", caption: "Rooftop layout" },
+      { src: IMG("anvaya-3.png"), alt: "Aerial render of the landscaped terrace deck at Anvaya", caption: "Rooftop layout" },
       { src: IMG("anvaya-4.jpg"), alt: "View from the site toward Mumbai airport and the mid-town skyline", caption: "View from project" },
       { src: IMG("Medinee Niketan CHSL 09JUNE20228394.jpg"), alt: "View from the site over the tree cover of Andheri East", caption: "View from project" },
       { src: IMG("anvaya-actual-view.png"), alt: "Another actual view from Anvaya", caption: "Actual view" },
